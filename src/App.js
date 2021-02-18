@@ -1,24 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import Header from "./components/header";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import TruthPage from "./pages/Truth-page";
+import NeverPage from "./pages/Never-page";
+import QuestionsPage from "./pages/Questions-page";
+import AdminPage from "./pages/Admin-page";
+import SelectPlayersPage from "./pages/Select-players-page";
+import "./sass/style.scss";
+import { useDispatch } from "react-redux";
+import { setData } from "./actions";
+function App({ data }) {
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(setData(data))
+  }, [data, dispatch])
 
-function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <main>
+        <Switch>
+          <Route exact path="/">
+            <TruthPage />
+          </Route>
+          <Route path="/never">
+            <NeverPage />
+          </Route>
+          <Route path="/questions">
+            <QuestionsPage />
+          </Route>
+          <Route path="/select-players">
+            <SelectPlayersPage />
+          </Route>
+          <Route path="/admin">
+            <AdminPage />
+          </Route>
+
+          <Route>{/* <NotFound /> */}</Route>
+        </Switch>
+      </main>
+    </Router>
   );
 }
 
