@@ -1,34 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useLocation } from "react-router-dom";
+const links = [
+  { title: "Правда или Действие", path: "/" },
+  { title: "Я никогда не", path: "/never" },
+  { title: "Впоросы", path: "/questions" },
+  { title: "Добавить свои", path: "/admin" },
+];
 export default function Navbar() {
+  const location = useLocation();
   return (
     <div
       className="collapse navbar-collapse justify-content-end"
       id="navbarSupportedContent"
     >
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-        <li className="nav-item">
-          <Link className="nav-link active" aria-current="page" to="/">
-            Правда или действие
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/never">
-            Я никогда не
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link className="nav-link" to="/questions">
-            Вопросы
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/admin">
-            Добавить свои
-          </Link>
-        </li>
+        {links.map(({ title, path }, key) => {
+          const isActive = (location.pathname === path ? true : false);
+          return (
+            <li key={key} className="nav-item">
+              <Link
+                className={`nav-link ${isActive ? "active" : ""}`}
+                aria-current="page"
+                to={path}
+              >
+                {title}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

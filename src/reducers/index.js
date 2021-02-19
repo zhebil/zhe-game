@@ -1,5 +1,7 @@
 import { dare } from "./dare";
+import { never } from "./never";
 import { players } from "./players";
+import { questions } from "./questions";
 import { truth } from "./truth";
 
 const initialState = {
@@ -14,6 +16,16 @@ const initialState = {
     rest: [],
     done: [],
   },
+  never: {
+    all: [],
+    rest: [],
+    done: [],
+  },
+  questions: {
+    all: [],
+    rest: [],
+    done: [],
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,6 +33,8 @@ const reducer = (state = initialState, action) => {
     players: players(state, action),
     truth: truth(state, action),
     dare: dare(state, action),
+    never: never(state, action),
+    questions: questions(state, action),
   };
 };
 

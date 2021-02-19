@@ -14,6 +14,7 @@ export default function Truth() {
     text: "",
     first: true,
   });
+  const data = { dare, truth };
   const dispatch = useDispatch();
   const getType = (type) => {
     switch (type) {
@@ -25,31 +26,25 @@ export default function Truth() {
         break;
     }
   };
-  const getTruth = () => {
-    const dataIdx = getRandom(0, truth.length - 1);
+  const newRaund = (type, cb) => {
+    const dataIdx = getRandom(0, data[type].length - 1);
     const nextPlayer =
       raund.playerIdx < players.length - 1 ? raund.playerIdx + 1 : 0;
     setRaund({
       player: players[raund.playerIdx].name,
       playerIdx: nextPlayer,
-      type: "truth",
-      text: truth[dataIdx].text,
+      type: type,
+      text: data[type][dataIdx].text,
       first: false,
     });
-    dispatch(updateTruth(truth[dataIdx].id));
+    dispatch(cb(data[type][dataIdx].id));
   };
+  const getTruth = () => {
+    newRaund("truth", updateTruth)
+  };
+  console.log(data);
   const getDare = () => {
-    const dataIdx = getRandom(0, dare.length - 1);
-    const nextPlayer =
-      raund.playerIdx < players.length - 1 ? raund.playerIdx + 1 : 0;
-    setRaund({
-      player: players[raund.playerIdx].name,
-      playerIdx: nextPlayer,
-      type: "dare",
-      text: dare[dataIdx].text,
-      first: false,
-    });
-    dispatch(updateDare(dare[dataIdx].id));
+    newRaund("dare", updateDare)
   };
   const getRandomType = () => {
     const number = Math.random();
@@ -58,7 +53,7 @@ export default function Truth() {
   };
   const typeText = getType(raund.type);
   if (truth.length <= 0 || dare.length <= 0) {
-    return <h2> Игра окончена! К соалению больше нет вопросов {":("}</h2>;
+    return <h2> Игра окончена! К сожалению больше нет вопросов {":("}</h2>;
   }
   return (
     <div className="app">
@@ -72,8 +67,15 @@ export default function Truth() {
             <h2> Игрок: {raund.player}</h2>
             <div className="row">
               <h3 className="col-auto mb-0">{typeText}: </h3>
-              <p className="col alert mb-0 alert-success">{raund.text}</p>
-            </div> </>
+              <p
+                className={`col alert mb-0 ${
+                  raund.type === "dare" ? "alert-danger" : "alert-success"
+                }`}
+              >
+                {raund.text}
+              </p>
+            </div>
+          </>
         )}
       </div>
       <div className="app__body row mt-2">

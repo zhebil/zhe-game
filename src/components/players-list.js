@@ -1,16 +1,23 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import ListItem from "./list-item";
 
-export default function PlayersList({ players }) {
+export default function PlayersList({ players, isPage = true }) {
   return (
-    <div>
+    <>
       <ul className="list-group">
         {players.map((player) => {
           return (
-            <ListItem key={player.id} id={player.id} content={player.name} />
+            <ListItem
+              key={player.id}
+              id={player.id}
+              isPage={isPage}
+              content={player.name}
+            />
           );
         })}
       </ul>
-    </div>
+      {!isPage && <Link to="/select-players">Изменить </Link>}
+    </>
   );
 }

@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPlayer } from "../actions";
 import PlayersList from "../components/players-list";
 import { getRandom } from "../utillity";
-import {nanoid} from "nanoid";
-
+import { nanoid } from "nanoid";
+import { useHistory } from "react-router-dom";
 
 export default function SelectPlayersPage() {
   const players = useSelector((state) => state.players);
   const dispatch = useDispatch();
-
+  const history = useHistory()
   const submitForm = (e) => {
     e.preventDefault();
 
@@ -17,7 +17,7 @@ export default function SelectPlayersPage() {
     const id = nanoid(16);
     if (players.find((item) => item.name.toUpperCase() === name.toUpperCase()))
       return false;
-    if (name.trim().length > 2) dispatch(addPlayer({ name, id }));
+    if (name.trim().length >= 2) dispatch(addPlayer({ name, id }));
     else return false;
   };
   return (
@@ -46,6 +46,11 @@ export default function SelectPlayersPage() {
                 Добавить
               </button>
             </form>
+            {players.length >= 2 && (
+              <div className="d-flex  mt-4 justify-content-center">
+                <button onClick={()=>{history.goBack()}} className="btn col-2 btn-success ">Играть</button>
+              </div>
+            )}
           </div>
         </div>
       </div>

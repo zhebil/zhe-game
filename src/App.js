@@ -15,7 +15,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const dataType = ["truth", "dare"];
+    const dataType = ["truth", "dare", "never"];
     let data = {};
     dataType.forEach((item) => {
       data[item] = getData(item);

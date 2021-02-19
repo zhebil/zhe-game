@@ -28,3 +28,15 @@ export const updateDare = (id) => {
     payload: id,
   };
 };
+export const updateNever = (id) => {
+  return {
+    type: "UPDATE_NEVER",
+    payload: id,
+  };
+};
+export const updateQuestions = (id) => {
+  return {
+    type: "UPDATE_QUESTIONS",
+    payload: id,
+  };
+};
