@@ -42,13 +42,11 @@ export default function Truth() {
   const getTruth = () => {
     newRaund("truth", updateTruth)
   };
-  console.log(data);
   const getDare = () => {
     newRaund("dare", updateDare)
   };
   const getRandomType = () => {
     const number = Math.random();
-    console.log(number);
     return number >= 0.5 ? getDare() : getTruth();
   };
   const typeText = getType(raund.type);

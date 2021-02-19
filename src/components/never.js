@@ -18,7 +18,6 @@ export default function Never() {
 
     const nextPlayer =
       raund.playerIdx < players.length - 1 ? raund.playerIdx + 1 : 0;
-    console.log(never);
     setRaund({
       player: players[raund.playerIdx],
       playerIdx: nextPlayer,

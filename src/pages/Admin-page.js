@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import firebase from "../services/firebaseApi";
+import FingerprintJS from "@fingerprintjs/fingerprintjs";
 
 import { nanoid } from "nanoid";
 export default function AdminPage() {
+    const [fp, setFp] = useState("")
+  useEffect(() => {
+    (async () => {
+      const fp = await FingerprintJS.load();
+      const result = await fp.get();
+      const visitorId = result.visitorId;
+      setFp(visitorId)
+    })();
+  }, []);
+
   const addDataToFirestore = (path, data) => {
     firebase
       .firestore()
       .collection(path)
       .add(data)
       .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
+        // console.log("Document written with ID: ", docRef.id);
       })
       .catch((error) => {
         console.error("Error adding document: ", error);
@@ -18,12 +29,12 @@ export default function AdminPage() {
   const formSubmit = (e) => {
     e.preventDefault();
     if (e.target.text.value.trim().length <= 1) return false;
-    const path = e.target.name;
+    const path = e.target.name + fp;
     const data = {
       id: nanoid(16),
       text: e.target.text.value,
     };
-    e.target.text.value = ""
+    e.target.text.value = "";
     addDataToFirestore(path, data);
   };
 
