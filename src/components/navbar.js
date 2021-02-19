@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 const links = [
   { title: "Правда или Действие", path: "/" },
   { title: "Я никогда не", path: "/never" },
-  { title: "Впоросы", path: "/questions" },
+  { title: "Вопросы", path: "/questions" },
   { title: "Добавить свои", path: "/admin" },
 ];
 export default function Navbar() {
