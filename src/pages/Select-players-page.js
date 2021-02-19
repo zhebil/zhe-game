@@ -14,6 +14,7 @@ export default function SelectPlayersPage() {
     e.preventDefault();
 
     const name = e.target.name.value;
+    e.target.name.value="";
     const id = nanoid(16);
     if (players.find((item) => item.name.toUpperCase() === name.toUpperCase()))
       return false;
@@ -39,7 +40,7 @@ export default function SelectPlayersPage() {
                   type="text"
                   className="form-control"
                   id="name"
-                  placeholder="Введите имя"
+                  placeholder="Введите имя" 
                 />
               </div>
               <button type="submit" className="btn btn-primary">

@@ -4,7 +4,7 @@ import Never from "../components/never";
 
 export default function NeverPage() {
   return (
-    <Layout title="Я икогда не...">
+    <Layout title="Я никогда не...">
       <Never />
     </Layout>
   );
