@@ -4,7 +4,7 @@ import Truth from "../components/truth";
 
 export default function TruthPage() {
   return (
-    <Layout title="Gfdsf">
+    <Layout title="Правда или действие">
       <Truth />
     </Layout>
   );

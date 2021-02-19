@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPlayer } from "../actions";
 import PlayersList from "../components/players-list";
 import { getRandom } from "../utillity";
+import {nanoid} from "nanoid";
+
 
 export default function SelectPlayersPage() {
   const players = useSelector((state) => state.players);
@@ -12,7 +14,7 @@ export default function SelectPlayersPage() {
     e.preventDefault();
 
     const name = e.target.name.value;
-    const id = getRandom(0, 1000000);
+    const id = nanoid(16);
     if (players.find((item) => item.name.toUpperCase() === name.toUpperCase()))
       return false;
     if (name.trim().length > 2) dispatch(addPlayer({ name, id }));

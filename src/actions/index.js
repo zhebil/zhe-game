@@ -16,3 +16,15 @@ export const setData = (data) => {
     payload: data,
   };
 };
+export const updateTruth = (id) => {
+  return {
+    type: "UPDATE_TRUTH",
+    payload: id,
+  };
+};
+export const updateDare = (id) => {
+  return {
+    type: "UPDATE_DARE",
+    payload: id,
+  };
+};

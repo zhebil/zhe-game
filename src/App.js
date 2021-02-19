@@ -8,13 +8,20 @@ import AdminPage from "./pages/Admin-page";
 import SelectPlayersPage from "./pages/Select-players-page";
 import "./sass/style.scss";
 import { useDispatch } from "react-redux";
-import { setData } from "./actions";
-function App({ data }) {
+import { setData, setTruth } from "./actions";
+import { getData } from "./utillity/getData";
+
+function App() {
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
+    const dataType = ["truth", "dare"];
+    let data = {};
+    dataType.forEach((item) => {
+      data[item] = getData(item);
+    });
     dispatch(setData(data))
-  }, [data, dispatch])
+  }, [dispatch]);
 
   return (
     <Router>

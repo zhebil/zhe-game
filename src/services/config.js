@@ -1,3 +1,4 @@
+
 export const config = {
     apiKey: "AIzaSyAnv1UelCIhcVvrn63JIpU2mBF-dp714mc",
     authDomain: "zhe-game.firebaseapp.com",
