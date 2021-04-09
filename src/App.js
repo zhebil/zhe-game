@@ -10,6 +10,7 @@ import "./sass/style.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setData, setTruth } from "./actions";
 import { getData } from "./utillity/getData";
+import Spinner from "./components/spinner";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,7 +25,13 @@ function App() {
     });
     dispatch(setData(data));
   }, [dispatch]);
-
+if (!dataToConsole.dare.length) {
+  return (
+    <div className="container d-flex vh-100 justify-content-center align-items-center">
+      <Spinner/> 
+     </div>
+     )
+}
   return (
     <Router>
       <Header />

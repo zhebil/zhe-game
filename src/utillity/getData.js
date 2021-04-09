@@ -5,9 +5,10 @@ export const getData = (path) => {
   db.collection(path)
     .get()
     .then((querySnapshot) => {
+      console.log(querySnapshot);
       querySnapshot.forEach((doc) => {
         data.push(doc.data());
       });
-    });
+    }).catch(e => console.log(e.message))
   return data;
 };
