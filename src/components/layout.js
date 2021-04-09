@@ -18,8 +18,8 @@ export default function Layout(props) {
           </div>
         ) : (
           <div className="row">
-            <div className="col-8">{props.children}</div>
-            <div className="col-4">
+            <div className="col-md-8 mb-4">{props.children}</div>
+            <div className="col-md-4">
               <PlayersList players={players} isPage={false} />
             </div>
           </div>

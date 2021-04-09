@@ -64,14 +64,18 @@ export default function Truth() {
           <>
             <h2> Игрок: {raund.player}</h2>
             <div className="row">
-              <h3 className="col-auto mb-0">{typeText}: </h3>
-              <p
-                className={`col alert mb-0 ${
-                  raund.type === "dare" ? "alert-danger" : "alert-success"
-                }`}
+              <h3 className="col-12 mb-2">{typeText}: </h3>
+              <div
+                className='col-12  mb-0'
               >
+              <p className={`alert ${
+                  raund.type === "dare" ? "alert-danger" : "alert-success"
+                }`}>
                 {raund.text}
-              </p>
+              
+                </p>
+                
+              </div>
             </div>
           </>
         )}

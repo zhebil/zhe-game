@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import firebase from "../services/firebaseApi";
-import FingerprintJS from "@fingerprintjs/fingerprintjs";
-
 import { nanoid } from "nanoid";
+import FingerprintJS from "@fingerprintjs/fingerprintjs";
+ 
 export default function AdminPage() {
-    const [fp, setFp] = useState("")
+ 
+  const [fp, setFp] = useState("")
   useEffect(() => {
     (async () => {
       const fp = await FingerprintJS.load();
@@ -26,6 +27,17 @@ export default function AdminPage() {
         console.error("Error adding document: ", error);
       });
   };
+  useEffect(() => {
+    // data.forEach(item=>{
+    //   if (item.trim().length) {
+    //   addDataToFirestore("never", {
+    //     id: nanoid(16),
+    //     text: item.trim()
+    //   })}
+    // })
+    
+  }, [])
+    
   const formSubmit = (e) => {
     e.preventDefault();
     if (e.target.text.value.trim().length <= 1) return false;
@@ -39,10 +51,10 @@ export default function AdminPage() {
   };
 
   return (
-    <section className="admin section-padding">
+    <section className="admin padding-section">
       <div className="container">
         <div className="row">
-          <div className="col">
+          <div className="col-12 col-md-4 mb-4">
             <form name="truth" onSubmit={formSubmit}>
               <label htmlFor="question" className="form-label">
                 <b>Добавить вопрос</b>
@@ -59,7 +71,7 @@ export default function AdminPage() {
             </form>
           </div>
 
-          <div className="col">
+          <div className="col-12 col-md-4 mb-4">
             <form name="dare" onSubmit={formSubmit}>
               <label htmlFor="dare" className="form-label">
                 <b>Добавить действие</b>
@@ -75,7 +87,7 @@ export default function AdminPage() {
               </button>
             </form>
           </div>
-          <div className="col">
+          <div className="col-12 col-md-4 mb-4">
             <form name="never" onSubmit={formSubmit}>
               <label htmlFor="never" className="form-label">
                 <b>Добавить "Я никогда не..."</b>

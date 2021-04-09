@@ -1,1 +1,8 @@
-@import "./spinner.scss"
+@import "./spinner.scss";
+
+.padding-section {
+    padding-top: 50px;
+    @media (max-width: 991px) {
+        padding-top: 20px;
+    }
+}
