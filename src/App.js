@@ -15,8 +15,7 @@ import Spinner from "./components/spinner";
 function App() {
   const dispatch = useDispatch();
 
-  const dataToConsole = useSelector(state=> state)
-  console.log(dataToConsole);
+  const dataToConsole = useSelector(state=> state.dare.all)
   useEffect(() => {
     const dataType = ["truth", "dare", "never"];
     let data = {};
@@ -25,13 +24,8 @@ function App() {
     });
     dispatch(setData(data));
   }, [dispatch]);
-if (!dataToConsole.dare.length) {
-  return (
-    <div className="container d-flex vh-100 justify-content-center align-items-center">
-      <Spinner/> 
-     </div>
-     )
-}
+console.log(dataToConsole.length, dataToConsole);
+ 
   return (
     <Router>
       <Header />

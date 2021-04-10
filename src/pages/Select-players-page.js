@@ -49,7 +49,7 @@ export default function SelectPlayersPage() {
             </form>
             {players.length >= 2 && (
               <div className="d-flex  mt-4 justify-content-center">
-                <button onClick={()=>{history.goBack()}} className="btn col-2 btn-success ">Играть</button>
+                <button onClick={()=>{history.goBack()}} className="btn col-12 col-md-2 btn-success">Играть</button>
               </div>
             )}
           </div>
