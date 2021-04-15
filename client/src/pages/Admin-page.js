@@ -1,53 +1,28 @@
-import React, { useEffect, useState } from "react";
-import firebase from "../services/firebaseApi";
-import { nanoid } from "nanoid";
-import FingerprintJS from "@fingerprintjs/fingerprintjs";
- 
+import React, { useEffect, useState } from 'react';
+import FingerprintJS from '@fingerprintjs/fingerprintjs';
+import { addData } from '../utillity/getServerData';
+
 export default function AdminPage() {
- 
-  const [fp, setFp] = useState("")
+  const [fp, setFp] = useState('');
   useEffect(() => {
     (async () => {
       const fp = await FingerprintJS.load();
       const result = await fp.get();
       const visitorId = result.visitorId;
-      setFp(visitorId)
+      setFp(visitorId);
     })();
   }, []);
 
-  const addDataToFirestore = (path, data) => {
-    firebase
-      .firestore()
-      .collection(path)
-      .add(data)
-      .then((docRef) => {
-        // console.log("Document written with ID: ", docRef.id);
-      })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-      });
-  };
-  useEffect(() => {
-    // data.forEach(item=>{
-    //   if (item.trim().length) {
-    //   addDataToFirestore("never", {
-    //     id: nanoid(16),
-    //     text: item.trim()
-    //   })}
-    // })
-    
-  }, [])
-    
-  const formSubmit = (e) => {
+  const formSubmit = async (e) => {
     e.preventDefault();
     if (e.target.text.value.trim().length <= 1) return false;
-    const path = e.target.name + fp;
+    const path = e.target.name;
     const data = {
-      id: nanoid(16),
       text: e.target.text.value,
     };
-    e.target.text.value = "";
-    addDataToFirestore(path, data);
+    e.target.text.value = '';
+    const res = await addData(path, data);
+    console.log(res);
   };
 
   return (
