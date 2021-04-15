@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 const HOSTNAME = process.env.SERVER_HOST || `localhost`;
-const PORT = parseInt(process.env.SERVER_PORT, 10) || 5000;
+const PORT = parseInt(process.env.PORT, 10) || 5000;
 
 const serverAddress = `http://${HOSTNAME}:${PORT}`;
 
