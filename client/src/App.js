@@ -31,7 +31,11 @@ function App() {
     })();
   }, [dispatch]);
   if (fetch.loading) {
-    return <Spinner />;
+    return (
+      <div className="container d-flex justify-content-center vh-100 align-items-center">
+        <Spinner />
+      </div>
+    );
   }
   if (fetch.error) {
     return <h1>Что-то пошло не так</h1>;

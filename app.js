@@ -38,6 +38,7 @@ async function run() {
 
 setInterval(function () {
   http.get('http://zhe-game.herokuapp.com');
+  console.log('AUTO PING');
 }, 300000); // every 5 minutes (300000)
 
 run();

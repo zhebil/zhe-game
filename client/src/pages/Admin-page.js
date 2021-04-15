@@ -16,7 +16,7 @@ export default function AdminPage() {
   const formSubmit = async (e) => {
     e.preventDefault();
     if (e.target.text.value.trim().length <= 1) return false;
-    const path = e.target.name;
+    const path = e.target.name + fp;
     const data = {
       text: e.target.text.value,
     };

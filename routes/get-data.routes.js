@@ -3,7 +3,7 @@ const Dare = require('../models/dare');
 const Truth = require('../models/truth');
 const Never = require('../models/never');
 const router = Router();
-
+const randomModel = require('../models/randomModel');
 router.use((req, res, next) => {
   res.header(`Access-Control-Allow-Origin`, `*`);
   res.header(
@@ -78,7 +78,18 @@ router.post('/:dataType', async (req, res) => {
         }
         break;
       default:
-        throw new Error();
+        const newModel = randomModel(type);
+        const existNewModel = await newModel.findOne({ text: data.text });
+        if (existNewModel) {
+          res.status(400).json({ message: 'Такие данные уже существуют' });
+        } else {
+          const newNewModel = new newModel({ text: data.text });
+          const addedNewModel = await newNewModel.save();
+          res.status(201).json({
+            ...addedNewModel._doc,
+            message: 'Данные успешно добавлены',
+          });
+        }
     }
   } catch (e) {
     res.status(500).json({ message: 'Невозможно записать данные' });
