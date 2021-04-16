@@ -25,7 +25,7 @@ if (cluster.isMaster) {
     console.log('AUTO PING');
   }, 300000);
 
-  require('./mailer-test');
+  // require('./mailer-test');
 } else {
   const app = express();
   app.use(express.json({ extended: true }));
