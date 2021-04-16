@@ -5,8 +5,8 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 
-const HOSTNAME = process.env.SERVER_HOST || 'localhost';
-const PORT = parseInt(process.env.SERVER_PORT, 10) || 5000;
+const HOSTNAME = process.env.HOST || 'localhost';
+const PORT = parseInt(process.env.PORT, 10) || 5000;
 const serverAddress = `http://${HOSTNAME}:${PORT}`;
 const url = process.env.MONGO_URL;
 
