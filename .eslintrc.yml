@@ -1,5 +1,5 @@
+parser: 'babel-eslint'
 parserOptions:
-  ecmaVersion: 2017
   sourceType: 'module'
 
 env:
@@ -8,5 +8,6 @@ env:
   commonjs: true
   browser: false
   mocha: true
-  linebreak-style: 0
-extends: 'airbnb'
+rules:
+  linebreak-style: ['error', 'windows']
+extends: ['airbnb', 'eslint:recommended']

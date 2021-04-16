@@ -1,4 +1,5 @@
 require('dotenv').config();
+const http = require('http');
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -35,5 +36,8 @@ async function run() {
     process.exit(1);
   }
 }
-
+setInterval(function () {
+  http.get('http://zhe-game.herokuapp.com');
+  console.log('AUTO PING');
+}, 300000);
 run();
