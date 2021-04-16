@@ -6,10 +6,9 @@ var transporter = nodemailer.createTransport({
   auth: {
     type: 'OAuth2',
     user: 'jbilyk1996@gmail.com', // Your email id
-    pass: 'jeka2902', // Your password
-    clientId:
-      '842548504207-kp3slju4uahhft4gi2c7k51f2rfm6tth.apps.googleusercontent.com',
-    clientSecret: 'kCNsXyuLx8BRK-rlYJNI7tQN',
+    pass: process.env.PASS, // Your password
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
   },
   tls: {
     // do not fail on invalid certs
