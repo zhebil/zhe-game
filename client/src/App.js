@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Header from './components/header';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import TruthPage from './pages/Truth-page';
-import NeverPage from './pages/Never-page';
-import QuestionsPage from './pages/Questions-page';
-import AdminPage from './pages/Admin-page';
-import SelectPlayersPage from './pages/Select-players-page';
+
 import './sass/style.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { setData } from './actions';
-import { getServerData } from './utillity/getServerData';
+import api from './api/api';
 import Spinner from './components/spinner';
+import router from './constants/router';
 
 function App() {
   const dispatch = useDispatch();
@@ -21,7 +18,7 @@ function App() {
         const dataType = ['truth', 'dare', 'never'];
         let data = {};
         for (const item of dataType) {
-          data[item] = (await getServerData(item)).data;
+          data[item] = (await api.getDataByType(item)).data;
         }
         dispatch(setData(data));
         setFetch({ error: false, loading: false });
@@ -32,7 +29,7 @@ function App() {
   }, [dispatch]);
   if (fetch.loading) {
     return (
-      <div className="container d-flex justify-content-center vh-100 align-items-center">
+      <div className="d-flex justify-content-center vh-100 align-items-center">
         <Spinner />
       </div>
     );
@@ -45,22 +42,13 @@ function App() {
       <Header />
       <main>
         <Switch>
-          <Route exact path="/">
-            <TruthPage />
-          </Route>
-          <Route path="/never">
-            <NeverPage />
-          </Route>
-          <Route path="/questions">
-            <QuestionsPage />
-          </Route>
-          <Route path="/select-players">
-            <SelectPlayersPage />
-          </Route>
-          <Route path="/admin">
-            <AdminPage />
-          </Route>
-
+          {router.map(({ exact, path, component: Component }, i) => {
+            return (
+              <Route key={i} exact={exact} path={path}>
+                <Component />
+              </Route>
+            );
+          })}
           <Route>{/* <NotFound /> */}</Route>
         </Switch>
       </main>

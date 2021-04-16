@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
-import { addData } from '../utillity/getServerData';
-
+import api from '../api/api';
 export default function AdminPage() {
   const [fp, setFp] = useState('');
   useEffect(() => {
@@ -16,12 +15,12 @@ export default function AdminPage() {
   const formSubmit = async (e) => {
     e.preventDefault();
     if (e.target.text.value.trim().length <= 1) return false;
-    const path = e.target.name + fp;
+    const path = e.target.name;
     const data = {
       text: e.target.text.value,
     };
     e.target.text.value = '';
-    const res = await addData(path, data);
+    const res = await api.addData(path, data);
     console.log(res);
   };
 

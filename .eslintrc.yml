@@ -8,5 +8,5 @@ env:
   commonjs: true
   browser: false
   mocha: true
-
+  linebreak-style: 0
 extends: 'airbnb'
