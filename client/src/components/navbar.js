@@ -1,25 +1,25 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { forwardRef, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import constants from '../constants';
+const { routes } = constants;
 const links = [
-  { title: "Правда или Действие", path: "/" },
-  { title: "Я никогда не", path: "/never" },
-  { title: "Вопросы", path: "/questions" },
-  { title: "Добавить свои", path: "/admin" },
+  { title: 'Правда или Действие', path: routes.truth },
+  { title: 'Я никогда не', path: routes.never },
+  { title: 'Вопросы', path: routes.questions },
+  { title: 'Добавить свои', path: routes.adminPage },
+  { title: 'Пресеты', path: routes.presets },
 ];
-export default function Navbar() {
+const Navbar = forwardRef((props, ref) => {
   const location = useLocation();
   return (
-    <div
-      className="collapse navbar-collapse justify-content-end"
-      id="navbarSupportedContent"
-    >
+    <div className="collapse menu-transition navbar-collapse" ref={ref}>
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         {links.map(({ title, path }, key) => {
-          const isActive = (location.pathname === path ? true : false);
+          const isActive = location.pathname === path ? true : false;
           return (
             <li key={key} className="nav-item">
               <Link
-                className={`nav-link ${isActive ? "active" : ""}`}
+                className={`nav-link ${isActive ? 'active' : ''}`}
                 aria-current="page"
                 to={path}
               >
@@ -31,4 +31,6 @@ export default function Navbar() {
       </ul>
     </div>
   );
-}
+});
+
+export default Navbar;
