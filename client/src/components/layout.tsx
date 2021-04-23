@@ -1,11 +1,14 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import PlayersList from "./players-list";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useAppSelector } from '../hooks/redux.hook';
+import { IPlayer } from '../types';
+import PlayersList from './players-list';
 
-export default function Layout(props) {
-  const { title } = props;
-  const players = useSelector((state) => state.players);
+const Layout: React.FC<{ title: string; children: React.ReactNode }> = ({
+  title,
+  children,
+}) => {
+  const players: IPlayer[] = useAppSelector((state) => state.players);
   return (
     <section className="app padding-section">
       <div className="container">
@@ -18,7 +21,7 @@ export default function Layout(props) {
           </div>
         ) : (
           <div className="row">
-            <div className="col-md-8 mb-4">{props.children}</div>
+            <div className="col-md-8 mb-4">{children}</div>
             <div className="col-md-4">
               <PlayersList players={players} isPage={false} />
             </div>
@@ -27,4 +30,6 @@ export default function Layout(props) {
       </div>
     </section>
   );
-}
+};
+
+export default Layout;

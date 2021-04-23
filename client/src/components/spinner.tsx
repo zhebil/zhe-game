@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-export default function Spinner() {
+const Spinner: React.FC = () => {
   return (
     <>
       <div className="spinner">
@@ -17,4 +17,6 @@ export default function Spinner() {
       </div>
     </>
   );
-}
+};
+
+export default Spinner;

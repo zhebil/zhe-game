@@ -7,4 +7,7 @@ const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 store.subscribe(() => {
   console.log('subscribe', store.getState());
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 export default store;

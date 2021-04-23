@@ -1,27 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import api from '../api/api';
-export default function AdminPage() {
-  const [fp, setFp] = useState('');
-  useEffect(() => {
-    (async () => {
-      const fp = await FingerprintJS.load();
-      const result = await fp.get();
-      const visitorId = result.visitorId;
-      setFp(visitorId);
-    })();
-  }, []);
 
-  const formSubmit = async (e) => {
+const AdminPage: React.FC = () => {
+  // const [fp, setFp] = useState('');
+  // useEffect(() => {
+  //   (async () => {
+  //     const fp = await FingerprintJS.load();
+  //     const result = await fp.get();
+  //     const visitorId = result.visitorId;
+  //     setFp(visitorId);
+  //   })();
+  // }, []);
+
+  const formSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
-    if (e.target.text.value.trim().length <= 1) return false;
-    const path = e.target.name;
-    const data = {
-      text: e.target.text.value,
-    };
-    e.target.text.value = '';
-    const res = await api.addData(path, data);
-    console.log(res);
+
+    const { text, name } = e.target as HTMLFormElement;
+
+    if (text.value.trim().length >= 1) {
+      const path: string = name;
+      const data: { text: string } = {
+        text: text.value,
+      };
+      text.value = '';
+      const res = await api.postData(path, data);
+      console.log(res);
+    }
   };
 
   return (
@@ -81,4 +86,5 @@ export default function AdminPage() {
       </div>
     </section>
   );
-}
+};
+export default AdminPage;

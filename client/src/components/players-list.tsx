@@ -1,8 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import ListItem from "./list-item";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { IPlayer } from '../types';
+import ListItem from './list-item';
 
-export default function PlayersList({ players, isPage = true }) {
+const PlayersList: React.FC<{ players: IPlayer[]; isPage?: boolean }> = ({
+  players,
+  isPage = true,
+}) => {
   return (
     <>
       <ul className="list-group">
@@ -20,4 +24,6 @@ export default function PlayersList({ players, isPage = true }) {
       {!isPage && <Link to="/select-players">Изменить </Link>}
     </>
   );
-}
+};
+
+export default PlayersList;

@@ -4,9 +4,9 @@ const onDeletePlayer = (items, itemId) => {
 };
 export const players = (state, action) => {
   switch (action.type) {
-    case "ADD_PLAYER":
+    case 'ADD_PLAYER':
       return [...state.players, action.payload];
-    case "DELETE_PLAYER":
+    case 'DELETE_PLAYER':
       return onDeletePlayer(state.players, action.payload);
     default:
       return state.players;

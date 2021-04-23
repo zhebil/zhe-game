@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import constants from '.';
 import AdminPage from '../pages/Admin-page';
 import NeverPage from '../pages/Never-page';
@@ -6,34 +7,40 @@ import QuestionsPage from '../pages/Questions-page';
 import SelectPlayersPage from '../pages/Select-players-page';
 import TruthPage from '../pages/Truth-page';
 
-const router = [
+export interface IRouterItem {
+  path: string;
+  exact: boolean;
+  component: FC;
+}
+const { ROUTES } = constants;
+const router: IRouterItem[] = [
   {
-    path: constants.routes.truth,
+    path: ROUTES.TRUTH,
     exact: true,
     component: TruthPage,
   },
   {
-    path: constants.routes.never,
+    path: ROUTES.NEVER,
     exact: false,
     component: NeverPage,
   },
   {
-    path: constants.routes.questions,
+    path: ROUTES.QUESTIONS,
     exact: false,
     component: QuestionsPage,
   },
   {
-    path: constants.routes.selectPlayers,
+    path: ROUTES.SELECT_PLAYER,
     exact: false,
     component: SelectPlayersPage,
   },
   {
-    path: constants.routes.adminPage,
+    path: ROUTES.ADMIN_PAGE,
     exact: false,
     component: AdminPage,
   },
   {
-    path: constants.routes.presets,
+    path: ROUTES.PRESETS,
     exact: true,
     component: Presets,
   },

@@ -1,25 +1,30 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addPlayer } from "../actions";
-import PlayersList from "../components/players-list";
-import { getRandom } from "../utillity";
-import { nanoid } from "nanoid";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import { addPlayer } from '../actions/index';
+import PlayersList from '../components/players-list';
+import { nanoid } from 'nanoid';
+import { useHistory } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
+import { ID, IPlayer } from '../types';
 
-export default function SelectPlayersPage() {
-  const players = useSelector((state) => state.players);
-  const dispatch = useDispatch();
-  const history = useHistory()
-  const submitForm = (e) => {
+const SelectPlayersPage: React.FC = () => {
+  const players: IPlayer[] = useAppSelector((state) => state.players);
+
+  const dispatch = useAppDispatch();
+  const history = useHistory();
+  const submitForm = (e: React.FormEvent): void => {
     e.preventDefault();
 
-    const name = e.target.name.value;
-    e.target.name.value="";
-    const id = nanoid(16);
+    const form = e.target as HTMLFormElement;
+    const name: string = form.personName.value;
+
+    form.personName.value = '';
+
+    const id: ID = nanoid(16);
+
     if (players.find((item) => item.name.toUpperCase() === name.toUpperCase()))
-      return false;
+      return;
     if (name.trim().length >= 2) dispatch(addPlayer({ name, id }));
-    else return false;
+    else return;
   };
   return (
     <div className="select-player padding-section">
@@ -39,8 +44,8 @@ export default function SelectPlayersPage() {
                 <input
                   type="text"
                   className="form-control"
-                  id="name"
-                  placeholder="Введите имя" 
+                  id="personName"
+                  placeholder="Введите имя"
                 />
               </div>
               <button type="submit" className="btn btn-primary">
@@ -49,7 +54,14 @@ export default function SelectPlayersPage() {
             </form>
             {players.length >= 2 && (
               <div className="d-flex  mt-4 justify-content-center">
-                <button onClick={()=>{history.goBack()}} className="btn col-12 col-md-2 btn-success">Играть</button>
+                <button
+                  onClick={(): void => {
+                    history.goBack();
+                  }}
+                  className="btn col-12 col-md-2 btn-success"
+                >
+                  Играть
+                </button>
               </div>
             )}
           </div>
@@ -57,4 +69,6 @@ export default function SelectPlayersPage() {
       </div>
     </div>
   );
-}
+};
+
+export default SelectPlayersPage;

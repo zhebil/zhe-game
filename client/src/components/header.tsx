@@ -1,19 +1,19 @@
 import React, { useRef, useState } from 'react';
 import Navbar from './navbar';
 
-export default function Header(props) {
-  const menuRef = useRef(null);
-  const [isShow, setIsShow] = useState(false);
-  const [click, setCick] = useState(false);
+const Header: React.FC = () => {
+  const menuRef = useRef<HTMLDivElement>(null);
+  const [isShow, setIsShow] = useState<boolean>(false);
+  const [click, setCick] = useState<boolean>(false);
 
   function toggleMenu() {
     if (click) return false;
-
     setCick(true);
-    const el = menuRef.current;
+
+    const el: HTMLDivElement = menuRef.current!;
     el.style.display = 'block';
     el.style.height = 'auto';
-    const height = el.offsetHeight;
+    const height: number = el.offsetHeight;
 
     if (!isShow) {
       el.style.height = '';
@@ -23,7 +23,7 @@ export default function Header(props) {
     } else {
       el.style.height = height + 'px';
       setTimeout(() => {
-        el.style.height = 0;
+        el.style.height = '0px';
       }, 10);
     }
     setTimeout(() => {
@@ -41,12 +41,9 @@ export default function Header(props) {
           <button
             className="navbar-toggler"
             type="button"
-            // data-bs-toggle="collapse"
-            // data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             onClick={toggleMenu}
-            // => true
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
@@ -56,4 +53,6 @@ export default function Header(props) {
       </nav>
     </header>
   );
-}
+};
+
+export default Header;
