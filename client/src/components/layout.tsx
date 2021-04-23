@@ -7,7 +7,7 @@ import PlayersList from './players-list';
 const Layout: React.FC<{ title: string; children: React.ReactNode }> = ({
   title,
   children,
-}) => {
+}): JSX.Element => {
   const players: IPlayer[] = useAppSelector((state) => state.players);
   return (
     <section className="app padding-section">

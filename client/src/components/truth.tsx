@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxAction, updateDare, updateTruth } from '../actions/index';
 import { useAppSelector } from '../hooks/redux.hook';
-import { IPlayer, IRaund, oneDataItem } from '../types';
+import { ID, IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
 
 type RaundType = 'truth' | 'dare' | '';
@@ -17,7 +17,7 @@ interface IDataForTruth {
   dare: oneDataItem[];
 }
 
-const Truth: React.FC = () => {
+const Truth: React.FC = (): JSX.Element => {
   const truth: oneDataItem[] = useAppSelector((state) => state.truth.rest);
   const dare: oneDataItem[] = useAppSelector((state) => state.dare.rest);
   const players: IPlayer[] = useAppSelector((state) => state.players);
@@ -37,7 +37,7 @@ const Truth: React.FC = () => {
     return raundType === 'truth' ? 'Правда' : 'Действие';
   };
 
-  const newRaund = (type: RaundType, cb: (arg: any) => reduxAction): void => {
+  const newRaund = (type: RaundType, cb: (id: ID) => reduxAction): void => {
     const dataIdx: number = getRandom(
       0,
       data[type as keyof IDataForTruth].length - 1
@@ -46,18 +46,20 @@ const Truth: React.FC = () => {
     const thisRaundData: oneDataItem =
       data[type as keyof IDataForTruth][dataIdx];
 
-    setRaund((prev: ITruthRaund) => {
-      const nextPlayer: number =
-        raund.nextPlayer < players.length - 1 ? raund.nextPlayer + 1 : 0;
+    setRaund(
+      (prev: ITruthRaund): ITruthRaund => {
+        const nextPlayer: number =
+          raund.nextPlayer < players.length - 1 ? raund.nextPlayer + 1 : 0;
 
-      return {
-        player: players[prev.nextPlayer].name,
-        nextPlayer: nextPlayer,
-        type: type,
-        text: thisRaundData.text,
-        first: false,
-      };
-    });
+        return {
+          player: players[prev.nextPlayer].name,
+          nextPlayer: nextPlayer,
+          type: type,
+          text: thisRaundData.text,
+          first: false,
+        };
+      }
+    );
 
     dispatch(cb(thisRaundData.id));
   };

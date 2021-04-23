@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { updateNever } from '../actions/index';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import { IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
 
-export default function Never() {
+const Never: React.FC = (): JSX.Element => {
   const never: oneDataItem[] = useAppSelector((state) => state.never.rest);
   const dispatch = useAppDispatch();
   const players: IPlayer[] = useAppSelector((state) => state.players);
@@ -19,16 +18,18 @@ export default function Never() {
   const nextRaund = (): void => {
     const dataIdx: number = getRandom(0, never.length - 1);
 
-    setRaund((prev) => {
-      const nextPlayer: number =
-        prev.nextPlayer < players.length - 1 ? prev.nextPlayer + 1 : 0;
+    setRaund(
+      (prev: IRaund): IRaund => {
+        const nextPlayer: number =
+          prev.nextPlayer < players.length - 1 ? prev.nextPlayer + 1 : 0;
 
-      return {
-        player: players[prev.nextPlayer].name,
-        nextPlayer: nextPlayer,
-        text: never[dataIdx].text,
-      };
-    });
+        return {
+          player: players[prev.nextPlayer].name,
+          nextPlayer: nextPlayer,
+          text: never[dataIdx].text,
+        };
+      }
+    );
 
     dispatch(updateNever(never[dataIdx].id));
   };
@@ -53,4 +54,6 @@ export default function Never() {
       )}
     </div>
   );
-}
+};
+
+export default Never;

@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react';
 import Navbar from './navbar';
 
-const Header: React.FC = () => {
+const Header: React.FC = (): JSX.Element => {
   const menuRef = useRef<HTMLDivElement>(null);
   const [isShow, setIsShow] = useState<boolean>(false);
   const [click, setCick] = useState<boolean>(false);
 
-  function toggleMenu() {
-    if (click) return false;
+  function toggleMenu(): void {
+    if (click) return;
     setCick(true);
 
     const el: HTMLDivElement = menuRef.current!;

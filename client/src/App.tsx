@@ -8,18 +8,19 @@ import api from './api/api';
 import Spinner from './components/spinner';
 import router, { IRouterItem } from './constants/router';
 import { useAppDispatch } from './hooks/redux.hook';
+import { oneDataItem } from './types';
 
 interface IFetch {
   hasError: boolean;
   isLoading: boolean;
 }
 export interface IFetchedData {
-  truth?: any[];
-  dare?: any[];
-  never?: any[];
+  truth?: oneDataItem[];
+  dare?: oneDataItem[];
+  never?: oneDataItem[];
 }
 
-function App() {
+const App: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const [fetch, setFetch] = useState<IFetch>({
     hasError: false,
@@ -27,15 +28,18 @@ function App() {
   });
 
   useEffect(() => {
-    (async () => {
+    (async (): Promise<void> => {
       try {
         const dataTypes: string[] = ['truth', 'dare', 'never'];
         let data: IFetchedData = {};
+
         for (const item of dataTypes) {
           data[item as keyof IFetchedData] = (
             await api.getDataByType(item)
           ).data;
         }
+        console.log(data);
+
         dispatch(setData(data));
         setFetch({ hasError: false, isLoading: false });
       } catch (e) {
@@ -73,6 +77,6 @@ function App() {
       </main>
     </Router>
   );
-}
+};
 
 export default App;

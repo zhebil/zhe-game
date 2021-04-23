@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import { ID, IPlayer } from '../types';
 
-const SelectPlayersPage: React.FC = () => {
+const SelectPlayersPage: React.FC = (): JSX.Element => {
   const players: IPlayer[] = useAppSelector((state) => state.players);
 
   const dispatch = useAppDispatch();

@@ -4,7 +4,6 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import store from './store';
-import 'firebase/firestore';
 
 ReactDOM.render(
   <React.StrictMode>

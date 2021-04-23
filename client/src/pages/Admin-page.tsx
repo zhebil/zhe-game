@@ -1,8 +1,8 @@
-import React, { FormEvent, useEffect, useState } from 'react';
-import FingerprintJS from '@fingerprintjs/fingerprintjs';
+import React, { FormEvent } from 'react';
+// import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import api from '../api/api';
 
-const AdminPage: React.FC = () => {
+const AdminPage: React.FC = (): JSX.Element => {
   // const [fp, setFp] = useState('');
   // useEffect(() => {
   //   (async () => {

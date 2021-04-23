@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { deleteItem } from '../actions/index';
 import { useAppDispatch } from '../hooks/redux.hook';
 import { ID } from '../types';
@@ -7,7 +6,7 @@ const ListItem: React.FC<{ content: string; id: ID; isPage: boolean }> = ({
   content,
   id,
   isPage,
-}) => {
+}): JSX.Element => {
   const dispatch = useAppDispatch();
   const onDeleteItem = (): void => {
     dispatch(deleteItem(id));

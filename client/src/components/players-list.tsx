@@ -6,7 +6,7 @@ import ListItem from './list-item';
 const PlayersList: React.FC<{ players: IPlayer[]; isPage?: boolean }> = ({
   players,
   isPage = true,
-}) => {
+}): JSX.Element => {
   return (
     <>
       <ul className="list-group">

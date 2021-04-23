@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import { IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
 
-const Questions: React.FC = () => {
+const Questions: React.FC = (): JSX.Element => {
   const questions: oneDataItem[] = useAppSelector(
     (state) => state.questions.rest
   );
@@ -20,16 +20,18 @@ const Questions: React.FC = () => {
   const nextRaund = (): void => {
     const dataIdx: number = getRandom(0, questions.length - 1);
 
-    setRaund((prev) => {
-      const nextPlayer: number =
-        raund.nextPlayer < players.length - 1 ? raund.nextPlayer + 1 : 0;
+    setRaund(
+      (prev: IRaund): IRaund => {
+        const nextPlayer: number =
+          raund.nextPlayer < players.length - 1 ? raund.nextPlayer + 1 : 0;
 
-      return {
-        player: players[prev.nextPlayer].name,
-        nextPlayer: nextPlayer,
-        text: questions[dataIdx].text,
-      };
-    });
+        return {
+          player: players[prev.nextPlayer].name,
+          nextPlayer: nextPlayer,
+          text: questions[dataIdx].text,
+        };
+      }
+    );
 
     dispatch(updateQuestions(questions[dataIdx].id));
   };
