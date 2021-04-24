@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { reduxAction, updateDare, updateTruth } from '../actions/index';
+
 import { useAppSelector } from '../hooks/redux.hook';
+import { updateDare } from '../redux/ducks/gameData/dare/actionCreators';
+import { updateTruth } from '../redux/ducks/gameData/truth/actionCreators';
+import { reduxAction } from '../redux/ducks/players/actionCreators';
 import { ID, IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
 

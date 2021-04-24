@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { updateQuestions } from '../actions/index';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
+import { updateQuestions } from '../redux/ducks/gameData/questions/actionCreators';
 import { IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
 
