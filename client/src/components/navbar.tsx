@@ -18,7 +18,10 @@ const Navbar = forwardRef<HTMLDivElement, {}>(
     const location = useLocation<Location>();
 
     return (
-      <div className="collapse menu-transition navbar-collapse" ref={ref}>
+      <div
+        className="collapse menu-transition justify-content-end navbar-collapse"
+        ref={ref}
+      >
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           {links.map(({ title, path }, key) => {
             const isActive: boolean = location.pathname === path;
