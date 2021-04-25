@@ -1,7 +1,7 @@
-import { gameDataState } from '../../../../types';
-import { updateData } from '../../../functions';
-import { gameDataStatus } from '../../../types';
-import { QuestionsAction, questionsActionsType } from './actionCreators';
+import { gameDataState } from '../../types';
+import { updateData } from '../../functions';
+import { gameDataStatus } from '../../types';
+import { NeverAction, neverActionsType } from './actionCreators';
 
 const initialState: gameDataState = {
   all: [],
@@ -10,12 +10,12 @@ const initialState: gameDataState = {
   status: gameDataStatus.NEVER,
 };
 
-export const questions = (
+export const never = (
   state = initialState,
-  action: QuestionsAction
+  action: NeverAction
 ): gameDataState => {
   switch (action.type) {
-    case questionsActionsType.SET_STATUS:
+    case neverActionsType.SET_STATUS:
       return {
         all: [],
         rest: [],
@@ -23,15 +23,14 @@ export const questions = (
         status: action.payload,
       };
 
-    case questionsActionsType.SET_DATA:
+    case neverActionsType.SET_DATA:
       return {
         ...state,
-        all: action.payload,
-        rest: action.payload,
+        ...action.payload,
         status: gameDataStatus.LOADED,
       };
 
-    case questionsActionsType.UPDATE:
+    case neverActionsType.UPDATE:
       return updateData(state, action.payload);
 
     default:

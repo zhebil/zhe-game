@@ -1,7 +1,7 @@
-import { gameDataState } from '../../../../types';
-import { updateData } from '../../../functions';
-import { gameDataStatus } from '../../../types';
-import { DareAction, dareActionsType } from './actionCreators';
+import { gameDataState } from '../../types';
+import { updateData } from '../../functions';
+import { gameDataStatus } from '../../types';
+import { QuestionsAction, questionsActionsType } from './actionCreators';
 
 const initialState: gameDataState = {
   all: [],
@@ -10,12 +10,12 @@ const initialState: gameDataState = {
   status: gameDataStatus.NEVER,
 };
 
-export const dare = (
+export const questions = (
   state = initialState,
-  action: DareAction
+  action: QuestionsAction
 ): gameDataState => {
   switch (action.type) {
-    case dareActionsType.SET_STATUS:
+    case questionsActionsType.SET_STATUS:
       return {
         all: [],
         rest: [],
@@ -23,15 +23,14 @@ export const dare = (
         status: action.payload,
       };
 
-    case dareActionsType.SET_DATA:
+    case questionsActionsType.SET_DATA:
       return {
         ...state,
-        all: action.payload,
-        rest: action.payload,
+        ...action.payload,
         status: gameDataStatus.LOADED,
       };
 
-    case dareActionsType.UPDATE:
+    case questionsActionsType.UPDATE:
       return updateData(state, action.payload);
 
     default:

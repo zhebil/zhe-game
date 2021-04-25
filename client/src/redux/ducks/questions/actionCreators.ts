@@ -1,17 +1,18 @@
 import { Action } from 'redux';
-import { ID, oneDataItem } from '../../../../types';
-import { gameDataStatus } from '../../../types';
+import { ID } from '../../../types';
+import { gameDataStatus, gameOneDataTypeState } from '../../types';
 
 export enum questionsActionsType {
   SET_DATA = 'questions/SET_DATA',
   UPDATE = 'questions/UPDATE',
   SET_STATUS = 'questions/SET_STATUS',
+  FETCH = 'questions/FETCH_QUESTIONS',
 }
 
 export interface SetQuestionsActionInterface
   extends Action<questionsActionsType> {
   type: questionsActionsType.SET_DATA;
-  payload: oneDataItem[];
+  payload: gameOneDataTypeState;
 }
 export interface UpdateQuestionsActionInterface
   extends Action<questionsActionsType> {
@@ -23,9 +24,12 @@ export interface SetQuestionsStatusInterface
   type: questionsActionsType.SET_STATUS;
   payload: gameDataStatus;
 }
+export interface FetchQuestionsInterface extends Action<questionsActionsType> {
+  type: questionsActionsType.FETCH;
+}
 
 export const setQuestions = (
-  payload: oneDataItem[]
+  payload: gameOneDataTypeState
 ): SetQuestionsActionInterface => {
   return {
     type: questionsActionsType.SET_DATA,
@@ -48,8 +52,14 @@ export const updateQuestionsStatus = (
     payload,
   };
 };
+export const fetchQuestions = (): FetchQuestionsInterface => {
+  return {
+    type: questionsActionsType.FETCH,
+  };
+};
 
 export type QuestionsAction =
   | SetQuestionsActionInterface
   | UpdateQuestionsActionInterface
-  | SetQuestionsStatusInterface;
+  | SetQuestionsStatusInterface
+  | FetchQuestionsInterface;

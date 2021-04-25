@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
-import { updateNever } from '../redux/ducks/gameData/never/actionCreators';
+import { fetchNever, updateNever } from '../redux/ducks/never/actionCreators';
+import { gameDataStatus } from '../redux/types';
 import { IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
+import Spinner from './spinner';
 
 const Never: React.FC = (): JSX.Element => {
-  const never: oneDataItem[] = useAppSelector((state) => state.never.rest);
   const dispatch = useAppDispatch();
+
+  const status: gameDataStatus = useAppSelector((state) => state.never.status);
+  useEffect(() => {
+    dispatch(fetchNever());
+  }, [dispatch]);
+
+  const never: oneDataItem[] = useAppSelector((state) => state.never.rest);
+
   const players: IPlayer[] = useAppSelector((state) => state.players);
 
   const [raund, setRaund] = useState<IRaund>({
@@ -31,8 +40,18 @@ const Never: React.FC = (): JSX.Element => {
       }
     );
 
-    dispatch(updateNever(never[dataIdx].id));
+    dispatch(updateNever(never[dataIdx]._id));
   };
+  if (status === gameDataStatus.LOADNIG) {
+    return (
+      <div className="d-flex justify-content-center vh-100 align-items-center">
+        <Spinner />
+      </div>
+    );
+  }
+  if (status === gameDataStatus.ERROR) {
+    return <h1>Что-то пошло не так</h1>;
+  }
   if (never.length <= 0) {
     return <h2> Игра окончена! К сожалению больше нет вопросов {':('}</h2>;
   }
