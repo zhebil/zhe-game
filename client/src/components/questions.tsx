@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useFetch } from '../hooks/fetch.hook';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import {
   fetchQuestions,
@@ -8,14 +7,13 @@ import {
 import { gameDataStatus } from '../redux/types';
 import { IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
-import Spinner from './spinner';
+import { FetchContainer } from './fetchContainer';
 
 const Questions: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const questions: oneDataItem[] = useAppSelector(
     (state) => state.questions.rest
   );
-  useFetch(fetchQuestions, questions.length);
 
   const status: gameDataStatus = useAppSelector(
     (state) => state.questions.status
@@ -48,37 +46,32 @@ const Questions: React.FC = (): JSX.Element => {
     dispatch(updateQuestions(questions[dataIdx]._id));
   };
 
-  if (status === gameDataStatus.LOADNIG) {
-    return (
-      <div className="d-flex justify-content-center vh-100 align-items-center">
-        <Spinner />
-      </div>
-    );
-  }
-  if (status === gameDataStatus.ERROR) {
-    return <h1>Что-то пошло не так</h1>;
-  }
-
-  if (questions.length <= 0) {
+  if (status === gameDataStatus.LOADED && questions.length <= 0) {
     return <h2> Игра окончена! К сожалению больше нет вопросов {':('}</h2>;
   }
   return (
-    <div className="d-flex flex-column h-100">
-      {raund.text ? (
-        <>
-          <div className="alert alert-success">
-            <h3>{raund.text}</h3>
-          </div>
-          <button onClick={nextRaund} className="btn mt-auto btn-primary">
-            Следущий вопрос
+    <FetchContainer
+      fetchFunction={fetchQuestions}
+      dataLength={questions.length}
+      status={status}
+    >
+      <div className="d-flex flex-column h-100">
+        {raund.text ? (
+          <>
+            <div className="alert alert-success">
+              <h3>{raund.text}</h3>
+            </div>
+            <button onClick={nextRaund} className="btn mt-auto btn-primary">
+              Следущий вопрос
+            </button>
+          </>
+        ) : (
+          <button onClick={nextRaund} className="btn btn-primary">
+            Начать
           </button>
-        </>
-      ) : (
-        <button onClick={nextRaund} className="btn btn-primary">
-          Начать
-        </button>
-      )}
-    </div>
+        )}
+      </div>
+    </FetchContainer>
   );
 };
 

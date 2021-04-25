@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import {
@@ -10,8 +10,8 @@ import { updateTruth } from '../redux/ducks/truth-or-dare/actionCreators';
 import { ID, IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
 import { gameDataStatus } from '../redux/types';
-import Spinner from './spinner';
 import { useFetch } from '../hooks/fetch.hook';
+import { FetchContainer } from './fetchContainer';
 
 type RaundType = 'truth' | 'dare' | '';
 
@@ -97,64 +97,70 @@ const Truth: React.FC = (): JSX.Element => {
 
   const typeText: string = getType(raund.type);
 
-  if (status === gameDataStatus.LOADNIG) {
-    return (
-      <div className="d-flex justify-content-center vh-100 align-items-center">
-        <Spinner />
-      </div>
-    );
-  }
-  if (status === gameDataStatus.ERROR) {
-    return <h1>Что-то пошло не так</h1>;
-  }
-
-  if (truth.length <= 0 || dare.length <= 0) {
+  if (
+    (status === gameDataStatus.LOADED && truth.length <= 0) ||
+    (status === gameDataStatus.LOADED && dare.length <= 0)
+  ) {
     return <h2> Игра окончена! К сожалению больше нет вопросов {':('}</h2>;
   }
 
   return (
-    <div className="app">
-      <div className="app__top">
-        {raund.first ? (
-          <p className="alert alert-danger">
-            Правда или действие? Выберите чтобы начать
-          </p>
-        ) : (
-          <>
-            <h2> Игрок: {raund.player}</h2>
-            <div className="row">
-              <h3 className="col-12 mb-2">{typeText}: </h3>
-              <div className="col-12  mb-0">
-                <p
-                  className={`alert ${
-                    raund.type === 'dare' ? 'alert-danger' : 'alert-success'
-                  }`}
-                >
-                  {raund.text}
-                </p>
+    <FetchContainer
+      fetchFunction={fetchTruthOrDare}
+      dataLength={dare.length}
+      status={status}
+    >
+      <div className="app">
+        <div className="app__top">
+          {raund.first ? (
+            <p className="alert alert-danger">
+              Правда или действие? Выберите чтобы начать
+            </p>
+          ) : (
+            <>
+              <h2> Игрок: {raund.player}</h2>
+              <div className="row">
+                <h3 className="col-12 mb-2">{typeText}: </h3>
+                <div className="col-12  mb-0">
+                  <p
+                    className={`alert ${
+                      raund.type === 'dare' ? 'alert-danger' : 'alert-success'
+                    }`}
+                  >
+                    {raund.text}
+                  </p>
+                </div>
               </div>
-            </div>
-          </>
-        )}
-      </div>
-      <div className="app__body row mt-2">
-        <div className="col btn-group" role="group" aria-label="Basic example">
-          <button onClick={getTruth} type="button" className="btn btn-primary">
-            Правда
-          </button>
-          <button
-            onClick={getRandomType}
-            type="button"
-            className="btn btn-danger"
+            </>
+          )}
+        </div>
+        <div className="app__body row mt-2">
+          <div
+            className="col btn-group"
+            role="group"
+            aria-label="Basic example"
           >
-            Случайно
-          </button>
-          <button onClick={getDare} type="button" className="btn btn-success">
-            Действие
-          </button>
+            <button
+              onClick={getTruth}
+              type="button"
+              className="btn btn-primary"
+            >
+              Правда
+            </button>
+            <button
+              onClick={getRandomType}
+              type="button"
+              className="btn btn-danger"
+            >
+              Случайно
+            </button>
+            <button onClick={getDare} type="button" className="btn btn-success">
+              Действие
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </FetchContainer>
   );
 };
 
