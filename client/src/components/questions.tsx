@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useFetch } from '../hooks/fetch.hook';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import {
   fetchQuestions,
@@ -11,13 +12,14 @@ import Spinner from './spinner';
 
 const Questions: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const questions: oneDataItem[] = useAppSelector(
+    (state) => state.questions.rest
+  );
+  useFetch(fetchQuestions, questions.length);
 
-  const status: gameDataStatus = useAppSelector((state) => state.never.status);
-  useEffect(() => {
-    dispatch(fetchQuestions());
-  }, [dispatch]);
-
-  const questions: oneDataItem[] = useAppSelector((state) => state.never.rest);
+  const status: gameDataStatus = useAppSelector(
+    (state) => state.questions.status
+  );
 
   const players: IPlayer[] = useAppSelector((state) => state.players);
 

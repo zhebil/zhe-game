@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useFetch } from '../hooks/fetch.hook';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import { fetchNever, updateNever } from '../redux/ducks/never/actionCreators';
 import { gameDataStatus } from '../redux/types';
@@ -9,13 +10,11 @@ import Spinner from './spinner';
 const Never: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
-  const status: gameDataStatus = useAppSelector((state) => state.never.status);
-  useEffect(() => {
-    dispatch(fetchNever());
-  }, [dispatch]);
-
   const never: oneDataItem[] = useAppSelector((state) => state.never.rest);
 
+  useFetch(fetchNever, never.length);
+
+  const status: gameDataStatus = useAppSelector((state) => state.never.status);
   const players: IPlayer[] = useAppSelector((state) => state.players);
 
   const [raund, setRaund] = useState<IRaund>({

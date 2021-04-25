@@ -11,6 +11,7 @@ import { ID, IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
 import { gameDataStatus } from '../redux/types';
 import Spinner from './spinner';
+import { useFetch } from '../hooks/fetch.hook';
 
 type RaundType = 'truth' | 'dare' | '';
 
@@ -29,16 +30,14 @@ const Truth: React.FC = (): JSX.Element => {
   const status: gameDataStatus = useAppSelector(
     (state) => state.truthOrDare.status
   );
-  useEffect(() => {
-    dispatch(fetchTruthOrDare());
-  }, [dispatch]);
-
   const truth: oneDataItem[] = useAppSelector(
     (state) => state.truthOrDare.truth.rest
   );
   const dare: oneDataItem[] = useAppSelector(
     (state) => state.truthOrDare.dare.rest
   );
+  useFetch(fetchTruthOrDare, truth.length);
+
   const players: IPlayer[] = useAppSelector((state) => state.players);
 
   const [raund, setRaund] = useState<ITruthRaund>({

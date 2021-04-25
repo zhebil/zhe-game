@@ -1,11 +1,6 @@
 import { Action } from 'redux';
 import { ID, IPlayer } from '../../../types';
 
-export interface reduxAction {
-  type: string;
-  payload?: any;
-}
-
 export enum playersActionsType {
   ADD = 'players/ADD',
   DELETE = 'players/DELETE',

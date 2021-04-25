@@ -20,7 +20,7 @@ export interface IFetchedData {
 export function* fetchGameData() {
   try {
     yield put(updateQuestionsStatus(gameDataStatus.LOADNIG));
-    const questions: IFetchedData = yield api.getDataByType('questions');
+    const questions: IFetchedData = yield api.getDataByType('truth');
     const transformedQuestions = transformData(questions.data);
     yield put(setQuestions(transformedQuestions));
   } catch (e) {

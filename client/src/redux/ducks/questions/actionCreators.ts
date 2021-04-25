@@ -27,6 +27,10 @@ export interface SetQuestionsStatusInterface
 export interface FetchQuestionsInterface extends Action<questionsActionsType> {
   type: questionsActionsType.FETCH;
 }
+// export type ActionType = <T extends Action<questionsActionsType>, R>(payload: R)=>{
+//   type: T,
+//   paylaod: R
+// }
 
 export const setQuestions = (
   payload: gameOneDataTypeState
