@@ -19,7 +19,7 @@ export const FetchContainer: React.FC<fetchContainer> = ({
   useFetch(fetchFunction, dataLength);
   if (status === gameDataStatus.LOADNIG) {
     return (
-      <div className="d-flex justify-content-center vh-100 align-items-center">
+      <div className="d-flex justify-content-center  align-items-center">
         <Spinner />
       </div>
     );

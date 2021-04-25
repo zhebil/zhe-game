@@ -10,7 +10,6 @@ import { updateTruth } from '../redux/ducks/truth-or-dare/actionCreators';
 import { ID, IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
 import { gameDataStatus } from '../redux/types';
-import { useFetch } from '../hooks/fetch.hook';
 import { FetchContainer } from './fetchContainer';
 
 type RaundType = 'truth' | 'dare' | '';
@@ -36,8 +35,6 @@ const Truth: React.FC = (): JSX.Element => {
   const dare: oneDataItem[] = useAppSelector(
     (state) => state.truthOrDare.dare.rest
   );
-  useFetch(fetchTruthOrDare, truth.length);
-
   const players: IPlayer[] = useAppSelector((state) => state.players);
 
   const [raund, setRaund] = useState<ITruthRaund>({
@@ -103,11 +100,16 @@ const Truth: React.FC = (): JSX.Element => {
   ) {
     return <h2> Игра окончена! К сожалению больше нет вопросов {':('}</h2>;
   }
+  const dataLength = (): number => {
+    if (dare.length === 0 || truth.length === 0) return 0;
+    else return 1;
+  };
+  console.log(dataLength());
 
   return (
     <FetchContainer
       fetchFunction={fetchTruthOrDare}
-      dataLength={dare.length}
+      dataLength={dataLength()}
       status={status}
     >
       <div className="app">

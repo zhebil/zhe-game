@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, call, takeLatest } from 'redux-saga/effects';
 import api from '../../../api/api';
 import { oneDataItem } from '../../../types';
 import { transformData } from '../../../utillity';
@@ -20,7 +20,7 @@ export interface IFetchedData {
 export function* fetchGameData() {
   try {
     yield put(updateNeverStatus(gameDataStatus.LOADNIG));
-    const never: IFetchedData = yield api.getDataByType('never');
+    const never: IFetchedData = yield call(() => api.getDataByType('never'));
     const transformedNever = transformData(never.data);
     yield put(setNever(transformedNever));
   } catch (e) {

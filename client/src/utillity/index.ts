@@ -12,3 +12,28 @@ export const transformData = (data: oneDataItem[]): gameOneDataTypeState => {
     done: [],
   };
 };
+
+export const slideToggle = (
+  el: HTMLElement,
+  isShow: boolean,
+  cb?: any
+): void => {
+  el.style.display = 'block';
+  el.style.height = 'auto';
+  const height: number = el.offsetHeight;
+
+  if (!isShow) {
+    el.style.height = '';
+    setTimeout(() => {
+      el.style.height = height + 'px';
+    }, 10);
+  } else {
+    el.style.height = height + 'px';
+    setTimeout(() => {
+      el.style.height = '0px';
+    }, 10);
+  }
+  setTimeout(() => {
+    cb();
+  }, 350);
+};

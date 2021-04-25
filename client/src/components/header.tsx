@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { slideToggle } from '../utillity';
 import Navbar from './navbar';
 
 const Header: React.FC = (): JSX.Element => {
@@ -11,25 +12,10 @@ const Header: React.FC = (): JSX.Element => {
     setCick(true);
 
     const el: HTMLDivElement = menuRef.current!;
-    el.style.display = 'block';
-    el.style.height = 'auto';
-    const height: number = el.offsetHeight;
-
-    if (!isShow) {
-      el.style.height = '';
-      setTimeout(() => {
-        el.style.height = height + 'px';
-      }, 10);
-    } else {
-      el.style.height = height + 'px';
-      setTimeout(() => {
-        el.style.height = '0px';
-      }, 10);
-    }
-    setTimeout(() => {
+    slideToggle(el, isShow, () => {
       setIsShow(!isShow);
       setCick(false);
-    }, 350);
+    });
   }
   return (
     <header>
