@@ -4,7 +4,7 @@ export interface IPlayer {
   name: string;
 }
 export interface oneDataItem {
-  id: ID;
+  _id: ID;
   text: string;
 }
 

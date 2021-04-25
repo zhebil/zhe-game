@@ -1,63 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Header from './components/header';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import './sass/style.scss';
-import { setData } from './actions/index';
-import api from './api/api';
-import Spinner from './components/spinner';
 import router, { IRouterItem } from './constants/router';
-import { useAppDispatch } from './hooks/redux.hook';
-import { oneDataItem } from './types';
-
-interface IFetch {
-  hasError: boolean;
-  isLoading: boolean;
-}
-export interface IFetchedData {
-  truth?: oneDataItem[];
-  dare?: oneDataItem[];
-  never?: oneDataItem[];
-}
 
 const App: React.FC = (): JSX.Element => {
-  const dispatch = useAppDispatch();
-  const [fetch, setFetch] = useState<IFetch>({
-    hasError: false,
-    isLoading: true,
-  });
-
-  useEffect(() => {
-    (async (): Promise<void> => {
-      try {
-        const dataTypes: string[] = ['truth', 'dare', 'never'];
-        let data: IFetchedData = {};
-
-        for (const item of dataTypes) {
-          data[item as keyof IFetchedData] = (
-            await api.getDataByType(item)
-          ).data;
-        }
-        console.log(data);
-
-        dispatch(setData(data));
-        setFetch({ hasError: false, isLoading: false });
-      } catch (e) {
-        setFetch({ hasError: true, isLoading: false });
-      }
-    })();
-  }, [dispatch]);
-
-  if (fetch.isLoading) {
-    return (
-      <div className="d-flex justify-content-center vh-100 align-items-center">
-        <Spinner />
-      </div>
-    );
-  }
-  if (fetch.hasError) {
-    return <h1>Что-то пошло не так</h1>;
-  }
   return (
     <Router>
       <Header />

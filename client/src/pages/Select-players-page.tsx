@@ -1,5 +1,5 @@
 import React from 'react';
-import { addPlayer } from '../actions/index';
+import { addPlayer } from '../redux/ducks/players/actionCreators';
 import PlayersList from '../components/players-list';
 import { nanoid } from 'nanoid';
 import { useHistory } from 'react-router-dom';

@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
-import { updateNever } from '../actions/index';
+import { useFetch } from '../hooks/fetch.hook';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
+import { fetchNever, updateNever } from '../redux/ducks/never/actionCreators';
+import { gameDataStatus } from '../redux/types';
 import { IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
+import Spinner from './spinner';
 
 const Never: React.FC = (): JSX.Element => {
-  const never: oneDataItem[] = useAppSelector((state) => state.never.rest);
   const dispatch = useAppDispatch();
+
+  const never: oneDataItem[] = useAppSelector((state) => state.never.rest);
+
+  useFetch(fetchNever, never.length);
+
+  const status: gameDataStatus = useAppSelector((state) => state.never.status);
   const players: IPlayer[] = useAppSelector((state) => state.players);
 
   const [raund, setRaund] = useState<IRaund>({
@@ -31,8 +39,18 @@ const Never: React.FC = (): JSX.Element => {
       }
     );
 
-    dispatch(updateNever(never[dataIdx].id));
+    dispatch(updateNever(never[dataIdx]._id));
   };
+  if (status === gameDataStatus.LOADNIG) {
+    return (
+      <div className="d-flex justify-content-center vh-100 align-items-center">
+        <Spinner />
+      </div>
+    );
+  }
+  if (status === gameDataStatus.ERROR) {
+    return <h1>Что-то пошло не так</h1>;
+  }
   if (never.length <= 0) {
     return <h2> Игра окончена! К сожалению больше нет вопросов {':('}</h2>;
   }

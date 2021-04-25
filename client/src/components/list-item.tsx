@@ -1,5 +1,5 @@
 import React from 'react';
-import { deleteItem } from '../actions/index';
+import { deletePlayer } from '../redux/ducks/players/actionCreators';
 import { useAppDispatch } from '../hooks/redux.hook';
 import { ID } from '../types';
 const ListItem: React.FC<{ content: string; id: ID; isPage: boolean }> = ({
@@ -9,7 +9,7 @@ const ListItem: React.FC<{ content: string; id: ID; isPage: boolean }> = ({
 }): JSX.Element => {
   const dispatch = useAppDispatch();
   const onDeleteItem = (): void => {
-    dispatch(deleteItem(id));
+    dispatch(deletePlayer(id));
   };
   return (
     <>

@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { reduxAction, updateDare, updateTruth } from '../actions/index';
-import { useAppSelector } from '../hooks/redux.hook';
+import React, { useEffect, useState } from 'react';
+
+import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
+import {
+  fetchTruthOrDare,
+  TruthOrDareAction,
+  updateDare,
+} from '../redux/ducks/truth-or-dare/actionCreators';
+import { updateTruth } from '../redux/ducks/truth-or-dare/actionCreators';
 import { ID, IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
+import { gameDataStatus } from '../redux/types';
+import Spinner from './spinner';
+import { useFetch } from '../hooks/fetch.hook';
 
 type RaundType = 'truth' | 'dare' | '';
 
@@ -18,8 +26,18 @@ interface IDataForTruth {
 }
 
 const Truth: React.FC = (): JSX.Element => {
-  const truth: oneDataItem[] = useAppSelector((state) => state.truth.rest);
-  const dare: oneDataItem[] = useAppSelector((state) => state.dare.rest);
+  const dispatch = useAppDispatch();
+  const status: gameDataStatus = useAppSelector(
+    (state) => state.truthOrDare.status
+  );
+  const truth: oneDataItem[] = useAppSelector(
+    (state) => state.truthOrDare.truth.rest
+  );
+  const dare: oneDataItem[] = useAppSelector(
+    (state) => state.truthOrDare.dare.rest
+  );
+  useFetch(fetchTruthOrDare, truth.length);
+
   const players: IPlayer[] = useAppSelector((state) => state.players);
 
   const [raund, setRaund] = useState<ITruthRaund>({
@@ -32,12 +50,14 @@ const Truth: React.FC = (): JSX.Element => {
 
   const data: IDataForTruth = { dare, truth };
 
-  const dispatch = useDispatch();
   const getType = (raundType: RaundType): string => {
     return raundType === 'truth' ? 'Правда' : 'Действие';
   };
 
-  const newRaund = (type: RaundType, cb: (id: ID) => reduxAction): void => {
+  const newRaund = (
+    type: RaundType,
+    cb: (id: ID) => TruthOrDareAction
+  ): void => {
     const dataIdx: number = getRandom(
       0,
       data[type as keyof IDataForTruth].length - 1
@@ -61,7 +81,7 @@ const Truth: React.FC = (): JSX.Element => {
       }
     );
 
-    dispatch(cb(thisRaundData.id));
+    dispatch(cb(thisRaundData._id));
   };
 
   const getTruth = (): void => {
@@ -76,9 +96,22 @@ const Truth: React.FC = (): JSX.Element => {
   };
 
   const typeText: string = getType(raund.type);
+
+  if (status === gameDataStatus.LOADNIG) {
+    return (
+      <div className="d-flex justify-content-center vh-100 align-items-center">
+        <Spinner />
+      </div>
+    );
+  }
+  if (status === gameDataStatus.ERROR) {
+    return <h1>Что-то пошло не так</h1>;
+  }
+
   if (truth.length <= 0 || dare.length <= 0) {
     return <h2> Игра окончена! К сожалению больше нет вопросов {':('}</h2>;
   }
+
   return (
     <div className="app">
       <div className="app__top">
