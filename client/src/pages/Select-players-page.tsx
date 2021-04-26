@@ -5,9 +5,10 @@ import { nanoid } from 'nanoid';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import { ID, IPlayer } from '../types';
+import { playersSelector } from '../redux/ducks/players/selectors';
 
 const SelectPlayersPage: React.FC = (): JSX.Element => {
-  const players: IPlayer[] = useAppSelector((state) => state.players);
+  const players: IPlayer[] = useAppSelector(playersSelector);
 
   const dispatch = useAppDispatch();
   const history = useHistory();

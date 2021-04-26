@@ -11,6 +11,12 @@ import { ID, IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
 import { gameDataStatus } from '../redux/types';
 import { FetchContainer } from './fetchContainer';
+import {
+  dareSelector,
+  truthSelector,
+  trutOrDareStatusSelector,
+} from '../redux/ducks/truth-or-dare/selectors';
+import { playersSelector } from '../redux/ducks/players/selectors';
 
 type RaundType = 'truth' | 'dare' | '';
 
@@ -26,16 +32,10 @@ interface IDataForTruth {
 
 const Truth: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const status: gameDataStatus = useAppSelector(
-    (state) => state.truthOrDare.status
-  );
-  const truth: oneDataItem[] = useAppSelector(
-    (state) => state.truthOrDare.truth.rest
-  );
-  const dare: oneDataItem[] = useAppSelector(
-    (state) => state.truthOrDare.dare.rest
-  );
-  const players: IPlayer[] = useAppSelector((state) => state.players);
+  const status: gameDataStatus = useAppSelector(trutOrDareStatusSelector);
+  const truth: oneDataItem[] = useAppSelector(truthSelector);
+  const dare: oneDataItem[] = useAppSelector(dareSelector);
+  const players: IPlayer[] = useAppSelector(playersSelector);
 
   const [raund, setRaund] = useState<ITruthRaund>({
     player: '',

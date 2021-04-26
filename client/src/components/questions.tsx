@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
+import { playersSelector } from '../redux/ducks/players/selectors';
 import {
   fetchQuestions,
   updateQuestions,
 } from '../redux/ducks/questions/actionCreators';
+import {
+  questionsSelector,
+  questionsStatusSelector,
+} from '../redux/ducks/questions/selectors';
 import { gameDataStatus } from '../redux/types';
 import { IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
@@ -11,15 +16,11 @@ import { FetchContainer } from './fetchContainer';
 
 const Questions: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const questions: oneDataItem[] = useAppSelector(
-    (state) => state.questions.rest
-  );
+  const questions: oneDataItem[] = useAppSelector(questionsSelector);
 
-  const status: gameDataStatus = useAppSelector(
-    (state) => state.questions.status
-  );
+  const status: gameDataStatus = useAppSelector(questionsStatusSelector);
 
-  const players: IPlayer[] = useAppSelector((state) => state.players);
+  const players: IPlayer[] = useAppSelector(playersSelector);
 
   const [raund, setRaund] = useState<IRaund>({
     player: '',

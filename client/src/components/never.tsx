@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import { fetchNever, updateNever } from '../redux/ducks/never/actionCreators';
+import {
+  neverSelector,
+  neverStatusSelector,
+} from '../redux/ducks/never/selectors';
+import { playersSelector } from '../redux/ducks/players/selectors';
 import { gameDataStatus } from '../redux/types';
 import { IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
@@ -9,10 +14,10 @@ import { FetchContainer } from './fetchContainer';
 const Never: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
-  const never: oneDataItem[] = useAppSelector((state) => state.never.rest);
+  const never: oneDataItem[] = useAppSelector(neverSelector);
 
-  const status: gameDataStatus = useAppSelector((state) => state.never.status);
-  const players: IPlayer[] = useAppSelector((state) => state.players);
+  const status: gameDataStatus = useAppSelector(neverStatusSelector);
+  const players: IPlayer[] = useAppSelector(playersSelector);
 
   const [raund, setRaund] = useState<IRaund>({
     player: '',
