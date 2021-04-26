@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
-const Presets: React.FC = (): JSX.Element => {
+const Presets: React.FC = (): ReactElement => {
   return <h1>Presets</h1>;
 };
 export default Presets;

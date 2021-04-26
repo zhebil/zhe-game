@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { IPlayer } from '../types';
 import ListItem from './list-item';
@@ -6,7 +6,7 @@ import ListItem from './list-item';
 const PlayersList: React.FC<{ players: IPlayer[]; isPage?: boolean }> = ({
   players,
   isPage = true,
-}): JSX.Element => {
+}): ReactElement => {
   return (
     <>
       <ul className="list-group">

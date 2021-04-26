@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../hooks/redux.hook';
 import { playersSelector } from '../redux/ducks/players/selectors';
@@ -8,7 +8,7 @@ import PlayersList from './players-list';
 const Layout: React.FC<{ title: string; children: React.ReactNode }> = ({
   title,
   children,
-}): JSX.Element => {
+}): ReactElement => {
   const players: IPlayer[] = useAppSelector(playersSelector);
   return (
     <section className="app padding-section">

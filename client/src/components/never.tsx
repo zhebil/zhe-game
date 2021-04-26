@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import { fetchNever, updateNever } from '../redux/ducks/never/actionCreators';
 import {
@@ -11,7 +11,7 @@ import { IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
 import { FetchContainer } from './fetchContainer';
 
-const Never: React.FC = (): JSX.Element => {
+const Never: React.FC = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   const never: oneDataItem[] = useAppSelector(neverSelector);

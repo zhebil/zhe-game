@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import { useFetch } from '../hooks/fetch.hook';
 import { gameDataStatus, reduxAction } from '../redux/types';
+import ErrorIndicator from './errorIndicator';
 import Spinner from './spinner';
 
 export interface fetchContainer {
@@ -25,7 +26,7 @@ export const FetchContainer: React.FC<fetchContainer> = ({
     );
   }
   if (status === gameDataStatus.ERROR) {
-    return <h1>Что-то пошло не так</h1>;
+    return <ErrorIndicator />;
   }
   return children;
 };

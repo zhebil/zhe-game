@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import {
@@ -30,7 +30,7 @@ interface IDataForTruth {
   dare: oneDataItem[];
 }
 
-const Truth: React.FC = (): JSX.Element => {
+const Truth: React.FC = (): ReactElement => {
   const dispatch = useAppDispatch();
   const status: gameDataStatus = useAppSelector(trutOrDareStatusSelector);
   const truth: oneDataItem[] = useAppSelector(truthSelector);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import { playersSelector } from '../redux/ducks/players/selectors';
 import {
@@ -14,7 +14,7 @@ import { IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
 import { FetchContainer } from './fetchContainer';
 
-const Questions: React.FC = (): JSX.Element => {
+const Questions: React.FC = (): ReactElement => {
   const dispatch = useAppDispatch();
   const questions: oneDataItem[] = useAppSelector(questionsSelector);
 

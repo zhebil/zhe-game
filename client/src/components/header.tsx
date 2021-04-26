@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { ReactElement, useRef, useState } from 'react';
 import { slideToggle } from '../utillity';
 import Navbar from './navbar';
 
-const Header: React.FC = (): JSX.Element => {
+const Header: React.FC = (): ReactElement => {
   const menuRef = useRef<HTMLDivElement>(null);
   const [isShow, setIsShow] = useState<boolean>(false);
   const [click, setCick] = useState<boolean>(false);
