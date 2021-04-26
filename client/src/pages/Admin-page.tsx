@@ -25,7 +25,6 @@ const AdminPage: React.FC = (): ReactElement => {
       };
       text.value = '';
       const res = await api.postData(path, data);
-      console.log(res);
     }
   };
 

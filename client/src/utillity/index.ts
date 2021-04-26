@@ -1,3 +1,4 @@
+import { messageItem, messageType } from '../redux/ducks/messages/reducer';
 import { gameOneDataTypeState } from '../redux/types';
 import { oneDataItem } from '../types';
 
@@ -36,4 +37,19 @@ export const slideToggle = (
   setTimeout(() => {
     cb();
   }, 350);
+};
+
+let counter = 0;
+const messageCounter = (): number => {
+  return ++counter;
+};
+export const createMessage = (
+  message: string,
+  type: messageType
+): messageItem => {
+  return {
+    id: messageCounter(),
+    text: message,
+    type,
+  };
 };

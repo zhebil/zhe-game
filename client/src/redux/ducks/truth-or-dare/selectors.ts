@@ -4,7 +4,7 @@ export const truthSelector: dataSelectorFucntion = (state) =>
   state.truthOrDare.truth.rest;
 
 export const dareSelector: dataSelectorFucntion = (state) =>
-  state.truthOrDare.truth.rest;
+  state.truthOrDare.dare.rest;
 
 export const trutOrDareStatusSelector: statusSelectorFucntion = (state) =>
   state.truthOrDare.status;
