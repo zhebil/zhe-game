@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, ReactElement } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import constants from '../constants/index';
 const { ROUTES } = constants;
@@ -14,7 +14,7 @@ const links: linkItem[] = [
   { title: 'Пресеты', path: ROUTES.PRESETS },
 ];
 const Navbar = forwardRef<HTMLDivElement, {}>(
-  (props, ref): JSX.Element => {
+  (props, ref): ReactElement => {
     const location = useLocation<Location>();
 
     return (

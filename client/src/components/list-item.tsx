@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { deletePlayer } from '../redux/ducks/players/actionCreators';
 import { useAppDispatch } from '../hooks/redux.hook';
 import { ID } from '../types';
@@ -6,7 +6,7 @@ const ListItem: React.FC<{ content: string; id: ID; isPage: boolean }> = ({
   content,
   id,
   isPage,
-}): JSX.Element => {
+}): ReactElement => {
   const dispatch = useAppDispatch();
   const onDeleteItem = (): void => {
     dispatch(deletePlayer(id));

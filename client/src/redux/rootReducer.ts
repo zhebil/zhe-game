@@ -3,10 +3,12 @@ import { never } from './ducks/never/reducer';
 import { players } from './ducks/players/reducer';
 import { questions } from './ducks/questions/reducer';
 import { truthOrDare } from './ducks/truth-or-dare/reducer';
+import { messages } from './ducks/messages/reducer';
 
 export const rootReducer = combineReducers({
   truthOrDare,
   never,
   players,
   questions,
+  messages,
 });

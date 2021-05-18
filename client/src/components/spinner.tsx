@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
-const Spinner: React.FC = (): JSX.Element => {
+const Spinner: React.FC = (): ReactElement => {
   return (
     <>
       <div className="spinner">

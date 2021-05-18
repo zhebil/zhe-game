@@ -1,4 +1,8 @@
+import { addNewMessage } from '../redux/ducks/messages/actionCreators';
+import { messageType } from '../redux/ducks/messages/reducer';
+import { store } from '../redux/store';
 import { ID, oneDataItem } from '../types';
+import { createMessage } from '../utillity';
 
 interface postData {
   text: string;
@@ -39,8 +43,17 @@ class Api {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
+
     const json = await res.json();
-    return json;
+    console.log(res);
+    if (res.ok) {
+      const message = createMessage(json.message, messageType.SUCCESS);
+      store.dispatch(addNewMessage(message));
+      return json;
+    } else {
+      const message = createMessage(json.message, messageType.DANGER);
+      store.dispatch(addNewMessage(message));
+    }
   }
   async updateData(path: string, data: postData, id: ID) {
     const res = await fetch(`${this.dataPath}${path}/${id}`, {

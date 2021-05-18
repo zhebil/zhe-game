@@ -1,27 +1,26 @@
-import React, { useState } from 'react';
-import { useFetch } from '../hooks/fetch.hook';
+import React, { ReactElement, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
+import { playersSelector } from '../redux/ducks/players/selectors';
 import {
   fetchQuestions,
   updateQuestions,
 } from '../redux/ducks/questions/actionCreators';
+import {
+  questionsSelector,
+  questionsStatusSelector,
+} from '../redux/ducks/questions/selectors';
 import { gameDataStatus } from '../redux/types';
 import { IPlayer, IRaund, oneDataItem } from '../types';
 import { getRandom } from '../utillity';
-import Spinner from './spinner';
+import { FetchContainer } from './fetchContainer';
 
-const Questions: React.FC = (): JSX.Element => {
+const Questions: React.FC = (): ReactElement => {
   const dispatch = useAppDispatch();
-  const questions: oneDataItem[] = useAppSelector(
-    (state) => state.questions.rest
-  );
-  useFetch(fetchQuestions, questions.length);
+  const questions: oneDataItem[] = useAppSelector(questionsSelector);
 
-  const status: gameDataStatus = useAppSelector(
-    (state) => state.questions.status
-  );
+  const status: gameDataStatus = useAppSelector(questionsStatusSelector);
 
-  const players: IPlayer[] = useAppSelector((state) => state.players);
+  const players: IPlayer[] = useAppSelector(playersSelector);
 
   const [raund, setRaund] = useState<IRaund>({
     player: '',
@@ -48,37 +47,32 @@ const Questions: React.FC = (): JSX.Element => {
     dispatch(updateQuestions(questions[dataIdx]._id));
   };
 
-  if (status === gameDataStatus.LOADNIG) {
-    return (
-      <div className="d-flex justify-content-center vh-100 align-items-center">
-        <Spinner />
-      </div>
-    );
-  }
-  if (status === gameDataStatus.ERROR) {
-    return <h1>Что-то пошло не так</h1>;
-  }
-
-  if (questions.length <= 0) {
+  if (status === gameDataStatus.LOADED && questions.length <= 0) {
     return <h2> Игра окончена! К сожалению больше нет вопросов {':('}</h2>;
   }
   return (
-    <div className="d-flex flex-column h-100">
-      {raund.text ? (
-        <>
-          <div className="alert alert-success">
-            <h3>{raund.text}</h3>
-          </div>
-          <button onClick={nextRaund} className="btn mt-auto btn-primary">
-            Следущий вопрос
+    <FetchContainer
+      fetchFunction={fetchQuestions}
+      dataLength={questions.length}
+      status={status}
+    >
+      <div className="d-flex flex-column h-100">
+        {raund.text ? (
+          <>
+            <div className="alert alert-success">
+              <h3>{raund.text}</h3>
+            </div>
+            <button onClick={nextRaund} className="btn mt-auto btn-primary">
+              Следущий вопрос
+            </button>
+          </>
+        ) : (
+          <button onClick={nextRaund} className="btn btn-primary">
+            Начать
           </button>
-        </>
-      ) : (
-        <button onClick={nextRaund} className="btn btn-primary">
-          Начать
-        </button>
-      )}
-    </div>
+        )}
+      </div>
+    </FetchContainer>
   );
 };
 
