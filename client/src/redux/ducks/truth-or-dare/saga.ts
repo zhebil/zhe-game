@@ -20,7 +20,7 @@ export interface IFetchedData {
 export function* fetchGameData() {
   try {
     yield put(updateTruthOrDareStatus(gameDataStatus.LOADNIG));
-    const dare: IFetchedData = yield call(() => api.getDataByType('error'));
+    const dare: IFetchedData = yield call(() => api.getDataByType('dare'));
     const truth: IFetchedData = yield call(() => api.getDataByType('truth'));
     const truthOrDare = {
       truth: transformData(truth.data),
