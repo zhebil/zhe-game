@@ -9,7 +9,4 @@ env:
   browser: false
   mocha: true
 
-rules:
-  linebreak-style: ['error', 'windows']
-
 extends: ['airbnb', 'eslint:recommended']
