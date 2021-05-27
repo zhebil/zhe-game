@@ -4,7 +4,7 @@ import PlayersList from '../../components/players-list';
 import ListItem from '../../components/list-item';
 import { Provider } from 'react-redux';
 import { store } from '../../redux/store';
-
+console.log(test);
 describe('player-list tests', () => {
   let i = 0;
   const getTestPlayer = () => ({
