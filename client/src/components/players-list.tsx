@@ -21,7 +21,7 @@ const PlayersList: React.FC<{ players: IPlayer[]; isPage?: boolean }> = ({
           );
         })}
       </ul>
-      {!isPage && <Link to="/select-players">Изменить </Link>}
+      {!isPage && <Link to="/select-players">Изменить</Link>}
     </>
   );
 };
