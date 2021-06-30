@@ -33,7 +33,16 @@ export const truthOrDare = (
   switch (action.type) {
     case truthOrDareActionsType.SET_STATUS:
       return {
-        ...state,
+        truth: {
+          all: [],
+          rest: [],
+          done: [],
+        },
+        dare: {
+          all: [],
+          rest: [],
+          done: [],
+        },
         status: action.payload,
       };
 

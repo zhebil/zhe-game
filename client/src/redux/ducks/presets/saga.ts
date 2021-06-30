@@ -4,17 +4,21 @@ import { createMessage } from '../../../utillity';
 import { gameDataStatus } from '../../types';
 import { addNewMessage } from '../messages/actionCreators';
 import { messageType } from '../messages/reducer';
+import { updateNeverStatus } from '../never/actionCreators';
+import { updateQuestionsStatus } from '../questions/actionCreators';
+import { updateTruthOrDareStatus } from '../truth-or-dare/actionCreators';
 import {
   setPresets,
   presetsActionsType,
   updatePresetsStatus,
+  UpdateCurrentPresetInterface,
 } from './actionCreators';
 
 export interface PresetsFetchedData {
   message: string;
   presets: any[];
 }
-export function* fetchPresets() {
+function* fetchPresets() {
   try {
     yield put(updatePresetsStatus(gameDataStatus.LOADNIG));
     const data: PresetsFetchedData = yield call(() => api.getPresets());
@@ -29,6 +33,20 @@ export function* fetchPresets() {
   }
 }
 
+function* updateCurrentPreset({ currentName }: UpdateCurrentPresetInterface) {
+  yield put(updateNeverStatus(gameDataStatus.NEVER));
+
+  yield put(updateQuestionsStatus(gameDataStatus.NEVER));
+
+  yield put(updateTruthOrDareStatus(gameDataStatus.NEVER));
+  yield put(
+    addNewMessage(
+      createMessage(`Пресет ${currentName} успешно выбран`, messageType.SUCCESS)
+    )
+  );
+}
+
 export function* presetsSaga() {
   yield takeLatest(presetsActionsType.GET_PRESETS, fetchPresets);
+  yield takeLatest(presetsActionsType.UPDATE_CURRENT, updateCurrentPreset);
 }

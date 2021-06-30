@@ -1,4 +1,4 @@
-import { put, call, takeLatest } from 'redux-saga/effects';
+import { put, call, takeLatest, select } from 'redux-saga/effects';
 import api from '../../../api/api';
 import { oneDataItem } from '../../../types';
 import { transformData } from '../../../utillity';
@@ -18,10 +18,21 @@ export interface IFetchedData {
   total: number;
 }
 export function* fetchGameData() {
+  const pathDataTruth: string = yield select(
+    (state) => state.presets.current.truth
+  );
+  const pathDataDare: string = yield select(
+    (state) => state.presets.current.dare
+  );
+
   try {
     yield put(updateTruthOrDareStatus(gameDataStatus.LOADNIG));
-    const dare: IFetchedData = yield call(() => api.getDataByType('dare'));
-    const truth: IFetchedData = yield call(() => api.getDataByType('truth'));
+    const dare: IFetchedData = yield call(() =>
+      api.getDataByType(pathDataDare)
+    );
+    const truth: IFetchedData = yield call(() =>
+      api.getDataByType(pathDataTruth)
+    );
     const truthOrDare = {
       truth: transformData(truth.data),
       dare: transformData(dare.data),

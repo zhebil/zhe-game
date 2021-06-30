@@ -4,6 +4,12 @@ import { PresetsAction, presetsActionsType } from './actionCreators';
 const initialState: any = {
   presets: [],
   status: gameDataStatus.NEVER,
+  current: {
+    truth: 'truth',
+    dare: 'dare',
+    never: 'never',
+  },
+  currentName: 'default',
 };
 
 export const presets = (state = initialState, action: PresetsAction): any => {
@@ -18,6 +24,13 @@ export const presets = (state = initialState, action: PresetsAction): any => {
       return {
         ...state,
         status: action.payload,
+      };
+
+    case presetsActionsType.UPDATE_CURRENT:
+      return {
+        ...state,
+        current: action.payload,
+        currentName: action.currentName,
       };
     default:
       return state;
