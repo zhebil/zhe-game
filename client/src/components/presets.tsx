@@ -28,7 +28,7 @@ const Presets: React.FC = (): ReactElement => {
       status={status}
     >
       <div className="container section-padding">
-        <h1>В разработке</h1>
+        <h1>Игровые пресеты</h1>
         <p>Выберите пресет:</p>
         <ul className="list-group">
           {presets.map((i: { name: string; data: any }) => (

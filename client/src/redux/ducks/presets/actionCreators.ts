@@ -33,6 +33,7 @@ export interface UpdateCurrentPresetInterface
 export interface CreatePresetInterface extends Action<presetsActionsType> {
   type: presetsActionsType.CREATE;
   payload: string;
+  history: any;
 }
 
 export const setPresets = (payload: any): SetPresetsActionInterface => {
@@ -68,10 +69,14 @@ export const updateCurrentPreset = (
   };
 };
 
-export const createPresets = (payload: string): CreatePresetInterface => {
+export const createPresets = (
+  payload: string,
+  history: any
+): CreatePresetInterface => {
   return {
     type: presetsActionsType.CREATE,
     payload,
+    history,
   };
 };
 

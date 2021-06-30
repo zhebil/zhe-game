@@ -19,7 +19,10 @@ module.exports = {
         const response = await newPreset.save();
         res
           .status(200)
-          .json({ message: `Пресет ${newModelName} успешно создан`, response });
+          .json({
+            message: `Пресет ${newModelName} успешно создан`,
+            data: response.data,
+          });
       }
     } catch (e) {
       res

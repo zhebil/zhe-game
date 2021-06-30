@@ -1,5 +1,6 @@
 import { put, call, takeLatest, select } from 'redux-saga/effects';
 import api from '../../../api/api';
+import constants from '../../../constants';
 import { createMessage } from '../../../utillity';
 import { gameDataStatus } from '../../types';
 import { addNewMessage } from '../messages/actionCreators';
@@ -47,25 +48,29 @@ function* updateCurrentPreset({ currentName }: UpdateCurrentPresetInterface) {
   );
 }
 
-function* createPreset({ payload: newPreset }: CreatePresetInterface) {
+function* createPreset({
+  payload: newPresetName,
+  history,
+}: CreatePresetInterface) {
   try {
     yield put(
       addNewMessage(
         createMessage(
-          `Создаем новый пресет - ${newPreset}`,
+          `Создаем новый пресет - ${newPresetName}`,
           messageType.SUCCESS
         )
       )
     );
+    console.log(window.location);
+
     const newPresetResponse: { data: any; message: string } | undefined =
-      yield call(() => api.createPreset(newPreset));
+      yield call(() => api.createPreset(newPresetName));
+
     if (!newPresetResponse) {
-      throw new Error(`Не удалось создать пресет ${newPreset}`);
+      throw new Error(`Не удалось создать пресет ${newPresetName}`);
     }
-    const currentPresets: any[] = yield select(
-      (state) => state.presets.presets
-    );
-    yield put(setPresets([...currentPresets, newPresetResponse.data]));
+    yield put(setPresets([]));
+    history.push(constants.ROUTES.PRESETS);
   } catch (e) {
     console.log(e);
     yield put(addNewMessage(createMessage(e.message, messageType.DANGER)));
