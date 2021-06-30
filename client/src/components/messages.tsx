@@ -30,7 +30,7 @@ const Messages: React.FC = (): ReactElement => {
             }}
           >
             <button
-              className={`alert alert-${message.type}`}
+              className={`alert d-block alert-${message.type}`}
               role="alert"
               aria-live="assertive"
               aria-atomic="true"
