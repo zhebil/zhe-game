@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import constants from '.';
 import AdminPage from '../pages/Admin-page';
+import { CreatePresetsPage } from '../pages/CreatePresets-page';
 import NeverPage from '../pages/Never-page';
-import Presets from '../pages/Presets-page';
+import PresetsPage from '../pages/Presets-page';
 import QuestionsPage from '../pages/Questions-page';
 import SelectPlayersPage from '../pages/Select-players-page';
 import TruthPage from '../pages/Truth-page';
@@ -42,7 +43,8 @@ const router: IRouterItem[] = [
   {
     path: ROUTES.PRESETS,
     exact: true,
-    component: Presets,
+    component: PresetsPage,
   },
+  { path: ROUTES.CREATE_PRESET, exact: false, component: CreatePresetsPage },
 ];
 export default router;

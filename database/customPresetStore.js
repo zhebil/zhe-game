@@ -2,7 +2,7 @@ const CustomPresets = require('../models/customPresets');
 
 module.exports = {
   async createPreset(req, res) {
-    const { newModelName } = req.body;
+    const { name: newModelName } = req.body;
     try {
       const exist = await CustomPresets.exists({ name: newModelName });
       if (exist) {
@@ -17,7 +17,9 @@ module.exports = {
           },
         });
         const response = await newPreset.save();
-        res.status(200).json({ message: 'Done', response });
+        res
+          .status(200)
+          .json({ message: `Пресет ${newModelName} успешно создан`, response });
       }
     } catch (e) {
       res

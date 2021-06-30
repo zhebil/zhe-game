@@ -6,6 +6,7 @@ const constants = {
     SELECT_PLAYER: '/select-players',
     ADMIN_PAGE: '/admin',
     PRESETS: '/presets',
+    CREATE_PRESET: '/presets/create',
   },
   DEFAULT_PRESET: {
     currentName: 'default',

@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef, useState } from 'react';
+import React, { ReactElement, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import { messageSelector } from '../redux/ducks/messages/selectors';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';

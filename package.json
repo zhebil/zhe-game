@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FrontValley-group/game.git"
+    "url": "git+https://github.com/zhebil/zhe-game.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/FrontValley-group/game/issues"
+    "url": "https://github.com/zhebil/zhe-game/issues"
   },
-  "homepage": "https://github.com/FrontValley-group/game#readme",
+  "homepage": "https://github.com/zhebil/zhe-game#readme",
   "dependencies": {
     "babel-eslint": "^10.1.0",
     "dotenv": "^8.2.0",

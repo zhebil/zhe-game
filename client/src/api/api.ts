@@ -44,9 +44,8 @@ class Api {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-
     const json = await res.json();
-    console.log(res);
+
     if (res.ok) {
       const message = createMessage(json.message, messageType.SUCCESS);
       store.dispatch(addNewMessage(message));
@@ -84,13 +83,20 @@ class Api {
   }
 
   async createPreset(name: string) {
-    const res = await fetch(`${this.dataPath}/create`, {
+    const res = await fetch(`${this.presetsPath}create`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name }),
     });
     const json = await res.json();
-    return json;
+    if (res.ok) {
+      const message = createMessage(json.message, messageType.SUCCESS);
+      store.dispatch(addNewMessage(message));
+      return json;
+    } else {
+      const message = createMessage(json.message, messageType.DANGER);
+      store.dispatch(addNewMessage(message));
+    }
   }
 }
-export default new Api('api/data/', 'api/presets/');
+export default new Api('/api/data/', '/api/presets/');

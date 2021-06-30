@@ -6,6 +6,7 @@ export enum presetsActionsType {
   SET_PRESETS = 'presets/SET_DATA',
   SET_STATUS = 'presets/SET_STATUS',
   UPDATE_CURRENT = 'presets/UPDATE_CURRENT',
+  CREATE = 'presets/CREATE',
 }
 
 export interface SetPresetsActionInterface extends Action<presetsActionsType> {
@@ -27,6 +28,11 @@ export interface UpdateCurrentPresetInterface
   type: presetsActionsType.UPDATE_CURRENT;
   payload: any;
   currentName: string;
+}
+
+export interface CreatePresetInterface extends Action<presetsActionsType> {
+  type: presetsActionsType.CREATE;
+  payload: string;
 }
 
 export const setPresets = (payload: any): SetPresetsActionInterface => {
@@ -62,8 +68,16 @@ export const updateCurrentPreset = (
   };
 };
 
+export const createPresets = (payload: string): CreatePresetInterface => {
+  return {
+    type: presetsActionsType.CREATE,
+    payload,
+  };
+};
+
 export type PresetsAction =
   | SetPresetsActionInterface
   | GetPresetsActionInterface
   | SetPresetsStatusInterface
-  | UpdateCurrentPresetInterface;
+  | UpdateCurrentPresetInterface
+  | CreatePresetInterface;

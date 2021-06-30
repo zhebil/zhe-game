@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+import { Link } from 'react-router-dom';
 import { FetchContainer } from '../components/fetchContainer';
 import constants from '../constants';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
@@ -35,7 +36,12 @@ const Presets: React.FC = (): ReactElement => {
           ))}
         </ul>
 
-        <button className="btn btn-primary mt-3">Создать свой</button>
+        <Link
+          to={constants.ROUTES.CREATE_PRESET}
+          className="btn btn-primary mt-3 mr-2"
+        >
+          Создать свой
+        </Link>
 
         <button
           onClick={onDefaultPresetChoose}

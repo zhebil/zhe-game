@@ -1,4 +1,4 @@
-import { put, call, takeLatest } from 'redux-saga/effects';
+import { put, call, takeLatest, select } from 'redux-saga/effects';
 import api from '../../../api/api';
 import { createMessage } from '../../../utillity';
 import { gameDataStatus } from '../../types';
@@ -12,6 +12,7 @@ import {
   presetsActionsType,
   updatePresetsStatus,
   UpdateCurrentPresetInterface,
+  CreatePresetInterface,
 } from './actionCreators';
 
 export interface PresetsFetchedData {
@@ -46,7 +47,33 @@ function* updateCurrentPreset({ currentName }: UpdateCurrentPresetInterface) {
   );
 }
 
+function* createPreset({ payload: newPreset }: CreatePresetInterface) {
+  try {
+    yield put(
+      addNewMessage(
+        createMessage(
+          `Создаем новый пресет - ${newPreset}`,
+          messageType.SUCCESS
+        )
+      )
+    );
+    const newPresetResponse: { data: any; message: string } | undefined =
+      yield call(() => api.createPreset(newPreset));
+    if (!newPresetResponse) {
+      throw new Error(`Не удалось создать пресет ${newPreset}`);
+    }
+    const currentPresets: any[] = yield select(
+      (state) => state.presets.presets
+    );
+    yield put(setPresets([...currentPresets, newPresetResponse.data]));
+  } catch (e) {
+    console.log(e);
+    yield put(addNewMessage(createMessage(e.message, messageType.DANGER)));
+  }
+}
+
 export function* presetsSaga() {
   yield takeLatest(presetsActionsType.GET_PRESETS, fetchPresets);
   yield takeLatest(presetsActionsType.UPDATE_CURRENT, updateCurrentPreset);
+  yield takeLatest(presetsActionsType.CREATE, createPreset);
 }
