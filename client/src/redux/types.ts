@@ -3,6 +3,7 @@ import { NeverAction } from './ducks/never/actionCreators';
 import { TruthOrDareAction } from './ducks/truth-or-dare/actionCreators';
 import { QuestionsAction } from './ducks/questions/actionCreators';
 import { RootState } from './store';
+import { PresetsAction } from './ducks/presets/actionCreators';
 export enum gameDataStatus {
   LOADNIG = 'LOADING',
   ERROR = 'ERROR',
@@ -22,7 +23,8 @@ export interface gameOneDataTypeState {
 export type reduxAction = () =>
   | NeverAction
   | TruthOrDareAction
-  | QuestionsAction;
+  | QuestionsAction
+  | PresetsAction;
 
 export type dataSelectorFucntion = (state: RootState) => oneDataItem[];
 export type statusSelectorFucntion = (state: RootState) => gameDataStatus;

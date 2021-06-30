@@ -37,6 +37,7 @@ class Api {
 
     return data;
   }
+
   async postData(path: string, data: postData) {
     const res = await fetch(`${this.dataPath}${path}`, {
       method: 'POST',
@@ -55,6 +56,7 @@ class Api {
       store.dispatch(addNewMessage(message));
     }
   }
+
   async updateData(path: string, data: postData, id: ID) {
     const res = await fetch(`${this.dataPath}${path}/${id}`, {
       method: 'PUT',
@@ -64,6 +66,7 @@ class Api {
     const json = await res.json();
     return json;
   }
+
   async deleteData(path: string, data: postData, id: ID) {
     const res = await fetch(`${this.dataPath}${path}/${id}`, {
       method: 'DELETE',
@@ -72,12 +75,14 @@ class Api {
     const json = await res.json();
     return json;
   }
+
   async getPresets(): Promise<presetsData> {
     const res = await fetch(`${this.presetsPath}`);
     const data = await res.json();
 
     return data;
   }
+
   async createPreset(name: string) {
     const res = await fetch(`${this.dataPath}/create`, {
       method: 'POST',
