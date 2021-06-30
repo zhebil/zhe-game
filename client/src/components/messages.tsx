@@ -8,8 +8,11 @@ const Messages: React.FC = (): ReactElement => {
   const messages = useAppSelector(messageSelector);
   const dispatch = useAppDispatch();
 
-  console.log(messages);
   const ref = useRef(null);
+
+  const onDeleteMessage = (id: number) => {
+    dispatch(removeMessage(id));
+  };
   return (
     <TransitionGroup className="message__container">
       {messages.map((message) => {
@@ -26,15 +29,16 @@ const Messages: React.FC = (): ReactElement => {
               }, 2000);
             }}
           >
-            <div
+            <button
               className={`alert alert-${message.type}`}
               role="alert"
               aria-live="assertive"
               aria-atomic="true"
               ref={ref}
+              onClick={() => onDeleteMessage(message.id)}
             >
               <p className="mb-0">{message.text}</p>
-            </div>
+            </button>
           </CSSTransition>
         );
       })}
