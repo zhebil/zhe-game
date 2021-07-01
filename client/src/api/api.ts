@@ -92,5 +92,19 @@ class Api {
       store.dispatch(logError(json.message));
     }
   }
+
+  async deletePreset(id: ID) {
+    const res = await fetch(`${this.presetsPath}${id}`, {
+      method: 'DELETE',
+    });
+    const json = await res.json();
+    if (res.ok) {
+      store.dispatch(logSuccess(json.message));
+      return json;
+    } else {
+      return new Error(json.message);
+      // store.dispatch(logError(json.message));
+    }
+  }
 }
 export default new Api('/api/data/', '/api/presets/');

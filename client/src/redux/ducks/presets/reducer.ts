@@ -1,7 +1,27 @@
+import { ID } from '../../../types';
 import { gameDataStatus } from '../../types';
 import { PresetsAction, presetsActionsType } from './actionCreators';
 
-const initialState: any = {
+export interface presetDataInterface {
+  truth: string;
+  dare: string;
+  never: string;
+}
+
+export interface presetInterface {
+  data: presetDataInterface;
+  _id: ID;
+  name: string;
+}
+
+export interface initialPresetState {
+  presets: presetInterface[];
+  status: gameDataStatus;
+  current: presetDataInterface;
+  currentName: string;
+}
+
+const initialState: initialPresetState = {
   presets: [],
   status: gameDataStatus.NEVER,
   current: {
@@ -12,7 +32,10 @@ const initialState: any = {
   currentName: 'default',
 };
 
-export const presets = (state = initialState, action: PresetsAction): any => {
+export const presets = (
+  state = initialState,
+  action: PresetsAction
+): initialPresetState => {
   switch (action.type) {
     case presetsActionsType.SET_PRESETS:
       return {

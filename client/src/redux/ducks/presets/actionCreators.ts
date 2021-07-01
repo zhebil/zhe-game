@@ -1,5 +1,7 @@
 import { Action } from 'redux';
+import { ID } from '../../../types';
 import { gameDataStatus } from '../../types';
+import { presetDataInterface, presetInterface } from './reducer';
 
 export enum presetsActionsType {
   GET_PRESETS = 'presets/GET_DATA',
@@ -7,11 +9,12 @@ export enum presetsActionsType {
   SET_STATUS = 'presets/SET_STATUS',
   UPDATE_CURRENT = 'presets/UPDATE_CURRENT',
   CREATE = 'presets/CREATE',
+  DELETE = 'presets/DELETE',
 }
 
 export interface SetPresetsActionInterface extends Action<presetsActionsType> {
   type: presetsActionsType.SET_PRESETS;
-  payload: any[];
+  payload: presetInterface[];
 }
 
 export interface GetPresetsActionInterface extends Action<presetsActionsType> {
@@ -26,7 +29,7 @@ export interface SetPresetsStatusInterface extends Action<presetsActionsType> {
 export interface UpdateCurrentPresetInterface
   extends Action<presetsActionsType> {
   type: presetsActionsType.UPDATE_CURRENT;
-  payload: any;
+  payload: presetDataInterface;
   currentName: string;
 }
 
@@ -36,7 +39,14 @@ export interface CreatePresetInterface extends Action<presetsActionsType> {
   history: any;
 }
 
-export const setPresets = (payload: any): SetPresetsActionInterface => {
+export interface DeletePresetInterface extends Action<presetsActionsType> {
+  type: presetsActionsType.DELETE;
+  payload: ID;
+}
+
+export const setPresets = (
+  payload: presetInterface[]
+): SetPresetsActionInterface => {
   return {
     type: presetsActionsType.SET_PRESETS,
     payload,
@@ -59,7 +69,7 @@ export const updatePresetsStatus = (
 };
 
 export const updateCurrentPreset = (
-  payload: any,
+  payload: presetDataInterface,
   currentName: string
 ): UpdateCurrentPresetInterface => {
   return {
@@ -80,9 +90,17 @@ export const createPresets = (
   };
 };
 
+export const deletePresets = (payload: ID): DeletePresetInterface => {
+  return {
+    type: presetsActionsType.DELETE,
+    payload,
+  };
+};
+
 export type PresetsAction =
   | SetPresetsActionInterface
   | GetPresetsActionInterface
   | SetPresetsStatusInterface
   | UpdateCurrentPresetInterface
-  | CreatePresetInterface;
+  | CreatePresetInterface
+  | DeletePresetInterface;

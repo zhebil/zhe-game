@@ -7,6 +7,7 @@ import {
   getPresets,
   updateCurrentPreset,
 } from '../redux/ducks/presets/actionCreators';
+import { presetInterface } from '../redux/ducks/presets/reducer';
 import PresetsListItem from './presets-list-item';
 
 const Presets: React.FC = (): ReactElement => {
@@ -31,7 +32,7 @@ const Presets: React.FC = (): ReactElement => {
         <h1>Игровые пресеты</h1>
         <p>Выберите пресет:</p>
         <ul className="list-group">
-          {presets.map((i: { name: string; data: any }) => (
+          {presets.map((i: presetInterface) => (
             <PresetsListItem key={i.name} {...i} />
           ))}
         </ul>
