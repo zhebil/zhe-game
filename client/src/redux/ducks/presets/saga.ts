@@ -1,4 +1,4 @@
-import { put, call, takeLatest, select } from 'redux-saga/effects';
+import { put, call, takeLatest } from 'redux-saga/effects';
 import api from '../../../api/api';
 import constants from '../../../constants';
 import { createMessage } from '../../../utillity';
@@ -24,7 +24,6 @@ function* fetchPresets() {
   try {
     yield put(updatePresetsStatus(gameDataStatus.LOADNIG));
     const data: PresetsFetchedData = yield call(() => api.getPresets());
-    console.log(data);
     yield put(setPresets(data.presets));
 
     yield put(addNewMessage(createMessage(data.message, messageType.SUCCESS)));
@@ -61,7 +60,6 @@ function* createPreset({
         )
       )
     );
-    console.log(window.location);
 
     const newPresetResponse: { data: any; message: string } | undefined =
       yield call(() => api.createPreset(newPresetName));
@@ -72,7 +70,6 @@ function* createPreset({
     yield put(setPresets([]));
     history.push(constants.ROUTES.PRESETS);
   } catch (e) {
-    console.log(e);
     yield put(addNewMessage(createMessage(e.message, messageType.DANGER)));
   }
 }

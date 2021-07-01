@@ -14,7 +14,6 @@ const App: React.FC = (): ReactElement => {
         <Switch>
           {router.map(
             ({ exact, path, component: Component }: IRouterItem, i: number) => {
-              console.log(router);
               return (
                 <Route key={path} exact={exact} path={path}>
                   <Component />

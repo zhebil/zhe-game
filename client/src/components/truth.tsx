@@ -63,20 +63,18 @@ const Truth: React.FC = (): ReactElement => {
     const thisRaundData: oneDataItem =
       data[type as keyof IDataForTruth][dataIdx];
 
-    setRaund(
-      (prev: ITruthRaund): ITruthRaund => {
-        const nextPlayer: number =
-          raund.nextPlayer < players.length - 1 ? raund.nextPlayer + 1 : 0;
+    setRaund((prev: ITruthRaund): ITruthRaund => {
+      const nextPlayer: number =
+        raund.nextPlayer < players.length - 1 ? raund.nextPlayer + 1 : 0;
 
-        return {
-          player: players[prev.nextPlayer].name,
-          nextPlayer: nextPlayer,
-          type: type,
-          text: thisRaundData.text,
-          first: false,
-        };
-      }
-    );
+      return {
+        player: players[prev.nextPlayer].name,
+        nextPlayer: nextPlayer,
+        type: type,
+        text: thisRaundData.text,
+        first: false,
+      };
+    });
 
     dispatch(cb(thisRaundData._id));
   };
@@ -104,7 +102,6 @@ const Truth: React.FC = (): ReactElement => {
     if (dare.length === 0 || truth.length === 0) return 0;
     else return 1;
   };
-  console.log(dataLength());
 
   return (
     <FetchContainer

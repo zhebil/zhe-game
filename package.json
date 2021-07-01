@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "build": "npm run build --prefix client",
-    "server": "nodemon app.js",
+    "server": "nodemon --trace-warnings app.js",
     "client": "npm run start --prefix client",
     "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\" "
   },
