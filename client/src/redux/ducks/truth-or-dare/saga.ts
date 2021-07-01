@@ -2,6 +2,7 @@ import { put, call, takeLatest, select } from 'redux-saga/effects';
 import api from '../../../api/api';
 import { oneDataItem } from '../../../types';
 import { transformData } from '../../../utillity';
+import { RootState } from '../../store';
 import { gameDataStatus } from '../../types';
 import {
   setTruthOrDare,
@@ -19,10 +20,10 @@ export interface IFetchedData {
 }
 export function* fetchGameData() {
   const pathDataTruth: string = yield select(
-    (state) => state.presets.current.truth
+    (state: RootState) => state.presets.current.truth
   );
   const pathDataDare: string = yield select(
-    (state) => state.presets.current.dare
+    (state: RootState) => state.presets.current.dare
   );
 
   try {

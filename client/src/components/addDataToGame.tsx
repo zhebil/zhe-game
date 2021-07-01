@@ -13,7 +13,7 @@ const AddDataToGame = () => {
         text: text.value,
       };
       text.value = '';
-      const res = await api.postData(path, data);
+      await api.postData(path, data);
     }
   };
 

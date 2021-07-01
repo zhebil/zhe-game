@@ -2,6 +2,7 @@ import { put, call, takeLatest, select } from 'redux-saga/effects';
 import api from '../../../api/api';
 import { oneDataItem } from '../../../types';
 import { transformData } from '../../../utillity';
+import { RootState } from '../../store';
 import { gameDataStatus } from '../../types';
 import {
   neverActionsType,
@@ -18,7 +19,9 @@ export interface IFetchedData {
   total: number;
 }
 export function* fetchGameData() {
-  const pathData: string = yield select((state) => state.presets.current.never);
+  const pathData: string = yield select(
+    (state: RootState) => state.presets.current.never
+  );
 
   try {
     yield put(updateNeverStatus(gameDataStatus.LOADNIG));

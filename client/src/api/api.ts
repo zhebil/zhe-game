@@ -89,7 +89,7 @@ class Api {
       store.dispatch(logSuccess(json.message));
       return json;
     } else {
-      store.dispatch(logError(json.message));
+      throw new Error(json.message);
     }
   }
 
@@ -102,8 +102,7 @@ class Api {
       store.dispatch(logSuccess(json.message));
       return json;
     } else {
-      return new Error(json.message);
-      // store.dispatch(logError(json.message));
+      throw new Error(json.message);
     }
   }
 }

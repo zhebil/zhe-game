@@ -2,6 +2,7 @@ import { put, call, takeLatest, select } from 'redux-saga/effects';
 import api from '../../../api/api';
 import { oneDataItem } from '../../../types';
 import { transformData } from '../../../utillity';
+import { RootState } from '../../store';
 import { gameDataStatus } from '../../types';
 import {
   questionsActionsType,
@@ -19,7 +20,7 @@ export interface IFetchedData {
 }
 export function* fetchGameData() {
   const pathDataName: string = yield select(
-    (state) => state.presets.current.truth
+    (state: RootState) => state.presets.current.truth
   );
   try {
     yield put(updateQuestionsStatus(gameDataStatus.LOADNIG));
