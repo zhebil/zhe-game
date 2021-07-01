@@ -1,8 +1,6 @@
-import { addNewMessage } from '../redux/ducks/messages/actionCreators';
-import { messageType } from '../redux/ducks/messages/reducer';
 import { store } from '../redux/store';
 import { ID, oneDataItem } from '../types';
-import { createMessage } from '../utillity';
+import { logError, logSuccess } from '../utillity';
 
 interface postData {
   text: string;
@@ -47,12 +45,10 @@ class Api {
     const json = await res.json();
 
     if (res.ok) {
-      const message = createMessage(json.message, messageType.SUCCESS);
-      store.dispatch(addNewMessage(message));
+      store.dispatch(logSuccess(json.message));
       return json;
     } else {
-      const message = createMessage(json.message, messageType.DANGER);
-      store.dispatch(addNewMessage(message));
+      store.dispatch(logError(json.message));
     }
   }
 
@@ -90,12 +86,10 @@ class Api {
     });
     const json = await res.json();
     if (res.ok) {
-      const message = createMessage(json.message, messageType.SUCCESS);
-      store.dispatch(addNewMessage(message));
+      store.dispatch(logSuccess(json.message));
       return json;
     } else {
-      const message = createMessage(json.message, messageType.DANGER);
-      store.dispatch(addNewMessage(message));
+      store.dispatch(logError(json.message));
     }
   }
 }

@@ -1,10 +1,8 @@
 import { put, call, takeLatest } from 'redux-saga/effects';
 import api from '../../../api/api';
 import constants from '../../../constants';
-import { createMessage } from '../../../utillity';
+import { logError, logSuccess, logWarning } from '../../../utillity';
 import { gameDataStatus } from '../../types';
-import { addNewMessage } from '../messages/actionCreators';
-import { messageType } from '../messages/reducer';
 import { updateNeverStatus } from '../never/actionCreators';
 import { updateQuestionsStatus } from '../questions/actionCreators';
 import { updateTruthOrDareStatus } from '../truth-or-dare/actionCreators';
@@ -26,11 +24,11 @@ function* fetchPresets() {
     const data: PresetsFetchedData = yield call(() => api.getPresets());
     yield put(setPresets(data.presets));
 
-    yield put(addNewMessage(createMessage(data.message, messageType.SUCCESS)));
+    yield put(logSuccess(data.message));
   } catch (e) {
     yield put(updatePresetsStatus(gameDataStatus.ERROR));
 
-    yield put(addNewMessage(createMessage(e.message, messageType.DANGER)));
+    yield put(logError(e.message));
   }
 }
 
@@ -40,11 +38,7 @@ function* updateCurrentPreset({ currentName }: UpdateCurrentPresetInterface) {
   yield put(updateQuestionsStatus(gameDataStatus.NEVER));
 
   yield put(updateTruthOrDareStatus(gameDataStatus.NEVER));
-  yield put(
-    addNewMessage(
-      createMessage(`Пресет ${currentName} успешно выбран`, messageType.SUCCESS)
-    )
-  );
+  yield put(logSuccess(`Пресет ${currentName} успешно выбран`));
 }
 
 function* createPreset({
@@ -52,14 +46,7 @@ function* createPreset({
   history,
 }: CreatePresetInterface) {
   try {
-    yield put(
-      addNewMessage(
-        createMessage(
-          `Создаем новый пресет - ${newPresetName}`,
-          messageType.SUCCESS
-        )
-      )
-    );
+    yield put(logWarning(`Создаем новый пресет - ${newPresetName}`));
 
     const newPresetResponse: { data: any; message: string } | undefined =
       yield call(() => api.createPreset(newPresetName));
@@ -70,7 +57,7 @@ function* createPreset({
     yield put(setPresets([]));
     history.push(constants.ROUTES.PRESETS);
   } catch (e) {
-    yield put(addNewMessage(createMessage(e.message, messageType.DANGER)));
+    yield put(logError(e.message));
   }
 }
 

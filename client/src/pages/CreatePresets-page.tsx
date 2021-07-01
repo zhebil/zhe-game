@@ -1,10 +1,8 @@
 import React, { FormEvent, ReactElement } from 'react';
 import { useHistory } from 'react-router';
 import { useAppDispatch } from '../hooks/redux.hook';
-import { addNewMessage } from '../redux/ducks/messages/actionCreators';
-import { messageType } from '../redux/ducks/messages/reducer';
 import { createPresets } from '../redux/ducks/presets/actionCreators';
-import { createMessage } from '../utillity';
+import { logError } from '../utillity';
 const CreatePresetsPage: React.FC = (): ReactElement => {
   const dispatch = useAppDispatch();
   const history = useHistory();
@@ -16,9 +14,7 @@ const CreatePresetsPage: React.FC = (): ReactElement => {
     if (newPreset.value.trim().length >= 1) {
       dispatch(createPresets(newPreset.value, history));
     } else {
-      dispatch(
-        addNewMessage(createMessage('Вы ничего не ввели', messageType.SUCCESS))
-      );
+      dispatch(logError('Вы ничего не ввели'));
     }
   };
 
