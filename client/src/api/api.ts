@@ -105,5 +105,16 @@ class Api {
       throw new Error(json.message);
     }
   }
+
+  async getPreset(name: string) {
+    const res = await fetch(`${this.presetsPath}${name}`);
+    const json = await res.json();
+    if (res.ok) {
+      store.dispatch(logSuccess(json.message));
+      return json;
+    } else {
+      throw new Error(json.message);
+    }
+  }
 }
 export default new Api('/api/data/', '/api/presets/');

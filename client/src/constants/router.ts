@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import constants from '.';
 import AdminPage from '../pages/Admin-page';
+import { ChangePresetPage } from '../pages/ChangePreset-page';
 import { CreatePresetsPage } from '../pages/CreatePresets-page';
 import NeverPage from '../pages/Never-page';
 import PresetsPage from '../pages/Presets-page';
@@ -46,5 +47,6 @@ const router: IRouterItem[] = [
     component: PresetsPage,
   },
   { path: ROUTES.CREATE_PRESET, exact: false, component: CreatePresetsPage },
+  { path: ROUTES.CHANGE_PRESET, exact: false, component: ChangePresetPage },
 ];
 export default router;

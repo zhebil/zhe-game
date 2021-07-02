@@ -30,7 +30,7 @@ module.exports = {
   },
   async getPresets(req, res) {
     try {
-      const presets = await CustomPresets.find();
+      const presets = await CustomPresets.find({ name: { $ne: 'default' } });
       res.json({ message: 'Пресеты успешно получены', presets });
     } catch (e) {
       res.status(400).json({ message: 'Не удалось полуить пресеты' });
@@ -51,6 +51,26 @@ module.exports = {
       }
     } catch (e) {
       res.status(400).json({ message: 'Не удалось удалить пресет' });
+    }
+  },
+
+  async getOnePreset(req, res) {
+    try {
+      const { name } = req.params;
+
+      const exist = await CustomPresets.exists({ name });
+
+      if (!exist) {
+        res.status(400).json({ message: 'Такого пресета не существуют' });
+      } else {
+        const requestedPreset = await CustomPresets.findOne({ name });
+        res.status(201).json({
+          message: 'Пресет успешно получен',
+          preset: requestedPreset,
+        });
+      }
+    } catch (e) {
+      res.status(400).json({ message: 'Не удалось получить пресет' });
     }
   },
 };

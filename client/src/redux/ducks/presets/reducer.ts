@@ -1,4 +1,4 @@
-import { ID } from '../../../types';
+import { ID, oneDataItem } from '../../../types';
 import { gameDataStatus } from '../../types';
 import { PresetsAction, presetsActionsType } from './actionCreators';
 
@@ -6,6 +6,12 @@ export interface presetDataInterface {
   truth: string;
   dare: string;
   never: string;
+}
+
+export interface gamePresetData {
+  truth: oneDataItem[];
+  dare: oneDataItem[];
+  never: oneDataItem[];
 }
 
 export interface presetInterface {
@@ -19,6 +25,13 @@ export interface initialPresetState {
   status: gameDataStatus;
   current: presetDataInterface;
   currentName: string;
+  toUpdate: toUpdatePresetInterface;
+}
+
+export interface toUpdatePresetInterface {
+  preset: presetInterface | {};
+  data: gamePresetData;
+  status: gameDataStatus;
 }
 
 const initialState: initialPresetState = {
@@ -30,6 +43,15 @@ const initialState: initialPresetState = {
     never: 'never',
   },
   currentName: 'default',
+  toUpdate: {
+    preset: {},
+    data: {
+      truth: [],
+      dare: [],
+      never: [],
+    },
+    status: gameDataStatus.NEVER,
+  },
 };
 
 export const presets = (
@@ -54,6 +76,19 @@ export const presets = (
         ...state,
         current: action.payload,
         currentName: action.currentName,
+      };
+    case presetsActionsType.SET_ONE:
+      return {
+        ...state,
+        toUpdate: action.payload,
+      };
+    case presetsActionsType.SET_PRESET_STATUS:
+      return {
+        ...state,
+        toUpdate: {
+          ...state.toUpdate,
+          status: action.payload,
+        },
       };
     default:
       return state;

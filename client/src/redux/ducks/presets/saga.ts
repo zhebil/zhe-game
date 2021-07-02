@@ -3,7 +3,7 @@ import api from '../../../api/api';
 import constants from '../../../constants';
 import { logError, logSuccess, logWarning } from '../../../utillity';
 import { RootState } from '../../store';
-import { gameDataStatus } from '../../types';
+import { gameDataStatus, IFetchedData } from '../../types';
 import { updateNeverStatus } from '../never/actionCreators';
 import { updateQuestionsStatus } from '../questions/actionCreators';
 import { updateTruthOrDareStatus } from '../truth-or-dare/actionCreators';
@@ -15,6 +15,9 @@ import {
   CreatePresetInterface,
   DeletePresetInterface,
   updateCurrentPreset,
+  GetOnePresetInterface,
+  setUpdatedPreset,
+  setUpdatedPresetStatus,
 } from './actionCreators';
 import { presetInterface } from './reducer';
 
@@ -84,9 +87,46 @@ function* deletePreset({ payload: id }: DeletePresetInterface) {
   }
 }
 
+function* getOnePresetSaga({ payload: name }: GetOnePresetInterface) {
+  try {
+    yield put(setUpdatedPresetStatus(gameDataStatus.LOADNIG));
+
+    const toUpdatePreset: { message: string; preset: presetInterface } =
+      yield call(() => api.getPreset(name));
+
+    yield put(logWarning('Получаем игровые данные текущего пресета'));
+
+    const pathTo = toUpdatePreset.preset.data;
+
+    const { data: never }: IFetchedData = yield call(() =>
+      api.getDataByType(pathTo.never)
+    );
+    const { data: truth }: IFetchedData = yield call(() =>
+      api.getDataByType(pathTo.truth)
+    );
+    const { data: dare }: IFetchedData = yield call(() =>
+      api.getDataByType(pathTo.dare)
+    );
+
+    const toUpdatePresetData = {
+      preset: toUpdatePreset.preset,
+      data: { truth, dare, never },
+      status: gameDataStatus.LOADED,
+    };
+
+    yield put(setUpdatedPreset(toUpdatePresetData));
+    yield put(logSuccess('Игровые данные текущего пресета получены'));
+  } catch (e) {
+    yield put(logError(e.message));
+
+    yield put(setUpdatedPresetStatus(gameDataStatus.ERROR));
+  }
+}
+
 export function* presetsSaga() {
   yield takeLatest(presetsActionsType.GET_PRESETS, fetchPresets);
   yield takeLatest(presetsActionsType.UPDATE_CURRENT, updateDataByNewPreset);
   yield takeLatest(presetsActionsType.CREATE, createPreset);
   yield takeLatest(presetsActionsType.DELETE, deletePreset);
+  yield takeLatest(presetsActionsType.GET_ONE, getOnePresetSaga);
 }

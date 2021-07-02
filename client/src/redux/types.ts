@@ -26,5 +26,10 @@ export type reduxAction = () =>
   | QuestionsAction
   | PresetsAction;
 
+export interface IFetchedData {
+  data: oneDataItem[];
+  skip: number;
+  total: number;
+}
 export type dataSelectorFucntion = (state: RootState) => oneDataItem[];
 export type statusSelectorFucntion = (state: RootState) => gameDataStatus;

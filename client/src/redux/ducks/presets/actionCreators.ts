@@ -1,7 +1,11 @@
 import { Action } from 'redux';
 import { ID } from '../../../types';
 import { gameDataStatus } from '../../types';
-import { presetDataInterface, presetInterface } from './reducer';
+import {
+  presetDataInterface,
+  presetInterface,
+  toUpdatePresetInterface,
+} from './reducer';
 
 export enum presetsActionsType {
   GET_PRESETS = 'presets/GET_DATA',
@@ -10,6 +14,9 @@ export enum presetsActionsType {
   UPDATE_CURRENT = 'presets/UPDATE_CURRENT',
   CREATE = 'presets/CREATE',
   DELETE = 'presets/DELETE',
+  GET_ONE = 'presets/GET_ONE',
+  SET_ONE = 'presets/SET_ONE',
+  SET_PRESET_STATUS = 'presets/SET_PRESET_STATUS',
 }
 
 export interface SetPresetsActionInterface extends Action<presetsActionsType> {
@@ -42,6 +49,22 @@ export interface CreatePresetInterface extends Action<presetsActionsType> {
 export interface DeletePresetInterface extends Action<presetsActionsType> {
   type: presetsActionsType.DELETE;
   payload: ID;
+}
+
+export interface GetOnePresetInterface extends Action<presetsActionsType> {
+  type: presetsActionsType.GET_ONE;
+  payload: string;
+}
+
+export interface SetOnePresetInterface extends Action<presetsActionsType> {
+  type: presetsActionsType.SET_ONE;
+  payload: toUpdatePresetInterface;
+}
+
+export interface SetUpdatedPresetStatusInterface
+  extends Action<presetsActionsType> {
+  type: presetsActionsType.SET_PRESET_STATUS;
+  payload: gameDataStatus;
 }
 
 export const setPresets = (
@@ -97,10 +120,38 @@ export const deletePresets = (payload: ID): DeletePresetInterface => {
   };
 };
 
+export const getOnePreset = (payload: string): GetOnePresetInterface => {
+  return {
+    type: presetsActionsType.GET_ONE,
+    payload,
+  };
+};
+
+export const setUpdatedPreset = (
+  payload: toUpdatePresetInterface
+): SetOnePresetInterface => {
+  return {
+    type: presetsActionsType.SET_ONE,
+    payload,
+  };
+};
+
+export const setUpdatedPresetStatus = (
+  payload: gameDataStatus
+): SetUpdatedPresetStatusInterface => {
+  return {
+    type: presetsActionsType.SET_PRESET_STATUS,
+    payload,
+  };
+};
+
 export type PresetsAction =
   | SetPresetsActionInterface
   | GetPresetsActionInterface
   | SetPresetsStatusInterface
   | UpdateCurrentPresetInterface
   | CreatePresetInterface
-  | DeletePresetInterface;
+  | DeletePresetInterface
+  | GetOnePresetInterface
+  | SetOnePresetInterface
+  | SetUpdatedPresetStatusInterface;

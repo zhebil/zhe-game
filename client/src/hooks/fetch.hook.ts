@@ -2,10 +2,17 @@ import { useEffect } from 'react';
 import { reduxAction } from '../redux/types';
 import { useAppDispatch } from './redux.hook';
 
-export const useFetch = (cb: reduxAction, dataLength: number): void => {
+export const useFetch = (
+  cb: reduxAction | null,
+  dataLength: number,
+  cleanup: () => void
+): void => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (dataLength === 0) dispatch(cb());
-  }, [dispatch, dataLength, cb]);
+    if (cb) {
+      if (dataLength === 0) dispatch(cb());
+    }
+    return cleanup;
+  }, [dispatch, dataLength, cb, cleanup]);
 };

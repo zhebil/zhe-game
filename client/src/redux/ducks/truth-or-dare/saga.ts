@@ -1,9 +1,8 @@
 import { put, call, takeLatest, select } from 'redux-saga/effects';
 import api from '../../../api/api';
-import { oneDataItem } from '../../../types';
 import { transformData } from '../../../utillity';
 import { RootState } from '../../store';
-import { gameDataStatus } from '../../types';
+import { gameDataStatus, IFetchedData } from '../../types';
 import {
   setTruthOrDare,
   truthOrDareActionsType,
@@ -13,11 +12,6 @@ import {
 // TODO: 1. Отрефакторить логику получения данных.
 //       2. Убрать повторение кода
 
-export interface IFetchedData {
-  data: oneDataItem[];
-  skip: number;
-  total: number;
-}
 export function* fetchGameData() {
   const pathDataTruth: string = yield select(
     (state: RootState) => state.presets.current.truth

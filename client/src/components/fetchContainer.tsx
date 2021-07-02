@@ -7,17 +7,20 @@ import Spinner from './spinner';
 export interface fetchContainer {
   status: gameDataStatus;
   children: ReactElement;
-  fetchFunction: reduxAction;
-  dataLength: number;
+  fetchFunction?: reduxAction | null;
+  dataLength?: number;
+  cleanup?: () => void;
 }
 
 export const FetchContainer: React.FC<fetchContainer> = ({
   status,
   children,
-  fetchFunction,
-  dataLength,
+  fetchFunction = null,
+  dataLength = 0,
+  cleanup = () => {},
 }: fetchContainer): ReactElement => {
-  useFetch(fetchFunction, dataLength);
+  useFetch(fetchFunction, dataLength, cleanup);
+
   if (status === gameDataStatus.LOADNIG) {
     return (
       <div className="d-flex justify-content-center  align-items-center">

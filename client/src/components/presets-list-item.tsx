@@ -1,4 +1,6 @@
 import React, { ReactElement } from 'react';
+import { Link } from 'react-router-dom';
+import constants from '../constants';
 import { useAppDispatch } from '../hooks/redux.hook';
 import {
   deletePresets,
@@ -16,7 +18,7 @@ const PresetsListItem: React.FC<presetInterface> = ({
     dispatch(updateCurrentPreset(data, name));
   };
   const onPresetDelete = (): void => {
-    dispatch(deletePresets('some-preset'));
+    dispatch(deletePresets(id));
   };
 
   return (
@@ -30,7 +32,12 @@ const PresetsListItem: React.FC<presetInterface> = ({
         >
           Выбрать
         </button>
-        <button className="col-auto btn btn-warning mr-2">Изменить</button>
+        <Link
+          to={`${constants.ROUTES.PRESETS}/${name}`}
+          className="col-auto btn btn-warning mr-2"
+        >
+          Изменить
+        </Link>
         <button onClick={onPresetDelete} className="col-auto btn btn-danger">
           Удалить
         </button>

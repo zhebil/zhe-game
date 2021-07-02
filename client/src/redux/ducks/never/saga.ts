@@ -3,7 +3,7 @@ import api from '../../../api/api';
 import { oneDataItem } from '../../../types';
 import { transformData } from '../../../utillity';
 import { RootState } from '../../store';
-import { gameDataStatus } from '../../types';
+import { gameDataStatus, IFetchedData } from '../../types';
 import {
   neverActionsType,
   setNever,
@@ -13,11 +13,6 @@ import {
 // TODO: 1. Отрефакторить логику получения данных.
 //       2. Убрать повторение кода
 
-export interface IFetchedData {
-  data: oneDataItem[];
-  skip: number;
-  total: number;
-}
 export function* fetchGameData() {
   const pathData: string = yield select(
     (state: RootState) => state.presets.current.never

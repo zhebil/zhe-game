@@ -7,6 +7,7 @@ const constants = {
     ADMIN_PAGE: '/admin',
     PRESETS: '/presets',
     CREATE_PRESET: '/presets/create',
+    CHANGE_PRESET: '/presets/:name',
   },
   DEFAULT_PRESET: {
     currentName: 'default',

@@ -1,18 +1,20 @@
 const createDataModel = require('../models/createDataModel');
 
-async function postData(type, data, res) {
+async function postData(type, data, res, needResponse = true) {
   const DataModel = createDataModel(type);
   const exist = await DataModel.exists({ text: data.text });
   const doc = '_doc';
-  if (exist) {
+  if (exist && needResponse) {
     res.status(400).json({ message: 'Такие данные уже существуют' });
   } else {
     const newDataItem = new DataModel({ text: data.text });
     const addedData = await newDataItem.save();
-    res.status(201).json({
-      ...addedData[doc],
-      message: 'Данные успешно добавлены',
-    });
+    if (needResponse) {
+      res.status(201).json({
+        ...addedData[doc],
+        message: 'Данные успешно добавлены',
+      });
+    }
   }
 }
 async function update(type, data, id, res) {
@@ -44,8 +46,12 @@ async function deleteDataById(type, id, res) {
 
 async function getData(type, res) {
   const DataModel = createDataModel(type);
-  const responseData = await DataModel.find();
+  const responseData = await DataModel.find().limit(20);
   res.json({ data: responseData, total: responseData.length, skip: 0 });
+}
+
+function isDefault(type) {
+  return type === 'truth' || type === 'dare' || type === 'never';
 }
 
 const store = {
@@ -61,6 +67,11 @@ const store = {
     try {
       const data = req.body;
       const type = req.params.dataType;
+
+      if (!isDefault(type)) {
+        const defaultType = type.split('-')[1];
+        postData(defaultType, data, res, false);
+      }
       postData(type, data, res);
     } catch (e) {
       res.status(500).json({ message: 'Невозможно записать данные' });
