@@ -59,7 +59,13 @@ class Api {
       body: JSON.stringify(data),
     });
     const json = await res.json();
-    return json;
+
+    if (res.ok) {
+      store.dispatch(logSuccess(json.message));
+      return json;
+    } else {
+      throw new Error(json.message);
+    }
   }
 
   async deleteData(path: string, data: postData, id: ID) {

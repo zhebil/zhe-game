@@ -1,13 +1,21 @@
 import React, { ReactElement } from 'react';
 import { oneDataItem } from '../types';
+import { EditTextItem } from './editTextItem';
 
-const ChangeData = ({ data }: { data: oneDataItem[] }): ReactElement => {
+interface changeData {
+  data: oneDataItem[];
+  path: string;
+}
+
+const ChangeData = ({ data, path }: changeData): ReactElement => {
   return (
-    <ul>
-      {data.map((i) => (
-        <p> {i.text}</p>
-      ))}
-    </ul>
+    <section className="container padding-section">
+      <ul className="list-group">
+        {data.map((i) => (
+          <EditTextItem key={i._id} {...i} path={path} />
+        ))}
+      </ul>
+    </section>
   );
 };
 

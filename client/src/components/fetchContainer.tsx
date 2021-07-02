@@ -4,12 +4,14 @@ import { gameDataStatus, reduxAction } from '../redux/types';
 import ErrorIndicator from './errorIndicator';
 import Spinner from './spinner';
 
+export type cleanup = () => void;
+
 export interface fetchContainer {
   status: gameDataStatus;
   children: ReactElement;
   fetchFunction?: reduxAction | null;
   dataLength?: number;
-  cleanup?: () => void;
+  cleanup?: cleanup | null;
 }
 
 export const FetchContainer: React.FC<fetchContainer> = ({
@@ -17,11 +19,11 @@ export const FetchContainer: React.FC<fetchContainer> = ({
   children,
   fetchFunction = null,
   dataLength = 0,
-  cleanup = () => {},
+  cleanup = null,
 }: fetchContainer): ReactElement => {
   useFetch(fetchFunction, dataLength, cleanup);
 
-  if (status === gameDataStatus.LOADNIG) {
+  if (status === gameDataStatus.LOADNIG || status === gameDataStatus.NEVER) {
     return (
       <div className="d-flex justify-content-center  align-items-center">
         <Spinner />
@@ -31,5 +33,6 @@ export const FetchContainer: React.FC<fetchContainer> = ({
   if (status === gameDataStatus.ERROR) {
     return <ErrorIndicator />;
   }
+
   return children;
 };

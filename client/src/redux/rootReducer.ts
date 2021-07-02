@@ -5,6 +5,7 @@ import { questions } from './ducks/questions/reducer';
 import { truthOrDare } from './ducks/truth-or-dare/reducer';
 import { messages } from './ducks/messages/reducer';
 import { presets } from './ducks/presets/reducer';
+import { gameDataCRUD } from './ducks/gameDataItemsCRUD/reducer';
 
 export const rootReducer = combineReducers({
   truthOrDare,
@@ -13,4 +14,5 @@ export const rootReducer = combineReducers({
   questions,
   messages,
   presets,
+  gameDataCRUD,
 });

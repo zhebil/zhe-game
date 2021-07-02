@@ -1,6 +1,5 @@
 import { put, call, takeLatest, select } from 'redux-saga/effects';
 import api from '../../../api/api';
-import { oneDataItem } from '../../../types';
 import { transformData } from '../../../utillity';
 import { RootState } from '../../store';
 import { gameDataStatus, IFetchedData } from '../../types';

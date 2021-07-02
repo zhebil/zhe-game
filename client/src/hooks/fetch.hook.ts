@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
+import { cleanup } from '../components/fetchContainer';
 import { reduxAction } from '../redux/types';
 import { useAppDispatch } from './redux.hook';
 
 export const useFetch = (
   cb: reduxAction | null,
   dataLength: number,
-  cleanup: () => void
+  cleanup: cleanup | null
 ): void => {
   const dispatch = useAppDispatch();
 
@@ -13,6 +14,8 @@ export const useFetch = (
     if (cb) {
       if (dataLength === 0) dispatch(cb());
     }
-    return cleanup;
+    if (cleanup) {
+      return cleanup;
+    }
   }, [dispatch, dataLength, cb, cleanup]);
 };

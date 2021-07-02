@@ -17,6 +17,7 @@ export enum presetsActionsType {
   GET_ONE = 'presets/GET_ONE',
   SET_ONE = 'presets/SET_ONE',
   SET_PRESET_STATUS = 'presets/SET_PRESET_STATUS',
+  EDIT_ITEM = 'presets/EDIT_ITEM',
 }
 
 export interface SetPresetsActionInterface extends Action<presetsActionsType> {

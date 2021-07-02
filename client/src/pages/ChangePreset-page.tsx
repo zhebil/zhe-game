@@ -7,6 +7,7 @@ import {
   getOnePreset,
   setUpdatedPreset,
 } from '../redux/ducks/presets/actionCreators';
+import { presetInterface } from '../redux/ducks/presets/reducer';
 import { gameDataStatus } from '../redux/types';
 
 const ChangePresetPage = () => {
@@ -17,7 +18,6 @@ const ChangePresetPage = () => {
   const {
     status,
     data: { truth, dare, never },
-    preset,
   } = currentPreset;
 
   const fetchFunction = useCallback(() => getOnePreset(name), [name]);
@@ -34,17 +34,23 @@ const ChangePresetPage = () => {
     dispatch(setUpdatedPreset(resetToUpdatePresetData));
   }, [dispatch]);
 
+  const { data: path } = currentPreset.preset as presetInterface;
+
   return (
     <FetchContainer
       fetchFunction={fetchFunction}
       status={status}
       cleanup={cleanupFunction}
     >
-      <>
-        <ChangeData data={truth} />
-        <ChangeData data={dare} />
-        <ChangeData data={never} />
-      </>
+      {status === gameDataStatus.LOADED ? (
+        <>
+          <ChangeData path={path.truth} data={truth} />
+          <ChangeData path={path.dare} data={dare} />
+          <ChangeData path={path.never} data={never} />
+        </>
+      ) : (
+        <></>
+      )}
     </FetchContainer>
   );
 };
