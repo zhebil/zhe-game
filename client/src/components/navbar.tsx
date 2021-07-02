@@ -13,8 +13,8 @@ const links: linkItem[] = [
   { title: 'Добавить свои', path: ROUTES.ADMIN_PAGE },
   { title: 'Пресеты', path: ROUTES.PRESETS },
 ];
-const Navbar = forwardRef<HTMLDivElement, {}>(
-  (props, ref): ReactElement => {
+const Navbar = forwardRef<HTMLDivElement, { toggleMenu: () => void }>(
+  ({ toggleMenu }, ref): ReactElement => {
     const location = useLocation<Location>();
 
     return (
@@ -31,6 +31,7 @@ const Navbar = forwardRef<HTMLDivElement, {}>(
                   className={`nav-link ${isActive ? 'active' : ''}`}
                   aria-current="page"
                   to={path}
+                  onClick={toggleMenu}
                 >
                   {title}
                 </Link>

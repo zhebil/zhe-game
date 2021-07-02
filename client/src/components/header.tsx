@@ -34,7 +34,7 @@ const Header: React.FC = (): ReactElement => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <Navbar ref={menuRef} />
+          <Navbar toggleMenu={toggleMenu} ref={menuRef} />
         </div>
       </nav>
     </header>
