@@ -1,6 +1,9 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '../hooks/redux.hook';
-import { updateGameDataItem } from '../redux/ducks/gameDataItemsCRUD/actionCreators';
+import {
+  updateGameDataItem,
+  deleteGameDataItem,
+} from '../redux/ducks/gameDataItemsCRUD/actionCreators';
 import { oneDataItem } from '../types';
 
 interface EditTextItemProps extends oneDataItem {
@@ -38,6 +41,10 @@ const EditTextItem = ({ text, _id, path }: EditTextItemProps): ReactElement => {
     setEditText(false);
   };
 
+  const onDeleteItem = () => {
+    dispatch(deleteGameDataItem({ path: path, id: _id }));
+  };
+
   return (
     <li className="list-group-item">
       <div className="row align-items-center">
@@ -57,7 +64,9 @@ const EditTextItem = ({ text, _id, path }: EditTextItemProps): ReactElement => {
           </p>
         )}
         <div className="col-auto">
-          <button className="btn btn-danger">Удалить</button>
+          <button onClick={onDeleteItem} className="btn btn-danger">
+            Удалить
+          </button>
         </div>
       </div>
     </li>

@@ -10,3 +10,7 @@ export const updateData = (data: any, id: ID): any => {
     done: [...data.done, item],
   };
 };
+
+export const deleteDataItem = (id: ID, data: oneDataItem[]): oneDataItem[] => {
+  return data.filter((item) => item._id !== id);
+};

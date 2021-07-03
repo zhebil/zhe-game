@@ -38,7 +38,7 @@ class Api {
     return data;
   }
 
-  private fetchWrappew<T>(...fetchParams: fetchParamsType): Promise<T> {
+  private fetchWrapper<T>(...fetchParams: fetchParamsType): Promise<T> {
     return fetch(...fetchParams)
       .then((res) => {
         if (!res.ok) {
@@ -56,7 +56,7 @@ class Api {
   }
 
   postData(path: string, data: postData) {
-    return this.fetchWrappew(`${this.dataPath}${path}`, {
+    return this.fetchWrapper(`${this.dataPath}${path}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -64,7 +64,7 @@ class Api {
   }
 
   updateData(path: string, data: postData, id: ID) {
-    return this.fetchWrappew(`${this.dataPath}${path}/${id}`, {
+    return this.fetchWrapper(`${this.dataPath}${path}/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -72,18 +72,18 @@ class Api {
   }
 
   deleteData(path: string, id: ID) {
-    return this.fetchWrappew(`${this.dataPath}${path}/${id}`, {
+    return this.fetchWrapper(`${this.dataPath}${path}/${id}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     });
   }
 
   getPresets(): Promise<presetsData> {
-    return this.fetchWrappew(`${this.presetsPath}`);
+    return this.fetchWrapper(`${this.presetsPath}`);
   }
 
   createPreset(name: string) {
-    return this.fetchWrappew(`${this.presetsPath}create`, {
+    return this.fetchWrapper(`${this.presetsPath}create`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name }),
@@ -91,13 +91,13 @@ class Api {
   }
 
   deletePreset(id: ID) {
-    return this.fetchWrappew(`${this.presetsPath}${id}`, {
+    return this.fetchWrapper(`${this.presetsPath}${id}`, {
       method: 'DELETE',
     });
   }
 
   getPreset(name: string) {
-    return this.fetchWrappew(`${this.presetsPath}${name}`);
+    return this.fetchWrapper(`${this.presetsPath}${name}`);
   }
 }
 export default new Api('/api/data/', '/api/presets/');

@@ -1,4 +1,6 @@
+import { Action } from 'redux';
 import { ID, oneDataItem } from '../../../types';
+import { deleteDataItem } from '../../functions';
 import { gameDataStatus } from '../../types';
 import { PresetsAction, presetsActionsType } from './actionCreators';
 
@@ -88,6 +90,21 @@ export const presets = (
         toUpdate: {
           ...state.toUpdate,
           status: action.payload,
+        },
+      };
+    case presetsActionsType.DELETE_ITEM:
+      const dataType = action.payload.dataType;
+      return {
+        ...state,
+        toUpdate: {
+          ...state.toUpdate,
+          data: {
+            ...state.toUpdate.data,
+            [dataType]: deleteDataItem(
+              action.payload.id,
+              state.toUpdate.data[dataType]
+            ),
+          },
         },
       };
     default:

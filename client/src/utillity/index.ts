@@ -3,6 +3,7 @@ import { messageItem, messageType } from '../redux/ducks/messages/reducer';
 import { gameOneDataTypeState } from '../redux/types';
 import { oneDataItem } from '../types';
 import { addMessageActionInterface } from '../redux/ducks/messages/actionCreators';
+import { someOneDataType } from '../redux/ducks/presets/actionCreators';
 
 export const getRandom = (min: number, max: number): number => {
   if (min > max) {
@@ -70,3 +71,9 @@ export const logSuccess = (error: string): addMessageActionInterface =>
 
 export const logWarning = (error: string): addMessageActionInterface =>
   addNewMessage(createMessage(error, messageType.WARNING));
+
+export const getDataTypeByPath = (path: string): someOneDataType => {
+  const pathArr = path.split('-');
+
+  return pathArr[pathArr.length - 1] as someOneDataType;
+};

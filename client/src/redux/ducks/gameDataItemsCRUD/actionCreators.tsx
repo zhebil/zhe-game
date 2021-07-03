@@ -21,24 +21,23 @@ export interface UpdateGameDataItemInterface
   payload: editedDataItem;
 }
 
-interface CRUDdataItem {
+interface CRUDDataItem {
   path: string;
-
   id: ID;
 }
 
-interface editedDataItem extends CRUDdataItem {
+interface editedDataItem extends CRUDDataItem {
   newText: string;
 }
 
 export interface DeleteGameDataItemInterface
   extends Action<gameDataCRUDActionsType> {
   type: gameDataCRUDActionsType.DELETE;
-  payload: CRUDdataItem;
+  payload: CRUDDataItem;
 }
 
 export const deleteGameDataItem = (
-  payload: CRUDdataItem
+  payload: CRUDDataItem
 ): DeleteGameDataItemInterface => {
   return {
     type: gameDataCRUDActionsType.DELETE,

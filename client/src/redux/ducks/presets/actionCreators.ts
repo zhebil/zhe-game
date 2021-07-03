@@ -17,7 +17,7 @@ export enum presetsActionsType {
   GET_ONE = 'presets/GET_ONE',
   SET_ONE = 'presets/SET_ONE',
   SET_PRESET_STATUS = 'presets/SET_PRESET_STATUS',
-  EDIT_ITEM = 'presets/EDIT_ITEM',
+  DELETE_ITEM = 'presets/DELETE_ITEM',
 }
 
 export interface SetPresetsActionInterface extends Action<presetsActionsType> {
@@ -67,6 +67,19 @@ export interface SetUpdatedPresetStatusInterface
   type: presetsActionsType.SET_PRESET_STATUS;
   payload: gameDataStatus;
 }
+
+export interface UpdatePresetDataByDeleteItem
+  extends Action<presetsActionsType> {
+  type: presetsActionsType.DELETE_ITEM;
+  payload: deletedItemPayload;
+}
+
+export interface deletedItemPayload {
+  id: ID;
+  dataType: someOneDataType;
+}
+
+export type someOneDataType = 'truth' | 'dare' | 'never';
 
 export const setPresets = (
   payload: presetInterface[]
@@ -146,6 +159,15 @@ export const setUpdatedPresetStatus = (
   };
 };
 
+export const updatePresetDataByDeleteItem = (
+  payload: deletedItemPayload
+): UpdatePresetDataByDeleteItem => {
+  return {
+    type: presetsActionsType.DELETE_ITEM,
+    payload,
+  };
+};
+
 export type PresetsAction =
   | SetPresetsActionInterface
   | GetPresetsActionInterface
@@ -155,4 +177,5 @@ export type PresetsAction =
   | DeletePresetInterface
   | GetOnePresetInterface
   | SetOnePresetInterface
-  | SetUpdatedPresetStatusInterface;
+  | SetUpdatedPresetStatusInterface
+  | UpdatePresetDataByDeleteItem;
