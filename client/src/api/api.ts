@@ -1,6 +1,6 @@
 import { store } from '../redux/store';
 import { ID, oneDataItem } from '../types';
-import { logError, logSuccess } from '../utillity';
+import { logSuccess } from '../utillity';
 
 interface postData {
   text: string;
@@ -27,6 +27,8 @@ interface presetsData {
   presets: onePresetItem[];
 }
 
+type fetchParamsType = [string, object?];
+
 class Api {
   constructor(private dataPath: string, private presetsPath: string) {}
   async getDataByType(type: string): Promise<IGetData> {
@@ -36,91 +38,66 @@ class Api {
     return data;
   }
 
-  async postData(path: string, data: postData) {
-    const res = await fetch(`${this.dataPath}${path}`, {
+  private fetchWrappew<T>(...fetchParams: fetchParamsType): Promise<T> {
+    return fetch(...fetchParams)
+      .then((res) => {
+        if (!res.ok) {
+          console.log(res);
+
+          throw new Error(res.statusText);
+        } else {
+          return res.json();
+        }
+      })
+      .then((json) => {
+        store.dispatch(logSuccess(json.message));
+        return json;
+      });
+  }
+
+  postData(path: string, data: postData) {
+    return this.fetchWrappew(`${this.dataPath}${path}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-    const json = await res.json();
-
-    if (res.ok) {
-      store.dispatch(logSuccess(json.message));
-      return json;
-    } else {
-      store.dispatch(logError(json.message));
-    }
   }
 
-  async updateData(path: string, data: postData, id: ID) {
-    const res = await fetch(`${this.dataPath}${path}/${id}`, {
+  updateData(path: string, data: postData, id: ID) {
+    return this.fetchWrappew(`${this.dataPath}${path}/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-    const json = await res.json();
-
-    if (res.ok) {
-      store.dispatch(logSuccess(json.message));
-      return json;
-    } else {
-      throw new Error(json.message);
-    }
   }
 
-  async deleteData(path: string, data: postData, id: ID) {
-    const res = await fetch(`${this.dataPath}${path}/${id}`, {
+  deleteData(path: string, id: ID) {
+    return this.fetchWrappew(`${this.dataPath}${path}/${id}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     });
-    const json = await res.json();
-    return json;
   }
 
-  async getPresets(): Promise<presetsData> {
-    const res = await fetch(`${this.presetsPath}`);
-    const data = await res.json();
-
-    return data;
+  getPresets(): Promise<presetsData> {
+    return this.fetchWrappew(`${this.presetsPath}`);
   }
 
-  async createPreset(name: string) {
-    const res = await fetch(`${this.presetsPath}create`, {
+  createPreset(name: string) {
+    return this.fetchWrappew(`${this.presetsPath}create`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name }),
     });
-    const json = await res.json();
-    if (res.ok) {
-      store.dispatch(logSuccess(json.message));
-      return json;
-    } else {
-      throw new Error(json.message);
-    }
   }
 
-  async deletePreset(id: ID) {
-    const res = await fetch(`${this.presetsPath}${id}`, {
+  deletePreset(id: ID) {
+    return this.fetchWrappew(`${this.presetsPath}${id}`, {
       method: 'DELETE',
     });
-    const json = await res.json();
-    if (res.ok) {
-      store.dispatch(logSuccess(json.message));
-      return json;
-    } else {
-      throw new Error(json.message);
-    }
   }
 
-  async getPreset(name: string) {
-    const res = await fetch(`${this.presetsPath}${name}`);
-    const json = await res.json();
-    if (res.ok) {
-      store.dispatch(logSuccess(json.message));
-      return json;
-    } else {
-      throw new Error(json.message);
-    }
+  getPreset(name: string) {
+    return this.fetchWrappew(`${this.presetsPath}${name}`);
   }
 }
 export default new Api('/api/data/', '/api/presets/');

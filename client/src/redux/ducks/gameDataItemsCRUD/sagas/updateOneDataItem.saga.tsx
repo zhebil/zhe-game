@@ -10,8 +10,7 @@ export function* updateOneDataItem({ payload }: UpdateGameDataItemInterface) {
     const updatedData: { data: oneDataItem; message: string } = yield call(() =>
       api.updateData(path, { text: newText }, id)
     );
-    console.log(updatedData);
   } catch (e) {
-    put(logError(e.message));
+    yield put(logError(e.message));
   }
 }
