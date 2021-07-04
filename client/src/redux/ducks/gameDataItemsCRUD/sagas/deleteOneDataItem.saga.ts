@@ -1,8 +1,10 @@
 import { call, put } from '@redux-saga/core/effects';
 import api from '../../../../api/api';
 import { getDataTypeByPath, logError } from '../../../../utillity';
-import { updatePresetDataByDeleteItem } from '../../presets/actionCreators';
-import { DeleteGameDataItemInterface } from '../actionCreators';
+import {
+  DeleteGameDataItemInterface,
+  updateStoreByDeleteItem,
+} from '../actionCreators';
 
 export function* deleteOneDataItem({ payload }: DeleteGameDataItemInterface) {
   try {
@@ -11,7 +13,7 @@ export function* deleteOneDataItem({ payload }: DeleteGameDataItemInterface) {
     const { path, id } = payload;
     yield call(() => api.deleteData(path, id));
     const dataType = getDataTypeByPath(path);
-    yield put(updatePresetDataByDeleteItem({ id, dataType }));
+    yield put(updateStoreByDeleteItem({ id, dataType }));
   } catch (e) {
     yield put(logError(e.message));
   }

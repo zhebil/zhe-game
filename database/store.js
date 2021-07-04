@@ -6,15 +6,19 @@ async function postData(type, data, res, needResponse = true) {
   const doc = '_doc';
   if (exist && needResponse) {
     res.status(400).json({ message: 'Такие данные уже существуют' });
-  } else {
-    const newDataItem = new DataModel({ text: data.text });
-    const addedData = await newDataItem.save();
-    if (needResponse) {
-      res.status(201).json({
-        ...addedData[doc],
-        message: 'Данные успешно добавлены',
-      });
-    }
+    return;
+  }
+  if (exist) {
+    return;
+  }
+
+  const newDataItem = new DataModel({ text: data.text });
+  const addedData = await newDataItem.save();
+  if (needResponse) {
+    res.status(201).json({
+      data: addedData[doc],
+      message: 'Данные успешно добавлены',
+    });
   }
 }
 async function update(type, data, id, res) {
@@ -69,8 +73,12 @@ const store = {
       const type = req.params.dataType;
 
       if (!isDefault(type)) {
-        const defaultType = type.split('-')[1];
-        postData(defaultType, data, res, false);
+        try {
+          const defaultType = type.split('-')[1];
+          postData(defaultType, data, res, false);
+        } catch (e) {
+          console.log('is existing');
+        }
       }
       postData(type, data, res);
     } catch (e) {

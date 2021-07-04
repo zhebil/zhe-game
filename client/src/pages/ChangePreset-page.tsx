@@ -3,17 +3,15 @@ import { useParams } from 'react-router';
 import { ChangeData } from '../components/changeData';
 import { FetchContainer } from '../components/fetchContainer';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
-import {
-  getOnePreset,
-  setUpdatedPreset,
-} from '../redux/ducks/presets/actionCreators';
+import { setDataCRUDToStore } from '../redux/ducks/gameDataItemsCRUD/actionCreators';
+import { getOnePreset } from '../redux/ducks/presets/actionCreators';
 import { presetInterface } from '../redux/ducks/presets/reducer';
 import { gameDataStatus } from '../redux/types';
 
 const ChangePresetPage = () => {
   const { name } = useParams<{ name: string }>();
   const dispatch = useAppDispatch();
-  const currentPreset = useAppSelector((state) => state.presets.toUpdate);
+  const currentPreset = useAppSelector((state) => state.gameDataCRUD);
 
   const {
     status,
@@ -31,7 +29,7 @@ const ChangePresetPage = () => {
       },
       status: gameDataStatus.NEVER,
     };
-    dispatch(setUpdatedPreset(resetToUpdatePresetData));
+    dispatch(setDataCRUDToStore(resetToUpdatePresetData));
   }, [dispatch]);
 
   const { data: path } = currentPreset.preset as presetInterface;
@@ -44,9 +42,9 @@ const ChangePresetPage = () => {
     >
       {status === gameDataStatus.LOADED ? (
         <>
-          <ChangeData path={path.truth} data={truth} />
-          <ChangeData path={path.dare} data={dare} />
-          <ChangeData path={path.never} data={never} />
+          <ChangeData title="Правда" path={path.truth} data={truth} />
+          <ChangeData title="Действие" path={path.dare} data={dare} />
+          <ChangeData title="Никогда не..." path={path.never} data={never} />
         </>
       ) : (
         <></>

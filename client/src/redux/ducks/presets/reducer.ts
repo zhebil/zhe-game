@@ -10,12 +10,6 @@ export interface presetDataInterface {
   never: string;
 }
 
-export interface gamePresetData {
-  truth: oneDataItem[];
-  dare: oneDataItem[];
-  never: oneDataItem[];
-}
-
 export interface presetInterface {
   data: presetDataInterface;
   _id: ID;
@@ -27,13 +21,6 @@ export interface initialPresetState {
   status: gameDataStatus;
   current: presetDataInterface;
   currentName: string;
-  toUpdate: toUpdatePresetInterface;
-}
-
-export interface toUpdatePresetInterface {
-  preset: presetInterface | {};
-  data: gamePresetData;
-  status: gameDataStatus;
 }
 
 const initialState: initialPresetState = {
@@ -45,15 +32,6 @@ const initialState: initialPresetState = {
     never: 'never',
   },
   currentName: 'default',
-  toUpdate: {
-    preset: {},
-    data: {
-      truth: [],
-      dare: [],
-      never: [],
-    },
-    status: gameDataStatus.NEVER,
-  },
 };
 
 export const presets = (
@@ -79,34 +57,7 @@ export const presets = (
         current: action.payload,
         currentName: action.currentName,
       };
-    case presetsActionsType.SET_ONE:
-      return {
-        ...state,
-        toUpdate: action.payload,
-      };
-    case presetsActionsType.SET_PRESET_STATUS:
-      return {
-        ...state,
-        toUpdate: {
-          ...state.toUpdate,
-          status: action.payload,
-        },
-      };
-    case presetsActionsType.DELETE_ITEM:
-      const dataType = action.payload.dataType;
-      return {
-        ...state,
-        toUpdate: {
-          ...state.toUpdate,
-          data: {
-            ...state.toUpdate.data,
-            [dataType]: deleteDataItem(
-              action.payload.id,
-              state.toUpdate.data[dataType]
-            ),
-          },
-        },
-      };
+
     default:
       return state;
   }

@@ -2,16 +2,15 @@ import { call, put } from '@redux-saga/core/effects';
 import api from '../../../../api/api';
 import { logError, logSuccess, logWarning } from '../../../../utillity';
 import { gameDataStatus, IFetchedData } from '../../../types';
-import {
-  GetOnePresetInterface,
-  setUpdatedPreset,
-  setUpdatedPresetStatus,
-} from '../actionCreators';
+import { GetOnePresetInterface } from '../actionCreators';
 import { presetInterface } from '../reducer';
-
+import {
+  setDataCRUDStatus,
+  setDataCRUDToStore,
+} from '../../gameDataItemsCRUD/actionCreators';
 export function* getOnePresetSaga({ payload: name }: GetOnePresetInterface) {
   try {
-    yield put(setUpdatedPresetStatus(gameDataStatus.LOADNIG));
+    yield put(setDataCRUDStatus(gameDataStatus.LOADNIG));
 
     const toUpdatePreset: { message: string; preset: presetInterface } =
       yield call(() => api.getPreset(name));
@@ -36,11 +35,11 @@ export function* getOnePresetSaga({ payload: name }: GetOnePresetInterface) {
       status: gameDataStatus.LOADED,
     };
 
-    yield put(setUpdatedPreset(toUpdatePresetData));
+    yield put(setDataCRUDToStore(toUpdatePresetData));
     yield put(logSuccess('Игровые данные текущего пресета получены'));
   } catch (e) {
     yield put(logError(e.message));
 
-    yield put(setUpdatedPresetStatus(gameDataStatus.ERROR));
+    yield put(setDataCRUDStatus(gameDataStatus.ERROR));
   }
 }

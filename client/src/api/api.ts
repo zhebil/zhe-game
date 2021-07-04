@@ -38,21 +38,15 @@ class Api {
     return data;
   }
 
-  private fetchWrapper<T>(...fetchParams: fetchParamsType): Promise<T> {
-    return fetch(...fetchParams)
-      .then((res) => {
-        if (!res.ok) {
-          console.log(res);
-
-          throw new Error(res.statusText);
-        } else {
-          return res.json();
-        }
-      })
-      .then((json) => {
-        store.dispatch(logSuccess(json.message));
-        return json;
-      });
+  private async fetchWrapper<T>(...fetchParams: fetchParamsType): Promise<T> {
+    const res = await fetch(...fetchParams);
+    const json = await res.json();
+    if (!res.ok) {
+      throw new Error(json.message);
+    } else {
+      store.dispatch(logSuccess(json.message));
+      return json;
+    }
   }
 
   postData(path: string, data: postData) {

@@ -1,4 +1,6 @@
+import { idText } from 'typescript';
 import { ID, oneDataItem } from '../../types';
+import { AddItemPayload } from '../ducks/gameDataItemsCRUD/actionCreators';
 
 export const updateData = (data: any, id: ID): any => {
   const itemIdx = data.rest.findIndex((item: oneDataItem) => item._id === id);
@@ -13,4 +15,12 @@ export const updateData = (data: any, id: ID): any => {
 
 export const deleteDataItem = (id: ID, data: oneDataItem[]): oneDataItem[] => {
   return data.filter((item) => item._id !== id);
+};
+
+export const addDataItem = (
+  { id, text }: AddItemPayload,
+  items: oneDataItem[]
+) => {
+  const newItem: oneDataItem = { _id: id, text };
+  return [...items, newItem];
 };

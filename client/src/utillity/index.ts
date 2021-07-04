@@ -3,7 +3,7 @@ import { messageItem, messageType } from '../redux/ducks/messages/reducer';
 import { gameOneDataTypeState } from '../redux/types';
 import { oneDataItem } from '../types';
 import { addMessageActionInterface } from '../redux/ducks/messages/actionCreators';
-import { someOneDataType } from '../redux/ducks/presets/actionCreators';
+import { someOneDataType } from '../redux/ducks/gameDataItemsCRUD/actionCreators';
 
 export const getRandom = (min: number, max: number): number => {
   if (min > max) {
@@ -23,14 +23,18 @@ export const transformData = (data: oneDataItem[]): gameOneDataTypeState => {
   };
 };
 
+export const getHeight = (el: HTMLElement) => {
+  el.style.display = 'block';
+  el.style.height = 'auto';
+  return el.offsetHeight;
+};
+
 export const slideToggle = (
   el: HTMLElement,
   isShow: boolean,
-  cb?: any
+  cb?: () => void
 ): void => {
-  el.style.display = 'block';
-  el.style.height = 'auto';
-  const height: number = el.offsetHeight;
+  const height: number = getHeight(el);
 
   if (!isShow) {
     el.style.height = '';
@@ -43,9 +47,11 @@ export const slideToggle = (
       el.style.height = '0px';
     }, 10);
   }
-  setTimeout(() => {
-    cb();
-  }, 350);
+  if (cb) {
+    setTimeout(() => {
+      cb();
+    }, 350);
+  }
 };
 
 let counter = 0;

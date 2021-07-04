@@ -1,11 +1,7 @@
 import { Action } from 'redux';
 import { ID } from '../../../types';
 import { gameDataStatus } from '../../types';
-import {
-  presetDataInterface,
-  presetInterface,
-  toUpdatePresetInterface,
-} from './reducer';
+import { presetDataInterface, presetInterface } from './reducer';
 
 export enum presetsActionsType {
   GET_PRESETS = 'presets/GET_DATA',
@@ -56,30 +52,6 @@ export interface GetOnePresetInterface extends Action<presetsActionsType> {
   type: presetsActionsType.GET_ONE;
   payload: string;
 }
-
-export interface SetOnePresetInterface extends Action<presetsActionsType> {
-  type: presetsActionsType.SET_ONE;
-  payload: toUpdatePresetInterface;
-}
-
-export interface SetUpdatedPresetStatusInterface
-  extends Action<presetsActionsType> {
-  type: presetsActionsType.SET_PRESET_STATUS;
-  payload: gameDataStatus;
-}
-
-export interface UpdatePresetDataByDeleteItem
-  extends Action<presetsActionsType> {
-  type: presetsActionsType.DELETE_ITEM;
-  payload: deletedItemPayload;
-}
-
-export interface deletedItemPayload {
-  id: ID;
-  dataType: someOneDataType;
-}
-
-export type someOneDataType = 'truth' | 'dare' | 'never';
 
 export const setPresets = (
   payload: presetInterface[]
@@ -141,33 +113,6 @@ export const getOnePreset = (payload: string): GetOnePresetInterface => {
   };
 };
 
-export const setUpdatedPreset = (
-  payload: toUpdatePresetInterface
-): SetOnePresetInterface => {
-  return {
-    type: presetsActionsType.SET_ONE,
-    payload,
-  };
-};
-
-export const setUpdatedPresetStatus = (
-  payload: gameDataStatus
-): SetUpdatedPresetStatusInterface => {
-  return {
-    type: presetsActionsType.SET_PRESET_STATUS,
-    payload,
-  };
-};
-
-export const updatePresetDataByDeleteItem = (
-  payload: deletedItemPayload
-): UpdatePresetDataByDeleteItem => {
-  return {
-    type: presetsActionsType.DELETE_ITEM,
-    payload,
-  };
-};
-
 export type PresetsAction =
   | SetPresetsActionInterface
   | GetPresetsActionInterface
@@ -175,7 +120,4 @@ export type PresetsAction =
   | UpdateCurrentPresetInterface
   | CreatePresetInterface
   | DeletePresetInterface
-  | GetOnePresetInterface
-  | SetOnePresetInterface
-  | SetUpdatedPresetStatusInterface
-  | UpdatePresetDataByDeleteItem;
+  | GetOnePresetInterface;
