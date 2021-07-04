@@ -20,7 +20,7 @@ const CreateTextItem: React.FC<{ path: string }> = ({ path }): ReactElement => {
 
   return (
     <div className="row">
-      <div className="col-12 col-md-6">
+      <div className="col-12 col-md-6 mb-2 mb-md-0">
         <form name={path} onSubmit={formSubmit}>
           <label htmlFor={path} className="form-label">
             <b>Добавить новый</b>
