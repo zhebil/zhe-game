@@ -50,7 +50,7 @@ async function deleteDataById(type, id, res) {
 
 async function getData(type, res) {
   const DataModel = createDataModel(type);
-  const responseData = await DataModel.find().limit(20);
+  const responseData = await DataModel.find();
   res.json({ data: responseData, total: responseData.length, skip: 0 });
 }
 

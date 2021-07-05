@@ -21,13 +21,13 @@ const ChangeData: React.FC<changeData> = ({
   const prevDataLength = usePrevious<number>(data.length);
 
   useEffect(() => {
-    if (data.length !== prevDataLength && prevDataLength! >= 0) {
-      openList();
-    }
-
     if (ref.current && isShow) {
       const height = getHeight(ref.current);
       ref.current.style.height = height + 'px';
+    }
+
+    if (data.length !== prevDataLength && prevDataLength! >= 0 && !isShow) {
+      openList();
     }
   }, [data.length]);
 
