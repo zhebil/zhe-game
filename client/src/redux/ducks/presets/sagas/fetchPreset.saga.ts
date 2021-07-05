@@ -14,7 +14,6 @@ export function* fetchPresets() {
     yield put(updatePresetsStatus(gameDataStatus.LOADNIG));
     const data: PresetsFetchedData = yield call(() => api.getPresets());
     yield put(setPresets(data.presets));
-    yield put(logSuccess(data.message));
   } catch (e) {
     yield put(updatePresetsStatus(gameDataStatus.ERROR));
     yield put(logError(e.message));

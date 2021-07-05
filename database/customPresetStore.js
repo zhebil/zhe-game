@@ -1,4 +1,22 @@
+const createDataModel = require('../models/createDataModel');
 const CustomPresets = require('../models/customPresets');
+
+async function removeCollection(type) {
+  const model = createDataModel(type);
+  const res = await model.collection.deleteOne();
+  return res;
+}
+
+async function removeCollections({ truth, dare, never }) {
+  try {
+    await removeCollection(truth);
+    await removeCollection(dare);
+    await removeCollection(never);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
 
 module.exports = {
   async createPreset(req, res) {
@@ -40,15 +58,22 @@ module.exports = {
     try {
       const { id } = req.params;
 
-      const exist = await CustomPresets.exists({ _id: id });
-      if (!exist) {
+      const preset = await CustomPresets.findById(id);
+      if (!preset) {
         res.status(400).json({ message: 'Такого пресета не существуют' });
-      } else {
-        await CustomPresets.deleteOne({ _id: id });
-        res.status(201).json({
-          message: 'Пресет успешно удален',
-        });
+        return;
       }
+      console.log(preset);
+      const isRemoved = await removeCollections(preset.data);
+      console.log(isRemoved);
+      if (!isRemoved) {
+        res.status(400).json({ message: 'Произошла ошибка при удалении' });
+      }
+
+      await CustomPresets.deleteOne({ _id: id });
+      res.status(201).json({
+        message: 'Пресет успешно удален',
+      });
     } catch (e) {
       res.status(400).json({ message: 'Не удалось удалить пресет' });
     }
