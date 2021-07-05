@@ -1,7 +1,7 @@
 import React, { FormEvent, ReactElement, useState } from 'react';
 import { useAppDispatch } from '../hooks/redux.hook';
 import { createGameDataItem } from '../redux/ducks/gameDataItemsCRUD/actionCreators';
-import { getDataTypeByPath } from '../utillity';
+import { getDataTypeByPath, logError } from '../utillity';
 import AllDataList from './allDataList';
 
 const CreateTextItem: React.FC<{ path: string; title: string }> = ({
@@ -11,17 +11,18 @@ const CreateTextItem: React.FC<{ path: string; title: string }> = ({
   const dispatch = useAppDispatch();
   const [showDataList, setShowDataList] = useState<boolean>(false);
 
-  const formSubmit = async (e: FormEvent): Promise<void> => {
+  const formSubmit = (e: FormEvent): void => {
     e.preventDefault();
 
     const { text, name } = e.target as HTMLFormElement;
-
-    if (text.value.trim().length >= 1) {
-      const path: string = name;
-      dispatch(createGameDataItem({ path, text: text.value }));
-
-      text.value = '';
+    if (text.value.trim().length === 0) {
+      dispatch(logError('Вы ничего не ввели'));
+      return;
     }
+    const path: string = name;
+    dispatch(createGameDataItem({ path, text: text.value }));
+
+    text.value = '';
   };
 
   const openAllDataList = () => {
