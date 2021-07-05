@@ -1,4 +1,5 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import { usePrevious } from '../hooks/usePrevios.hook';
 import { oneDataItem } from '../types';
 import { getHeight, slideToggle } from '../utillity';
 import { CreateTextItem } from './createTextItem';
@@ -17,17 +18,28 @@ const ChangeData: React.FC<changeData> = ({
 }): ReactElement => {
   const [isShow, setIsShow] = useState<boolean>(false);
   const ref = useRef<HTMLUListElement>(null);
+  const prevDataLength = usePrevious<number>(data.length);
+
   useEffect(() => {
+    if (data.length !== prevDataLength && prevDataLength! >= 0) {
+      openList();
+    }
+
     if (ref.current && isShow) {
       const height = getHeight(ref.current);
       ref.current.style.height = height + 'px';
     }
-  }, [data]);
+  }, [data.length]);
+
   const toggleList = () => {
     if (ref.current) {
       slideToggle(ref.current, isShow);
     }
     setIsShow(!isShow);
+  };
+  const openList = () => {
+    slideToggle(ref.current!, false);
+    setIsShow(true);
   };
 
   return (
@@ -40,12 +52,12 @@ const ChangeData: React.FC<changeData> = ({
           </button>
         </div>
       </div>
-      <ul ref={ref} className="list-group menu-transition collapse">
+      <ul ref={ref} className="list-group list-transition collapse">
         {data.map((i) => (
           <EditTextItem key={i._id} {...i} path={path} />
         ))}
       </ul>
-      <CreateTextItem path={path} />
+      <CreateTextItem path={path} title={title} />
     </section>
   );
 };

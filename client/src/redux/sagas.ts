@@ -1,4 +1,5 @@
 import { all } from 'redux-saga/effects';
+import { allDataSaga } from './ducks/allDataList/saga';
 import { gameDataCRUDSaga } from './ducks/gameDataItemsCRUD/saga';
 import { neverSaga } from './ducks/never/saga';
 import { presetsSaga } from './ducks/presets/saga';
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     questionsSaga(),
     presetsSaga(),
     gameDataCRUDSaga(),
+    allDataSaga(),
   ]);
 }

@@ -5,6 +5,7 @@ import { QuestionsAction } from './ducks/questions/actionCreators';
 import { RootState } from './store';
 import { PresetsAction } from './ducks/presets/actionCreators';
 import { gameDataCRUDAction } from './ducks/gameDataItemsCRUD/actionCreators';
+import { AllDataAction } from './ducks/allDataList/actionCreators';
 export enum gameDataStatus {
   LOADNIG = 'LOADING',
   ERROR = 'ERROR',
@@ -26,7 +27,8 @@ export type reduxAction = () =>
   | TruthOrDareAction
   | QuestionsAction
   | PresetsAction
-  | gameDataCRUDAction;
+  | gameDataCRUDAction
+  | AllDataAction;
 
 export interface IFetchedData {
   data: oneDataItem[];

@@ -6,13 +6,6 @@
     transform: rotate(360deg);
   }
 }
-.menu-transition {
-  @media (max-width: 992px) {
-    height: 0px;
-    transition: height 0.35s ease;
-    overflow: hidden;
-  }
-}
 .spinner div {
   box-sizing: border-box !important;
 }
@@ -124,4 +117,18 @@
 
 .spinner div {
   box-sizing: content-box;
+}
+
+.menu-transition {
+  @media (max-width: 992px) {
+    height: 0px;
+    transition: height 0.35s ease;
+    overflow: hidden;
+  }
+}
+
+.list-transition {
+  height: 0px;
+  transition: height 0.35s ease;
+  overflow: hidden;
 }

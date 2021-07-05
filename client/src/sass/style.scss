@@ -1,14 +1,18 @@
-@import "./spinner.scss";
-@import "./message.scss";
-@import "./transition.scss";
+@import './spinner.scss';
+@import './message.scss';
+@import './transition.scss';
 
 .padding-section {
-    padding-top: 50px;
-    @media (max-width: 991px) {
-        padding-top: 20px;
-    }
+  padding-top: 50px;
+  @media (max-width: 991px) {
+    padding-top: 20px;
+  }
 }
 
 main {
-    min-height: calc(100vh - 56px);
+  min-height: calc(100vh - 56px);
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

@@ -1,9 +1,15 @@
-import React, { FormEvent, ReactElement } from 'react';
+import React, { FormEvent, ReactElement, useState } from 'react';
 import { useAppDispatch } from '../hooks/redux.hook';
 import { createGameDataItem } from '../redux/ducks/gameDataItemsCRUD/actionCreators';
+import { getDataTypeByPath } from '../utillity';
+import AllDataList from './allDataList';
 
-const CreateTextItem: React.FC<{ path: string }> = ({ path }): ReactElement => {
+const CreateTextItem: React.FC<{ path: string; title: string }> = ({
+  path,
+  title,
+}): ReactElement => {
   const dispatch = useAppDispatch();
+  const [showDataList, setShowDataList] = useState<boolean>(false);
 
   const formSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -16,6 +22,17 @@ const CreateTextItem: React.FC<{ path: string }> = ({ path }): ReactElement => {
 
       text.value = '';
     }
+  };
+
+  const openAllDataList = () => {
+    setShowDataList(true);
+  };
+  const closeAllDataList = () => {
+    setShowDataList(false);
+  };
+
+  const onChoiseData = (text: string) => {
+    dispatch(createGameDataItem({ path, text: text }));
   };
 
   return (
@@ -37,7 +54,24 @@ const CreateTextItem: React.FC<{ path: string }> = ({ path }): ReactElement => {
         </form>
       </div>
       <div className="col-12 col-md-6 mt-auto">
-        <button className="btn btn-success">Выбрать из списка</button>
+        <button className="btn btn-success" onClick={openAllDataList}>
+          Выбрать из списка
+        </button>
+        {showDataList && (
+          <div
+            className="modal fade show"
+            style={{ display: 'block', background: 'rgba(0,0,0,0.7)' }}
+            role="dialog"
+            onClick={closeAllDataList}
+          >
+            <AllDataList
+              title={title}
+              onChoise={onChoiseData}
+              type={getDataTypeByPath(path)}
+              onCloseList={closeAllDataList}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

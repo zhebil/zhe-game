@@ -17,7 +17,7 @@ export function* createOneDataItem({ payload }: CreateNewItem) {
     const newItem: newItemInterface = yield call(() =>
       api.postData(path, { text })
     );
-    console.log(newItem);
+
     const dataType = getDataTypeByPath(path);
     yield put(
       addToStoreNewItem({
