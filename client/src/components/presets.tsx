@@ -28,7 +28,7 @@ const Presets: React.FC = (): ReactElement => {
       dataLength={presets.length}
       status={status}
     >
-      <div className="container section-padding">
+      <div className="container padding-section">
         <h1>Игровые пресеты</h1>
         <p>Выберите пресет:</p>
         <ul className="list-group">

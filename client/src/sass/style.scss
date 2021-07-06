@@ -1,6 +1,7 @@
 @import './spinner.scss';
 @import './message.scss';
 @import './transition.scss';
+@import './social.scss';
 
 .padding-section {
   padding-top: 50px;
@@ -10,9 +11,22 @@
 }
 
 main {
-  min-height: calc(100vh - 56px);
+  padding-bottom: 15px;
+  margin-bottom: auto;
 }
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+@media (max-width: 991px) {
+  html {
+    font-size: 14px;
+  }
 }

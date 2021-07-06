@@ -5,6 +5,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import './sass/style.scss';
 import router, { IRouterItem } from './constants/router';
 import Messages from './components/messages';
+import { Footer } from './components/footer';
 
 const App: React.FC = (): ReactElement => {
   return (
@@ -23,8 +24,9 @@ const App: React.FC = (): ReactElement => {
           )}
           <Route>{/* <NotFound /> */}</Route>
         </Switch>
-        <Messages />
       </main>
+      <Footer />
+      <Messages />
     </Router>
   );
 };
