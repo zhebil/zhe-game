@@ -1,6 +1,6 @@
 import { call, put } from '@redux-saga/core/effects';
 import api from '../../../../api/api';
-import { logError, logSuccess } from '../../../../utillity';
+import { logError } from '../../../../utillity';
 import { gameDataStatus } from '../../../types';
 import { setPresets, updatePresetsStatus } from '../actionCreators';
 import { presetInterface } from '../reducer';

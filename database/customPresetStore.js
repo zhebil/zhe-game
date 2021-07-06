@@ -63,9 +63,7 @@ module.exports = {
         res.status(400).json({ message: 'Такого пресета не существуют' });
         return;
       }
-      console.log(preset);
       const isRemoved = await removeCollections(preset.data);
-      console.log(isRemoved);
       if (!isRemoved) {
         res.status(400).json({ message: 'Произошла ошибка при удалении' });
       }

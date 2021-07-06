@@ -1,6 +1,4 @@
-import { Action } from 'redux';
-import { ID, oneDataItem } from '../../../types';
-import { deleteDataItem } from '../../functions';
+import { ID } from '../../../types';
 import { gameDataStatus } from '../../types';
 import { PresetsAction, presetsActionsType } from './actionCreators';
 
