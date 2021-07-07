@@ -19,7 +19,7 @@ const CreatePresetsPage: React.FC = (): ReactElement => {
   };
 
   return (
-    <div className="container">
+    <div className="container padding-section">
       <h1>Создать свой пресет</h1>
       <form
         name="custom-preset"
