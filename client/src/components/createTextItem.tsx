@@ -1,7 +1,8 @@
-import React, { FormEvent, ReactElement, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { useAppDispatch } from '../hooks/redux.hook';
 import { createGameDataItem } from '../redux/ducks/gameDataItemsCRUD/actionCreators';
-import { takeDataTypeFromPath, logError } from '../utillity';
+import { takeDataTypeFromPath } from '../utillity';
+import { AddDataForm } from './AddDataForm';
 import AllDataList from './allDataList';
 
 const CreateTextItem: React.FC<{ path: string; title: string }> = ({
@@ -11,23 +12,10 @@ const CreateTextItem: React.FC<{ path: string; title: string }> = ({
   const dispatch = useAppDispatch();
   const [showDataList, setShowDataList] = useState<boolean>(false);
 
-  const formSubmit = (e: FormEvent): void => {
-    e.preventDefault();
-
-    const { text, name } = e.target as HTMLFormElement;
-    if (text.value.trim().length === 0) {
-      dispatch(logError('Вы ничего не ввели'));
-      return;
-    }
-    const path: string = name;
-    dispatch(createGameDataItem({ path, text: text.value }));
-
-    text.value = '';
-  };
-
   const openAllDataList = () => {
     setShowDataList(true);
   };
+
   const closeAllDataList = () => {
     setShowDataList(false);
   };
@@ -39,20 +27,7 @@ const CreateTextItem: React.FC<{ path: string; title: string }> = ({
   return (
     <div className="row">
       <div className="col-12 col-md-6 mb-2 mb-md-0">
-        <form name={path} onSubmit={formSubmit}>
-          <label htmlFor={path} className="form-label">
-            <b>Добавить новый</b>
-          </label>
-          <input
-            type="text"
-            name="text"
-            id={path}
-            className="form-control mb-3"
-          />
-          <button className="btn w-100 btn-primary" type="submit">
-            Добавить
-          </button>
-        </form>
+        <AddDataForm name={path} label="Добавить новый" />
       </div>
       <div className="col-12 col-md-6 mt-auto">
         <button className="btn btn-success" onClick={openAllDataList}>
