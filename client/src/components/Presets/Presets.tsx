@@ -30,18 +30,25 @@ const Presets: React.FC = (): ReactElement => {
     >
       <div className="container padding-section">
         <h1>Игровые пресеты</h1>
-        <p>Выберите пресет:</p>
-        <ul className="list-group">
-          {presets.map((i: presetInterface) => (
-            <PresetsListItem key={i.name} {...i} />
-          ))}
-        </ul>
-
+        {presets.length ? (
+          <>
+            <p>Выберите пресет:</p>
+            <ul className="list-group">
+              {presets.map((i: presetInterface) => (
+                <PresetsListItem key={i.name} {...i} />
+              ))}
+            </ul>
+          </>
+        ) : (
+          <p className={`alert d-block alert-warning`}>
+            Пресетов пока нет, вы можете создать свой
+          </p>
+        )}
         <Link
           to={constants.ROUTES.CREATE_PRESET}
           className="btn btn-primary mt-3 mr-2"
         >
-          Создать свой
+          Создать новый
         </Link>
 
         <button
