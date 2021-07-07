@@ -10,8 +10,12 @@ interface EditTextItemProps extends oneDataItem {
   path: string;
 }
 
-const EditTextItem = ({ text, _id, path }: EditTextItemProps): ReactElement => {
-  const [editText, setEditText] = useState<boolean>(false);
+const EditPresetDataItem = ({
+  text,
+  _id,
+  path,
+}: EditTextItemProps): ReactElement => {
+  const [isTextEditable, setIsTextEditable] = useState<boolean>(false);
   const [newText, setNewText] = useState<string>(text);
   const ref = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
@@ -20,10 +24,10 @@ const EditTextItem = ({ text, _id, path }: EditTextItemProps): ReactElement => {
     if (ref.current) {
       ref.current.focus();
     }
-  }, [editText]);
+  }, [isTextEditable]);
 
   const onSetEditable = () => {
-    setEditText(true);
+    setIsTextEditable(true);
   };
 
   const onKeyDown = (e: React.KeyboardEvent) => {
@@ -38,7 +42,7 @@ const EditTextItem = ({ text, _id, path }: EditTextItemProps): ReactElement => {
 
   const onDispatchEditedText = () => {
     dispatch(updateGameDataItem({ path: path, id: _id, newText: newText }));
-    setEditText(false);
+    setIsTextEditable(false);
   };
 
   const onDeleteItem = () => {
@@ -48,7 +52,7 @@ const EditTextItem = ({ text, _id, path }: EditTextItemProps): ReactElement => {
   return (
     <li className="list-group-item">
       <div className="row align-items-center">
-        {editText ? (
+        {isTextEditable ? (
           <input
             className="input col"
             type="text"
@@ -73,4 +77,4 @@ const EditTextItem = ({ text, _id, path }: EditTextItemProps): ReactElement => {
   );
 };
 
-export { EditTextItem };
+export { EditPresetDataItem };

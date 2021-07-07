@@ -41,7 +41,7 @@ const ChangePresetPage = () => {
       cleanup={cleanupFunction}
     >
       {status === gameDataStatus.LOADED ? (
-        <>
+        <div className="padding-section">
           <ChangePresetData title="Правда" path={path.truth} data={truth} />
           <ChangePresetData title="Действие" path={path.dare} data={dare} />
           <ChangePresetData
@@ -49,7 +49,7 @@ const ChangePresetPage = () => {
             path={path.never}
             data={never}
           />
-        </>
+        </div>
       ) : (
         <></>
       )}

@@ -9,7 +9,7 @@ import { usePrevious } from '../hooks/usePrevios.hook';
 import { oneDataItem } from '../types';
 import { getOffsetHeight, slideToggle } from '../utillity';
 import { CreateNewPresetItemForm } from './CreateNewPresetItemForm';
-import { EditTextItem } from './editTextItem';
+import { EditPresetDataItem } from './EditPresetDataItem';
 
 interface changeData {
   data: oneDataItem[];
@@ -52,21 +52,36 @@ const ChangePresetData: React.FC<changeData> = ({
     slideToggle(ref.current!, false, () => setIsShow(true));
   };
 
+  const toggleButton: JSX.Element = (
+    <div className="col-auto d-flex">
+      <button onClick={toggleList} className="btn m-auto">
+        {isShow ? 'Скрыть' : 'Показать'}
+      </button>
+    </div>
+  );
+
+  const emptyListAlert = (
+    <p className={`alert d-block alert-warning`}>
+      К сожалению список пока пуст. Введите ваш вопрос в поле ниже и нажмите
+      Enter
+    </p>
+  );
+
+  const itemsList = (
+    <ul ref={ref} className="list-group list-transition collapse">
+      {data.map((i) => (
+        <EditPresetDataItem key={i._id} {...i} path={path} />
+      ))}
+    </ul>
+  );
+
   return (
-    <section className="container padding-section">
-      <div className="row">
+    <section className="container mb-5">
+      <div className="row mb-3">
         <h1 className="col">{title}</h1>
-        <div className="col-auto d-flex">
-          <button onClick={toggleList} className="btn m-auto">
-            {isShow ? 'Скрыть' : 'Показать'}
-          </button>
-        </div>
+        {data.length ? toggleButton : null}
       </div>
-      <ul ref={ref} className="list-group list-transition collapse">
-        {data.map((i) => (
-          <EditTextItem key={i._id} {...i} path={path} />
-        ))}
-      </ul>
+      {data.length ? itemsList : emptyListAlert}
       <CreateNewPresetItemForm path={path} title={title} />
     </section>
   );
