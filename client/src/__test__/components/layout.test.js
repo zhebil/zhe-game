@@ -2,7 +2,7 @@ import { create } from 'react-test-renderer';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/redux.hook';
 import Layout from '../../layout/Layout';
-import PlayersList from '../../components/players-list';
+import PlayersList from '../../components/PlayersList';
 
 jest.mock('../../hooks/redux.hook');
 

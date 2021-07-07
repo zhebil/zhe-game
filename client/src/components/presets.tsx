@@ -8,7 +8,7 @@ import {
   updateCurrentPreset,
 } from '../redux/ducks/presets/actionCreators';
 import { presetInterface } from '../redux/ducks/presets/reducer';
-import PresetsListItem from './presets-list-item';
+import PresetsListItem from './PresetsListItem';
 
 const Presets: React.FC = (): ReactElement => {
   const presets = useAppSelector((state) => state.presets.presets);
