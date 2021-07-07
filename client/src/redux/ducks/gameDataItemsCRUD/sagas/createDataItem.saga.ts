@@ -12,7 +12,6 @@ interface newItemInterface {
 export function* createOneDataItem({ payload }: CreateNewItem) {
   try {
     const { path, text } = payload;
-    console.log(payload);
 
     const newItem: newItemInterface = yield call(() =>
       api.postData(path, { text })

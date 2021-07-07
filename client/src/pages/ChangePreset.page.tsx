@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useParams } from 'react-router';
-import { ChangeData } from '../components/changeData';
+import { ChangePresetData } from '../components/ChangePresetData';
 import { FetchContainer } from '../layout/FetchContainer';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import { setDataCRUDToStore } from '../redux/ducks/gameDataItemsCRUD/actionCreators';
@@ -42,9 +42,13 @@ const ChangePresetPage = () => {
     >
       {status === gameDataStatus.LOADED ? (
         <>
-          <ChangeData title="Правда" path={path.truth} data={truth} />
-          <ChangeData title="Действие" path={path.dare} data={dare} />
-          <ChangeData title="Никогда не..." path={path.never} data={never} />
+          <ChangePresetData title="Правда" path={path.truth} data={truth} />
+          <ChangePresetData title="Действие" path={path.dare} data={dare} />
+          <ChangePresetData
+            title="Никогда не..."
+            path={path.never}
+            data={never}
+          />
         </>
       ) : (
         <></>

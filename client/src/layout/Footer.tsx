@@ -37,7 +37,7 @@ const Footer: React.FC = (): ReactElement => {
                 {social.map((i) => (
                   <li key={i.name} className="social__item">
                     <a href={i.link} className="social__link">
-                      <img src={`./assets/img/${i.name}.svg`} alt={i.name} />
+                      <img src={`/assets/img/${i.name}.svg`} alt={i.name} />
                     </a>
                   </li>
                 ))}

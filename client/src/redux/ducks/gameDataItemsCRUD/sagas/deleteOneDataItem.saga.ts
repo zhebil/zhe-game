@@ -8,8 +8,6 @@ import {
 
 export function* deleteOneDataItem({ payload }: DeleteGameDataItemInterface) {
   try {
-    console.log(payload);
-
     const { path, id } = payload;
     yield call(() => api.deleteData(path, id));
     const dataType = takeDataTypeFromPath(path);

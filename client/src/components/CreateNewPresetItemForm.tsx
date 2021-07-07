@@ -5,7 +5,7 @@ import { takeDataTypeFromPath } from '../utillity';
 import { AddDataForm } from './AddDataForm';
 import AllDataList from './allDataList';
 
-const CreateTextItem: React.FC<{ path: string; title: string }> = ({
+const CreateNewPresetItemForm: React.FC<{ path: string; title: string }> = ({
   path,
   title,
 }): ReactElement => {
@@ -53,4 +53,4 @@ const CreateTextItem: React.FC<{ path: string; title: string }> = ({
   );
 };
 
-export { CreateTextItem };
+export { CreateNewPresetItemForm };

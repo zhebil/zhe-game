@@ -1,8 +1,14 @@
-import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import React, {
+  ReactElement,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { usePrevious } from '../hooks/usePrevios.hook';
 import { oneDataItem } from '../types';
 import { getOffsetHeight, slideToggle } from '../utillity';
-import { CreateTextItem } from './createTextItem';
+import { CreateNewPresetItemForm } from './CreateNewPresetItemForm';
 import { EditTextItem } from './editTextItem';
 
 interface changeData {
@@ -11,7 +17,7 @@ interface changeData {
   title: string;
 }
 
-const ChangeData: React.FC<changeData> = ({
+const ChangePresetData: React.FC<changeData> = ({
   data,
   path,
   title,
@@ -20,26 +26,30 @@ const ChangeData: React.FC<changeData> = ({
   const ref = useRef<HTMLUListElement>(null);
   const prevDataLength = usePrevious<number>(data.length);
 
-  useEffect(() => {
+  const isItemAdded =
+    data.length !== prevDataLength && prevDataLength! >= 0 && !isShow;
+
+  const updateHeight = useCallback(() => {
     if (ref.current && isShow) {
       const height = getOffsetHeight(ref.current);
       ref.current.style.height = height + 'px';
     }
+  }, [isShow]);
 
-    if (data.length !== prevDataLength && prevDataLength! >= 0 && !isShow) {
+  useEffect(() => {
+    updateHeight();
+
+    if (isItemAdded) {
       openList();
     }
-  }, [data.length]);
+  }, [data.length, isItemAdded, updateHeight]);
 
   const toggleList = () => {
-    if (ref.current) {
-      slideToggle(ref.current, isShow);
-    }
-    setIsShow(!isShow);
+    slideToggle(ref.current!, isShow, () => setIsShow(!isShow));
   };
+
   const openList = () => {
-    slideToggle(ref.current!, false);
-    setIsShow(true);
+    slideToggle(ref.current!, false, () => setIsShow(true));
   };
 
   return (
@@ -57,9 +67,9 @@ const ChangeData: React.FC<changeData> = ({
           <EditTextItem key={i._id} {...i} path={path} />
         ))}
       </ul>
-      <CreateTextItem path={path} title={title} />
+      <CreateNewPresetItemForm path={path} title={title} />
     </section>
   );
 };
 
-export { ChangeData };
+export { ChangePresetData };
