@@ -5,8 +5,7 @@ import { neverSaga } from './ducks/never/saga';
 import { presetsSaga } from './ducks/presets/saga';
 import { questionsSaga } from './ducks/questions/saga';
 import { truthOrDareSaga } from './ducks/truth-or-dare/saga';
-
-export default function* rootSaga() {
+function* rootSaga() {
   yield all([
     truthOrDareSaga(),
     neverSaga(),
@@ -16,3 +15,5 @@ export default function* rootSaga() {
     allDataSaga(),
   ]);
 }
+
+export { rootSaga };

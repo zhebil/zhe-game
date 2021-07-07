@@ -1,6 +1,6 @@
 import { put, call, takeLatest, select } from 'redux-saga/effects';
 import api from '../../../api/api';
-import { transformData } from '../../../utillity';
+import { tranformDataByAddingToStore } from '../../../utillity';
 import { RootState } from '../../store';
 import { gameDataStatus, IFetchedData } from '../../types';
 import {
@@ -21,7 +21,7 @@ export function* fetchGameData() {
     const questions: IFetchedData = yield call(() =>
       api.getDataByType(pathDataName)
     );
-    const transformedQuestions = transformData(questions.data);
+    const transformedQuestions = tranformDataByAddingToStore(questions.data);
     yield put(setQuestions(transformedQuestions));
   } catch (e) {
     yield put(updateQuestionsStatus(gameDataStatus.ERROR));

@@ -1,13 +1,13 @@
 import { FC } from 'react';
-import constants from '.';
-import AdminPage from '../pages/Admin-page';
-import { ChangePresetPage } from '../pages/ChangePreset-page';
-import { CreatePresetsPage } from '../pages/CreatePresets-page';
-import NeverPage from '../pages/Never-page';
-import PresetsPage from '../pages/Presets-page';
-import QuestionsPage from '../pages/Questions-page';
-import SelectPlayersPage from '../pages/Select-players-page';
-import TruthPage from '../pages/Truth-page';
+import { constants } from '.';
+import { AdminPage } from '../pages/Admin.page';
+import { ChangePresetPage } from '../pages/ChangePreset.page';
+import { CreatePresetsPage } from '../pages/CreatePresets.page';
+import { NeverPage } from '../pages/Never.page';
+import { PresetsPage } from '../pages/Presets.page';
+import { QuestionsPage } from '../pages/Questions.page';
+import { SelectPlayersPage } from '../pages/SelectPlayers.page';
+import { TruthOrDarePage } from '../pages/TruthOrDare.page';
 
 export interface IRouterItem {
   path: string;
@@ -19,7 +19,7 @@ const router: IRouterItem[] = [
   {
     path: ROUTES.TRUTH,
     exact: true,
-    component: TruthPage,
+    component: TruthOrDarePage,
   },
   {
     path: ROUTES.NEVER,
@@ -49,4 +49,4 @@ const router: IRouterItem[] = [
   { path: ROUTES.CREATE_PRESET, exact: false, component: CreatePresetsPage },
   { path: ROUTES.CHANGE_PRESET, exact: false, component: ChangePresetPage },
 ];
-export default router;
+export { router };

@@ -1,7 +1,7 @@
 import { create } from 'react-test-renderer';
 import { BrowserRouter, Link } from 'react-router-dom';
-import PlayersList from '../../components/players-list';
-import ListItem from '../../components/list-item';
+import { PlayersList } from '../../components/Players/PlayersList';
+import { ListItem } from '../../components/Players/PlayerListItem';
 import { Provider } from 'react-redux';
 import { store } from '../../redux/store';
 
