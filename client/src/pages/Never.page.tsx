@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
-import Layout from '../components/layout';
-import Never from '../components/never';
+import Layout from '../layout/Layout';
+import Never from '../games/Never.game';
 
 const NeverPage: React.FC = (): ReactElement => {
   return (

@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
-import Layout from '../components/layout';
-import Questions from '../components/questions';
+import Layout from '../layout/Layout';
+import Questions from '../games/Questions.game';
 
 const QuestionsPage: React.FC = (): ReactElement => {
   return (

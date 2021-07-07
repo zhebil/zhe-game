@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
-import Layout from '../components/layout';
-import Truth from '../components/truth';
+import Layout from '../layout/Layout';
+import Truth from '../games/TruthOrDare.game';
 
 const TruthPage: React.FC = (): ReactElement => {
   return (

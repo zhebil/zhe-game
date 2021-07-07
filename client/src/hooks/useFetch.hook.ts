@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { cleanup } from '../components/fetchContainer';
+import { cleanup } from '../layout/FetchContainer';
 import { reduxAction } from '../redux/types';
 import { useAppDispatch } from './redux.hook';
 

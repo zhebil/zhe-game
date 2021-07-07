@@ -8,9 +8,9 @@ import {
 } from '../redux/ducks/truth-or-dare/actionCreators';
 import { updateTruth } from '../redux/ducks/truth-or-dare/actionCreators';
 import { ID, IPlayer, IRaund, oneDataItem } from '../types';
-import { getRandom } from '../utillity';
+import { getRandomInteger } from '../utillity';
 import { gameDataStatus } from '../redux/types';
-import { FetchContainer } from './fetchContainer';
+import { FetchContainer } from '../layout/FetchContainer';
 import {
   dareSelector,
   truthSelector,
@@ -30,7 +30,7 @@ interface IDataForTruth {
   dare: oneDataItem[];
 }
 
-const Truth: React.FC = (): ReactElement => {
+const TruthOrDare: React.FC = (): ReactElement => {
   const dispatch = useAppDispatch();
   const status: gameDataStatus = useAppSelector(trutOrDareStatusSelector);
   const truth: oneDataItem[] = useAppSelector(truthSelector);
@@ -55,7 +55,7 @@ const Truth: React.FC = (): ReactElement => {
     type: RaundType,
     cb: (id: ID) => TruthOrDareAction
   ): void => {
-    const dataIdx: number = getRandom(
+    const dataIdx: number = getRandomInteger(
       0,
       data[type as keyof IDataForTruth].length - 1
     );
@@ -163,4 +163,4 @@ const Truth: React.FC = (): ReactElement => {
   );
 };
 
-export default Truth;
+export default TruthOrDare;

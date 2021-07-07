@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppSelector } from '../hooks/redux.hook';
 import { fetchAllData } from '../redux/ducks/allDataList/actionCreators';
 import { someOneDataType } from '../redux/ducks/gameDataItemsCRUD/actionCreators';
-import { FetchContainer } from './fetchContainer';
+import { FetchContainer } from '../layout/FetchContainer';
 
 const AllDataList: React.FC<{
   title: string;

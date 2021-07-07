@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import constants from '.';
-import AdminPage from '../pages/Admin-page';
-import { ChangePresetPage } from '../pages/ChangePreset-page';
-import { CreatePresetsPage } from '../pages/CreatePresets-page';
-import NeverPage from '../pages/Never-page';
-import PresetsPage from '../pages/Presets-page';
-import QuestionsPage from '../pages/Questions-page';
-import SelectPlayersPage from '../pages/Select-players-page';
-import TruthPage from '../pages/Truth-page';
+import AdminPage from '../pages/Admin.page';
+import { ChangePresetPage } from '../pages/ChangePreset.page';
+import { CreatePresetsPage } from '../pages/CreatePresets.page';
+import NeverPage from '../pages/Never.page';
+import PresetsPage from '../pages/Presets.page';
+import QuestionsPage from '../pages/Questions.page';
+import SelectPlayersPage from '../pages/SelectPlayers.page';
+import TruthPage from '../pages/TruthOrDare.page';
 
 export interface IRouterItem {
   path: string;

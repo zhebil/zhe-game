@@ -77,7 +77,7 @@ const store = {
           const defaultType = type.split('-')[1];
           postData(defaultType, data, res, false);
         } catch (e) {
-          console.warn('is existing');
+          console.warn(e);
         }
       }
       postData(type, data, res);

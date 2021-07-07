@@ -1,6 +1,6 @@
 import React, { ReactElement, useRef, useState } from 'react';
 import { slideToggle } from '../utillity';
-import Navbar from './navbar';
+import Navbar from './Navbar';
 
 const Header: React.FC = (): ReactElement => {
   const menuRef = useRef<HTMLDivElement>(null);

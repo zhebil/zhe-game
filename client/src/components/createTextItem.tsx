@@ -1,7 +1,7 @@
 import React, { FormEvent, ReactElement, useState } from 'react';
 import { useAppDispatch } from '../hooks/redux.hook';
 import { createGameDataItem } from '../redux/ducks/gameDataItemsCRUD/actionCreators';
-import { getDataTypeByPath, logError } from '../utillity';
+import { takeDataTypeFromPath, logError } from '../utillity';
 import AllDataList from './allDataList';
 
 const CreateTextItem: React.FC<{ path: string; title: string }> = ({
@@ -68,7 +68,7 @@ const CreateTextItem: React.FC<{ path: string; title: string }> = ({
             <AllDataList
               title={title}
               onChoise={onChoiseData}
-              type={getDataTypeByPath(path)}
+              type={takeDataTypeFromPath(path)}
               onCloseList={closeAllDataList}
             />
           </div>

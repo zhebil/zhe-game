@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
-import { useFetch } from '../hooks/fetch.hook';
+import { useFetch } from '../hooks/useFetch.hook';
 import { gameDataStatus, reduxAction } from '../redux/types';
-import ErrorIndicator from './errorIndicator';
-import Spinner from './spinner';
+import ErrorIndicator from './ErrorIndicator';
+import Spinner from './Spinner';
 
 export type cleanup = () => void;
 

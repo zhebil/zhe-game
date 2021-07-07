@@ -1,7 +1,7 @@
 import { call, put } from '@redux-saga/core/effects';
 import api from '../../../../api/api';
 import { oneDataItem } from '../../../../types';
-import { getDataTypeByPath, logError } from '../../../../utillity';
+import { takeDataTypeFromPath, logError } from '../../../../utillity';
 import { CreateNewItem, addToStoreNewItem } from '../actionCreators';
 
 interface newItemInterface {
@@ -18,7 +18,7 @@ export function* createOneDataItem({ payload }: CreateNewItem) {
       api.postData(path, { text })
     );
 
-    const dataType = getDataTypeByPath(path);
+    const dataType = takeDataTypeFromPath(path);
     yield put(
       addToStoreNewItem({
         id: newItem.data._id,

@@ -1,9 +1,7 @@
 import {
   createMessage,
-  messageCounter,
-  slideToggle,
-  transformData,
-  getRandom,
+  tranformDataByAddingToStore,
+  getRandomInteger,
 } from '../../utillity/index.ts';
 
 describe('getRandom function test', () => {
@@ -15,7 +13,7 @@ describe('getRandom function test', () => {
   test.each(casesWithoutError)(
     'testing call with %s, %s',
     (min, max, expected) => {
-      const value = getRandom(min, max);
+      const value = getRandomInteger(min, max);
       expect(value).not.toBeNull();
       expect(value).toBeGreaterThanOrEqual(0);
       expect(value).toBeLessThanOrEqual(max);
@@ -29,7 +27,7 @@ describe('getRandom function test', () => {
   test.each(casesWithError)(
     'testing errors call with %s, %s',
     (min, max, expected) => {
-      expect(() => getRandom(min, max)).toThrow(Error);
+      expect(() => getRandomInteger(min, max)).toThrow(Error);
     }
   );
 });
@@ -54,7 +52,7 @@ describe('transformData tests', () => {
       ],
       done: [],
     };
-    expect(transformData(mockData)).toEqual(expectedData);
+    expect(tranformDataByAddingToStore(mockData)).toEqual(expectedData);
   });
 });
 

@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import { FetchContainer } from '../components/fetchContainer';
+import { FetchContainer } from '../layout/FetchContainer';
 import constants from '../constants';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import {

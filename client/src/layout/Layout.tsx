@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../hooks/redux.hook';
 import { playersSelector } from '../redux/ducks/players/selectors';
 import { IPlayer } from '../types';
-import PlayersList from './players-list';
+import PlayersList from '../components/players-list';
 
 const Layout: React.FC<{ title: string; children: React.ReactNode }> = ({
   title,

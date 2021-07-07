@@ -1,18 +1,7 @@
 import React, { forwardRef, ReactElement } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import constants from '../constants/index';
-const { ROUTES } = constants;
-type linkItem = {
-  title: string;
-  path: string;
-};
-const links: linkItem[] = [
-  { title: 'Правда или Действие', path: ROUTES.TRUTH },
-  { title: 'Я никогда не', path: ROUTES.NEVER },
-  { title: 'Вопросы', path: ROUTES.QUESTIONS },
-  { title: 'Добавить свои', path: ROUTES.ADMIN_PAGE },
-  { title: 'Пресеты', path: ROUTES.PRESETS },
-];
+import { navbarLinks } from '../constants/navbar';
+
 const Navbar = forwardRef<HTMLDivElement, { toggleMenu: () => void }>(
   ({ toggleMenu }, ref): ReactElement => {
     const location = useLocation<Location>();
@@ -23,7 +12,7 @@ const Navbar = forwardRef<HTMLDivElement, { toggleMenu: () => void }>(
         ref={ref}
       >
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-          {links.map(({ title, path }, key) => {
+          {navbarLinks.map(({ title, path }, key) => {
             const isActive: boolean = location.pathname === path;
             return (
               <li key={key} className="nav-item">

@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import { usePrevious } from '../hooks/usePrevios.hook';
 import { oneDataItem } from '../types';
-import { getHeight, slideToggle } from '../utillity';
+import { getOffsetHeight, slideToggle } from '../utillity';
 import { CreateTextItem } from './createTextItem';
 import { EditTextItem } from './editTextItem';
 
@@ -22,7 +22,7 @@ const ChangeData: React.FC<changeData> = ({
 
   useEffect(() => {
     if (ref.current && isShow) {
-      const height = getHeight(ref.current);
+      const height = getOffsetHeight(ref.current);
       ref.current.style.height = height + 'px';
     }
 

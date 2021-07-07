@@ -1,22 +1,25 @@
 import React, { ReactElement, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
-import { fetchNever, updateNever } from '../redux/ducks/never/actionCreators';
-import {
-  neverSelector,
-  neverStatusSelector,
-} from '../redux/ducks/never/selectors';
 import { playersSelector } from '../redux/ducks/players/selectors';
+import {
+  fetchQuestions,
+  updateQuestions,
+} from '../redux/ducks/questions/actionCreators';
+import {
+  questionsSelector,
+  questionsStatusSelector,
+} from '../redux/ducks/questions/selectors';
 import { gameDataStatus } from '../redux/types';
 import { IPlayer, IRaund, oneDataItem } from '../types';
-import { getRandom } from '../utillity';
-import { FetchContainer } from './fetchContainer';
+import { getRandomInteger } from '../utillity';
+import { FetchContainer } from '../layout/FetchContainer';
 
-const Never: React.FC = (): ReactElement => {
+const Questions: React.FC = (): ReactElement => {
   const dispatch = useAppDispatch();
+  const questions: oneDataItem[] = useAppSelector(questionsSelector);
 
-  const never: oneDataItem[] = useAppSelector(neverSelector);
+  const status: gameDataStatus = useAppSelector(questionsStatusSelector);
 
-  const status: gameDataStatus = useAppSelector(neverStatusSelector);
   const players: IPlayer[] = useAppSelector(playersSelector);
 
   const [raund, setRaund] = useState<IRaund>({
@@ -26,31 +29,29 @@ const Never: React.FC = (): ReactElement => {
   });
 
   const nextRaund = (): void => {
-    const dataIdx: number = getRandom(0, never.length - 1);
+    const dataIdx: number = getRandomInteger(0, questions.length - 1);
 
-    setRaund(
-      (prev: IRaund): IRaund => {
-        const nextPlayer: number =
-          prev.nextPlayer < players.length - 1 ? prev.nextPlayer + 1 : 0;
+    setRaund((prev: IRaund): IRaund => {
+      const nextPlayer: number =
+        raund.nextPlayer < players.length - 1 ? raund.nextPlayer + 1 : 0;
 
-        return {
-          player: players[prev.nextPlayer].name,
-          nextPlayer: nextPlayer,
-          text: never[dataIdx].text,
-        };
-      }
-    );
+      return {
+        player: players[prev.nextPlayer].name,
+        nextPlayer: nextPlayer,
+        text: questions[dataIdx].text,
+      };
+    });
 
-    dispatch(updateNever(never[dataIdx]._id));
+    dispatch(updateQuestions(questions[dataIdx]._id));
   };
 
-  if (status === gameDataStatus.LOADED && never.length <= 0) {
+  if (status === gameDataStatus.LOADED && questions.length <= 0) {
     return <h2> Игра окончена! К сожалению больше нет вопросов {':('}</h2>;
   }
   return (
     <FetchContainer
-      fetchFunction={fetchNever}
-      dataLength={never.length}
+      fetchFunction={fetchQuestions}
+      dataLength={questions.length}
       status={status}
     >
       <div className="d-flex flex-column h-100">
@@ -73,4 +74,4 @@ const Never: React.FC = (): ReactElement => {
   );
 };
 
-export default Never;
+export default Questions;
