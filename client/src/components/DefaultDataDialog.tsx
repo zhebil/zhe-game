@@ -4,12 +4,19 @@ import { fetchAllData } from '../redux/ducks/allDataList/actionCreators';
 import { someOneDataType } from '../redux/ducks/gameDataItemsCRUD/actionCreators';
 import { FetchContainer } from '../layout/FetchContainer';
 
-const DefaultDataDialog: React.FC<{
+interface defaultDataDialogProps {
   title: string;
   onChoise: (text: string) => void;
   onCloseList: () => void;
   type: someOneDataType;
-}> = ({ title, onChoise, onCloseList, type }) => {
+}
+
+const DefaultDataDialog: React.FC<defaultDataDialogProps> = ({
+  title,
+  onChoise,
+  onCloseList,
+  type,
+}) => {
   const status = useAppSelector((state) => state.allData.status);
   const thisTypeData = useAppSelector((state) => state.allData[type]);
 
@@ -24,8 +31,8 @@ const DefaultDataDialog: React.FC<{
         onClick={(e) => e.stopPropagation()}
         role="document"
       >
-        <div className="modal-content">
-          <div className="modal-header">
+        <article className="modal-content">
+          <header className="modal-header">
             <h5 className="modal-title">{title}</h5>
             <button
               type="button"
@@ -36,7 +43,7 @@ const DefaultDataDialog: React.FC<{
             >
               <span aria-hidden="true">&times;</span>
             </button>
-          </div>
+          </header>
           <div className="modal-body">
             <ul className="list-group">
               {thisTypeData.map((i) => (
@@ -52,7 +59,7 @@ const DefaultDataDialog: React.FC<{
               ))}
             </ul>
           </div>
-        </div>
+        </article>
       </div>
     </FetchContainer>
   );
