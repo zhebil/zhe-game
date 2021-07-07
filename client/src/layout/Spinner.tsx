@@ -19,4 +19,4 @@ const Spinner: React.FC = (): ReactElement => {
   );
 };
 
-export default Spinner;
+export { Spinner };

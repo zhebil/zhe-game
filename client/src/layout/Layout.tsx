@@ -33,4 +33,4 @@ const Layout: React.FC<{ title: string; children: React.ReactNode }> = ({
   );
 };
 
-export default Layout;
+export { Layout };

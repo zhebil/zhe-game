@@ -163,4 +163,4 @@ const TruthOrDare: React.FC = (): ReactElement => {
   );
 };
 
-export default TruthOrDare;
+export { TruthOrDare };

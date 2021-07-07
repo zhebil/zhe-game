@@ -72,4 +72,4 @@ const SelectPlayersPage: React.FC = (): ReactElement => {
   );
 };
 
-export default SelectPlayersPage;
+export { SelectPlayersPage };

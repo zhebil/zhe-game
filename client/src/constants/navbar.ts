@@ -1,4 +1,4 @@
-import constants from './index';
+import { constants } from './index';
 
 const { ROUTES } = constants;
 

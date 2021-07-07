@@ -1,26 +1,5 @@
 import React, { ReactElement } from 'react';
-interface socialItem {
-  link: string;
-  name: string;
-}
-const social: socialItem[] = [
-  {
-    link: 'https://t.me/zhebil',
-    name: 'telegram',
-  },
-  {
-    link: 'https://github.com/zhebil',
-    name: 'github',
-  },
-  {
-    link: 'tel:+380980129984',
-    name: 'phone',
-  },
-  {
-    link: 'https://www.instagram.com/zhebil',
-    name: 'instagram',
-  },
-];
+import { social } from '../constants/social';
 
 const Footer: React.FC = (): ReactElement => {
   return (

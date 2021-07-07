@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import constants from '../../constants';
+import { constants } from '../../constants';
 import { useAppDispatch } from '../../hooks/redux.hook';
 import {
   deletePresets,
@@ -46,4 +46,4 @@ const PresetsListItem: React.FC<presetInterface> = ({
   );
 };
 
-export default PresetsListItem;
+export { PresetsListItem };

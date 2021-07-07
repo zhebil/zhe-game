@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import constants from '../../constants';
+import { constants } from '../../constants';
 import { IPlayer } from '../../types';
 import { PlayerListItem } from './PlayerListItem';
 

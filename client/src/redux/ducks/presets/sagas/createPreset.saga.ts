@@ -1,6 +1,6 @@
 import { call, put } from '@redux-saga/core/effects';
 import api from '../../../../api/api';
-import constants from '../../../../constants';
+import { constants } from '../../../../constants';
 import { logError, logWarning } from '../../../../utillity';
 import { CreatePresetInterface, setPresets } from '../actionCreators';
 

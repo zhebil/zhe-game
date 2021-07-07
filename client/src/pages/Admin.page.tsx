@@ -10,4 +10,4 @@ const AdminPage: React.FC = (): ReactElement => {
     </section>
   );
 };
-export default AdminPage;
+export { AdminPage };

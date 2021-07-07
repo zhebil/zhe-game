@@ -8,4 +8,4 @@ const PresetsPage: React.FC = (): ReactElement => {
     </>
   );
 };
-export default PresetsPage;
+export { PresetsPage };

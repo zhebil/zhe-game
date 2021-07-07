@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
-import Layout from '../layout/Layout';
-import Never from '../games/Never.game';
+import { Layout } from '../layout/Layout';
+import { Never } from '../games/Never.game';
 
 const NeverPage: React.FC = (): ReactElement => {
   return (
@@ -10,4 +10,4 @@ const NeverPage: React.FC = (): ReactElement => {
   );
 };
 
-export default NeverPage;
+export { NeverPage };

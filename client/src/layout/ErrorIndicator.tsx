@@ -17,4 +17,4 @@ const ErrorIndicator: React.FC = (): ReactElement => {
   );
 };
 
-export default ErrorIndicator;
+export { ErrorIndicator };

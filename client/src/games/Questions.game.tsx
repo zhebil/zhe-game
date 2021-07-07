@@ -74,4 +74,4 @@ const Questions: React.FC = (): ReactElement => {
   );
 };
 
-export default Questions;
+export { Questions };

@@ -71,4 +71,4 @@ const Never: React.FC = (): ReactElement => {
   );
 };
 
-export default Never;
+export { Never };

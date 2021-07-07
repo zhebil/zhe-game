@@ -33,4 +33,4 @@ const Navbar = forwardRef<HTMLDivElement, { toggleMenu: () => void }>(
   }
 );
 
-export default Navbar;
+export { Navbar };
