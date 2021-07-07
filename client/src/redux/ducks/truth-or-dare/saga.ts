@@ -1,6 +1,6 @@
 import { put, call, takeLatest, select } from 'redux-saga/effects';
 import api from '../../../api/api';
-import { transformData } from '../../../utillity';
+import { tranformDataByAddingToStore } from '../../../utillity';
 import { RootState } from '../../store';
 import { gameDataStatus, IFetchedData } from '../../types';
 import {
@@ -29,8 +29,8 @@ export function* fetchGameData() {
       api.getDataByType(pathDataTruth)
     );
     const truthOrDare = {
-      truth: transformData(truth.data),
-      dare: transformData(dare.data),
+      truth: tranformDataByAddingToStore(truth.data),
+      dare: tranformDataByAddingToStore(dare.data),
     };
     yield put(setTruthOrDare(truthOrDare));
   } catch (e) {

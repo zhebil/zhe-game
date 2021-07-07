@@ -1,6 +1,6 @@
 import { put, call, takeLatest, select } from 'redux-saga/effects';
 import api from '../../../api/api';
-import { transformData } from '../../../utillity';
+import { tranformDataByAddingToStore } from '../../../utillity';
 import { RootState } from '../../store';
 import { gameDataStatus, IFetchedData } from '../../types';
 import {
@@ -20,7 +20,7 @@ export function* fetchGameData() {
   try {
     yield put(updateNeverStatus(gameDataStatus.LOADNIG));
     const never: IFetchedData = yield call(() => api.getDataByType(pathData));
-    const transformedNever = transformData(never.data);
+    const transformedNever = tranformDataByAddingToStore(never.data);
     yield put(setNever(transformedNever));
   } catch (e) {
     yield put(updateNeverStatus(gameDataStatus.ERROR));

@@ -32,7 +32,7 @@ describe('getRandom function test', () => {
   );
 });
 
-describe('transformData tests', () => {
+describe('tranformDataByAddingToStore tests', () => {
   test('equal mock with expected data', () => {
     const mockData = [
       { _id: 3123123, text: 'test text' },
