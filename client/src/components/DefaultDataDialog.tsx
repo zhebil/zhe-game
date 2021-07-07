@@ -4,7 +4,7 @@ import { fetchAllData } from '../redux/ducks/allDataList/actionCreators';
 import { someOneDataType } from '../redux/ducks/gameDataItemsCRUD/actionCreators';
 import { FetchContainer } from '../layout/FetchContainer';
 
-const AllDataList: React.FC<{
+const DefaultDataDialog: React.FC<{
   title: string;
   onChoise: (text: string) => void;
   onCloseList: () => void;
@@ -58,4 +58,4 @@ const AllDataList: React.FC<{
   );
 };
 
-export default AllDataList;
+export default DefaultDataDialog;

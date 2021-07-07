@@ -3,7 +3,7 @@ import { useAppDispatch } from '../hooks/redux.hook';
 import { createGameDataItem } from '../redux/ducks/gameDataItemsCRUD/actionCreators';
 import { takeDataTypeFromPath } from '../utillity';
 import { AddDataForm } from './AddDataForm';
-import AllDataList from './allDataList';
+import DefaultDataDialog from './DefaultDataDialog';
 
 const CreateNewPresetItemForm: React.FC<{ path: string; title: string }> = ({
   path,
@@ -40,7 +40,7 @@ const CreateNewPresetItemForm: React.FC<{ path: string; title: string }> = ({
             role="dialog"
             onClick={closeAllDataList}
           >
-            <AllDataList
+            <DefaultDataDialog
               title={title}
               onChoise={onChoiseData}
               type={takeDataTypeFromPath(path)}
