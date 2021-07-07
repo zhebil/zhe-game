@@ -1,10 +1,10 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
-import { useAppDispatch } from '../hooks/redux.hook';
+import { useAppDispatch } from '../../../hooks/redux.hook';
 import {
   updateGameDataItem,
   deleteGameDataItem,
-} from '../redux/ducks/gameDataItemsCRUD/actionCreators';
-import { oneDataItem } from '../types';
+} from '../../../redux/ducks/gameDataItemsCRUD/actionCreators';
+import { oneDataItem } from '../../../types';
 
 interface EditTextItemProps extends oneDataItem {
   path: string;

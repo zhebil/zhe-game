@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { AdminComponent } from '../components/AdminComponent';
+import { AdminComponent } from '../components/AdminComponents/AdminComponent';
 
 const AdminPage: React.FC = (): ReactElement => {
   return (

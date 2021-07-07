@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { addPlayer } from '../redux/ducks/players/actionCreators';
-import PlayersList from '../components/players-list';
+import { PlayersList } from '../components/Players/PlayersList';
 import { nanoid } from 'nanoid';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';

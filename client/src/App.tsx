@@ -4,7 +4,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import './sass/style.scss';
 import router, { IRouterItem } from './constants/router';
-import Messages from './components/messages';
+import { Messages } from './components/Messages/Messages';
 import { Footer } from './layout/Footer';
 
 const App: React.FC = (): ReactElement => {

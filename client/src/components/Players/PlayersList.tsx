@@ -1,7 +1,8 @@
 import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import { IPlayer } from '../types';
-import ListItem from './list-item';
+import constants from '../../constants';
+import { IPlayer } from '../../types';
+import { PlayerListItem } from './PlayerListItem';
 
 const PlayersList: React.FC<{ players: IPlayer[]; isPage?: boolean }> = ({
   players,
@@ -12,18 +13,18 @@ const PlayersList: React.FC<{ players: IPlayer[]; isPage?: boolean }> = ({
       <ul className="list-group">
         {players.map((player) => {
           return (
-            <ListItem
+            <PlayerListItem
               key={player.id}
               id={player.id}
               isPage={isPage}
-              content={player.name}
+              text={player.name}
             />
           );
         })}
       </ul>
-      {!isPage && <Link to="/select-players">Изменить</Link>}
+      {!isPage && <Link to={constants.ROUTES.SELECT_PLAYER}>Изменить</Link>}
     </>
   );
 };
 
-export default PlayersList;
+export { PlayersList };

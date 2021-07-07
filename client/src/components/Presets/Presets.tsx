@@ -1,13 +1,13 @@
 import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import { FetchContainer } from '../layout/FetchContainer';
-import constants from '../constants';
-import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
+import { FetchContainer } from '../../layout/FetchContainer';
+import constants from '../../constants';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux.hook';
 import {
   getPresets,
   updateCurrentPreset,
-} from '../redux/ducks/presets/actionCreators';
-import { presetInterface } from '../redux/ducks/presets/reducer';
+} from '../../redux/ducks/presets/actionCreators';
+import { presetInterface } from '../../redux/ducks/presets/reducer';
 import PresetsListItem from './PresetsListItem';
 
 const Presets: React.FC = (): ReactElement => {

@@ -5,11 +5,11 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { usePrevious } from '../hooks/usePrevios.hook';
-import { oneDataItem } from '../types';
-import { getOffsetHeight, slideToggle } from '../utillity';
-import { CreateNewPresetItemForm } from './CreateNewPresetItemForm';
-import { EditPresetDataItem } from './EditPresetDataItem';
+import { usePrevious } from '../../hooks/usePrevios.hook';
+import { oneDataItem } from '../../types';
+import { getOffsetHeight, slideToggle } from '../../utillity';
+import { CreateNewPresetItemForm } from './components/CreateNewPresetItemForm';
+import { EditPresetDataItem } from './components/EditPresetDataItem';
 
 interface changeData {
   data: oneDataItem[];

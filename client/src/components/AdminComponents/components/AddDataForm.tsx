@@ -1,7 +1,7 @@
 import React, { FormEvent, ReactElement } from 'react';
-import { useAppDispatch } from '../hooks/redux.hook';
-import { createGameDataItem } from '../redux/ducks/gameDataItemsCRUD/actionCreators';
-import { logError } from '../utillity';
+import { useAppDispatch } from '../../../hooks/redux.hook';
+import { createGameDataItem } from '../../../redux/ducks/gameDataItemsCRUD/actionCreators';
+import { logError } from '../../../utillity';
 
 const AddDataForm: React.FC<{ name: string; label: string }> = ({
   name,

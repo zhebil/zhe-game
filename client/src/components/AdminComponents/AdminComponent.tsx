@@ -1,5 +1,5 @@
 import React from 'react';
-import { AddDataForm } from './AddDataForm';
+import { AddDataForm } from './components/AddDataForm';
 
 const AdminComponent = () => {
   return (

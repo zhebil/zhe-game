@@ -1,8 +1,8 @@
 import React, { ReactElement, useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
-import { messageSelector } from '../redux/ducks/messages/selectors';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux.hook';
+import { messageSelector } from '../../redux/ducks/messages/selectors';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { removeMessage } from '../redux/ducks/messages/actionCreators';
+import { removeMessage } from '../../redux/ducks/messages/actionCreators';
 
 const Messages: React.FC = (): ReactElement => {
   const messages = useAppSelector(messageSelector);
@@ -46,4 +46,4 @@ const Messages: React.FC = (): ReactElement => {
   );
 };
 
-export default Messages;
+export { Messages };

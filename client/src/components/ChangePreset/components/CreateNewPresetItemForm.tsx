@@ -1,9 +1,9 @@
 import React, { ReactElement, useState } from 'react';
-import { useAppDispatch } from '../hooks/redux.hook';
-import { createGameDataItem } from '../redux/ducks/gameDataItemsCRUD/actionCreators';
-import { takeDataTypeFromPath } from '../utillity';
-import { AddDataForm } from './AddDataForm';
-import DefaultDataDialog from './DefaultDataDialog';
+import { useAppDispatch } from '../../../hooks/redux.hook';
+import { createGameDataItem } from '../../../redux/ducks/gameDataItemsCRUD/actionCreators';
+import { takeDataTypeFromPath } from '../../../utillity';
+import { AddDataForm } from './../../AdminComponents/components/AddDataForm';
+import { DefaultDataDialog } from './DefaultDataDialog';
 
 const CreateNewPresetItemForm: React.FC<{ path: string; title: string }> = ({
   path,

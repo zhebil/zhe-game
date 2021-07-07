@@ -1,9 +1,16 @@
 import React, { ReactElement } from 'react';
-import { deletePlayer } from '../redux/ducks/players/actionCreators';
-import { useAppDispatch } from '../hooks/redux.hook';
-import { ID } from '../types';
-const ListItem: React.FC<{ content: string; id: ID; isPage: boolean }> = ({
-  content,
+import { deletePlayer } from '../../redux/ducks/players/actionCreators';
+import { useAppDispatch } from '../../hooks/redux.hook';
+import { ID } from '../../types';
+
+interface PlayerListItemProps {
+  text: string;
+  id: ID;
+  isPage: boolean;
+}
+
+const PlayerListItem: React.FC<PlayerListItemProps> = ({
+  text,
   id,
   isPage,
 }): ReactElement => {
@@ -16,7 +23,7 @@ const ListItem: React.FC<{ content: string; id: ID; isPage: boolean }> = ({
       <li className="list-group-item">
         <div className="row justify-content-between">
           <div className="col-auto">
-            <h3 className="mb-0">{content}</h3>
+            <h3 className="mb-0">{text}</h3>
           </div>
           {isPage && (
             <button
@@ -33,4 +40,4 @@ const ListItem: React.FC<{ content: string; id: ID; isPage: boolean }> = ({
   );
 };
 
-export default ListItem;
+export { PlayerListItem };

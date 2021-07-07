@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useParams } from 'react-router';
-import { ChangePresetData } from '../components/ChangePresetData';
+import { ChangePresetData } from '../components/ChangePreset/ChangePresetData';
 import { FetchContainer } from '../layout/FetchContainer';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import { setDataCRUDToStore } from '../redux/ducks/gameDataItemsCRUD/actionCreators';

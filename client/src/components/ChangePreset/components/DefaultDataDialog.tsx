@@ -1,8 +1,8 @@
 import React from 'react';
-import { useAppSelector } from '../hooks/redux.hook';
-import { fetchAllData } from '../redux/ducks/allDataList/actionCreators';
-import { someOneDataType } from '../redux/ducks/gameDataItemsCRUD/actionCreators';
-import { FetchContainer } from '../layout/FetchContainer';
+import { useAppSelector } from '../../../hooks/redux.hook';
+import { fetchAllData } from '../../../redux/ducks/allDataList/actionCreators';
+import { someOneDataType } from '../../../redux/ducks/gameDataItemsCRUD/actionCreators';
+import { FetchContainer } from '../../../layout/FetchContainer';
 
 interface defaultDataDialogProps {
   title: string;
@@ -65,4 +65,4 @@ const DefaultDataDialog: React.FC<defaultDataDialogProps> = ({
   );
 };
 
-export default DefaultDataDialog;
+export { DefaultDataDialog };
