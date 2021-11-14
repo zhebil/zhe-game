@@ -10,6 +10,7 @@ export const navbarLinks: linkItem[] = [
   { title: 'Правда или Действие', path: ROUTES.TRUTH },
   { title: 'Я никогда не', path: ROUTES.NEVER },
   { title: 'Вопросы', path: ROUTES.QUESTIONS },
+  { title: 'Покер', path: ROUTES.POKER },
   { title: 'Добавить свои', path: ROUTES.ADMIN_PAGE },
   { title: 'Пресеты', path: ROUTES.PRESETS },
 ];

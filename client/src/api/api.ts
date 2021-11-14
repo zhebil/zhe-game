@@ -30,7 +30,11 @@ interface presetsData {
 type fetchParamsType = [string, object?];
 
 class Api {
-  constructor(private dataPath: string, private presetsPath: string) {}
+  constructor(
+    private dataPath: string,
+    private presetsPath: string,
+    private pokerPath: string
+  ) {}
   async getDataByType(type: string): Promise<IGetData> {
     const res = await fetch(`${this.dataPath}${type}`);
     const data = await res.json();
@@ -93,5 +97,12 @@ class Api {
   getPreset(name: string) {
     return this.fetchWrapper(`${this.presetsPath}${name}`);
   }
+
+  changePokerDeck() {
+    return this.fetchWrapper(`${this.pokerPath}/changeDeck/`);
+  }
+  getPokerDeck() {
+    return this.fetchWrapper(`${this.pokerPath}/getDeck/`);
+  }
 }
-export default new Api('/api/data/', '/api/presets/');
+export default new Api('/api/data/', '/api/presets/', '/api/poker/');

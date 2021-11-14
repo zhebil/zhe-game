@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { constants } from '.';
+import { PokerGame } from '../games/Poker.game';
 import { AdminPage } from '../pages/Admin.page';
 import { ChangePresetPage } from '../pages/ChangePreset.page';
 import { CreatePresetsPage } from '../pages/CreatePresets.page';
@@ -48,5 +49,6 @@ const router: IRouterItem[] = [
   },
   { path: ROUTES.CREATE_PRESET, exact: false, component: CreatePresetsPage },
   { path: ROUTES.CHANGE_PRESET, exact: false, component: ChangePresetPage },
+  { path: ROUTES.POKER, exact: false, component: PokerGame },
 ];
 export { router };

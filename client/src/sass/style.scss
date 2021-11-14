@@ -1,7 +1,7 @@
-@import './spinner.scss';
-@import './message.scss';
-@import './transition.scss';
-@import './social.scss';
+@import "./spinner.scss";
+@import "./message.scss";
+@import "./transition.scss";
+@import "./social.scss";
 
 .padding-section {
   padding-top: 50px;
@@ -28,5 +28,64 @@ main {
 @media (max-width: 991px) {
   html {
     font-size: 14px;
+  }
+}
+
+.poker-card {
+  flex: calc(20% - 10px) 0 1;
+  max-width: calc(20% - 10px);
+  margin: 5px 5px;
+  position: relative;
+}
+
+.poker-card-back {
+  img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+.poker-card-show {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+ul {
+  padding-left: 0;
+}
+
+.img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 992px) {
+  .card-body {
+    padding: 5px !important;
+    height: 100%;
+  }
+
+  .card-title {
+    font-size: 22px;
+  }
+  .img {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 500px) {
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .card-title {
+    margin-bottom: 5px !important;
+    font-size: 18px;
   }
 }

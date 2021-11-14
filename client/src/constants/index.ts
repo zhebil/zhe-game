@@ -8,6 +8,7 @@ const constants = {
     PRESETS: '/presets',
     CREATE_PRESET: '/presets/create',
     CHANGE_PRESET: '/presets/:name',
+    POKER: '/poker',
   },
   DEFAULT_PRESET: {
     currentName: 'default',
