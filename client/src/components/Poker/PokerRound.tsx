@@ -49,14 +49,18 @@ const PokerRound: FC<{ currentPlayer: IPlayer }> = ({ currentPlayer }) => {
     <div>
       <div className="row mb-3">
         <div className="col">
-          <button
-            onClick={() => {
-              dispatch(changePokerAction());
-            }}
-            className="btn mr-2 mb-2 btn-danger"
-          >
-            Перетасовать
-          </button>
+          {number === 1 && (
+            <button
+              onClick={() => {
+                dispatch(changePokerAction());
+                setCurrentStreet(0);
+              }}
+              className="btn mr-2 mb-2 btn-danger"
+            >
+              Перетасовать
+            </button>
+          )}
+
           <button
             onClick={() => {
               dispatch(getPokerAction());
