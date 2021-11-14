@@ -6,27 +6,26 @@ const PlayCard: FC<{ card: Card; isShowed: boolean }> = ({
   isShowed,
 }) => {
   return (
-    <li className="card poker-card">
+    <li className="poker-card">
       {isShowed ? (
         <>
           <div className="poker-card-back">
-            <img src="/assets/img/card-back.png" className="fade" alt="" />
+            <img
+              src="/assets/poker-cards/card-back.png"
+              className="fade"
+              alt=""
+            />
           </div>
-          <div className="poker-card-show">
-            <div className="card-body">
-              <h2 className="card-title"> {card[0]}</h2>
 
-              <img
-                className="mx-auto img d-block"
-                src={`/assets/img/${card[1]}.svg`}
-                alt={card[0] + card[1]}
-              />
-            </div>
-          </div>
+          <img
+            className="mx-auto poker-card-front d-block"
+            src={`/assets/poker-cards/${card[0]}-${card[1]}.svg`}
+            alt={card[0] + card[1]}
+          />
         </>
       ) : (
         <div className="poker-card-back">
-          <img src="/assets/img/card-back.png" alt="" />
+          <img src="/assets/poker-cards/card-back.png" alt="" />
         </div>
       )}
     </li>
