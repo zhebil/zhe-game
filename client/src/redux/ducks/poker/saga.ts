@@ -1,12 +1,17 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import api from '../../../api/api';
 import { logError } from '../../../utillity';
-import { pokerActionType, setPokerAction } from './actionCreators';
+import {
+  getPokerAction,
+  pokerActionType,
+  setPokerAction,
+} from './actionCreators';
 import { Card } from './reducer';
 
 export function* changeDeck() {
   try {
     yield api.changePokerDeck();
+    yield put(getPokerAction());
   } catch (e) {
     yield put(logError((e as Error).message));
   }

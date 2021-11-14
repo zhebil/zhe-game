@@ -53,7 +53,7 @@ const PokerRound: FC<{ currentPlayer: IPlayer }> = ({ currentPlayer }) => {
             onClick={() => {
               dispatch(changePokerAction());
             }}
-            className="btn mr-2 btn-danger"
+            className="btn mr-2 mb-2 btn-danger"
           >
             Перетасовать
           </button>
@@ -62,7 +62,7 @@ const PokerRound: FC<{ currentPlayer: IPlayer }> = ({ currentPlayer }) => {
               dispatch(getPokerAction());
               setCurrentStreet(0);
             }}
-            className="btn mr-2 btn-success"
+            className="btn mr-2 mb-2 btn-success"
           >
             Получить колоду
           </button>
@@ -70,7 +70,7 @@ const PokerRound: FC<{ currentPlayer: IPlayer }> = ({ currentPlayer }) => {
             onClick={() => {
               setCurrentStreet(currentStreet + 1);
             }}
-            className="btn btn-primary"
+            className="btn mb-2 btn-primary"
           >
             Следущая улица
           </button>
