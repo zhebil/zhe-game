@@ -26,7 +26,7 @@ function* fetchAllData() {
     yield put(setAllDataToStore({ never, truth, dare }));
   } catch (error) {
     yield put(setAllDataStatus(gameDataStatus.ERROR));
-    yield put(logError(error.message));
+    yield put(logError((error as Error).message));
   }
 }
 
