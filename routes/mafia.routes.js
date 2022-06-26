@@ -55,7 +55,7 @@ router.get('/killPlayer', async (req, res) => {
 
     part.splice(Number(killedPlayer), 1, ' ');
 
-    res.json({ data: part, message: 'Гравець убитий' });
+    res.json({ data: part, message: 'Гравець убитий мафією' });
   } catch (e) {
     res.status(500).json({ message: 'Неможливо убити гравця' });
   }
