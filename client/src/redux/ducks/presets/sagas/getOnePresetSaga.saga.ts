@@ -38,7 +38,7 @@ export function* getOnePresetSaga({ payload: name }: GetOnePresetInterface) {
     yield put(setDataCRUDToStore(toUpdatePresetData));
     yield put(logSuccess('Игровые данные текущего пресета получены'));
   } catch (e) {
-    yield put(logError(e.message));
+    yield put(logError((e as Error).message));
 
     yield put(setDataCRUDStatus(gameDataStatus.ERROR));
   }

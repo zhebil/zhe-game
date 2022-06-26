@@ -16,6 +16,6 @@ export function* createPreset({
     yield put(setPresets([]));
     history.push(constants.ROUTES.PRESETS);
   } catch (e) {
-    yield put(logError(e.message));
+    yield put(logError((e as Error).message));
   }
 }

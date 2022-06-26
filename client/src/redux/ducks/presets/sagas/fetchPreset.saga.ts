@@ -16,6 +16,6 @@ export function* fetchPresets() {
     yield put(setPresets(data.presets));
   } catch (e) {
     yield put(updatePresetsStatus(gameDataStatus.ERROR));
-    yield put(logError(e.message));
+    yield put(logError((e as Error).message));
   }
 }

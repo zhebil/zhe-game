@@ -32,6 +32,6 @@ export function* deletePreset({ payload: id }: DeletePresetInterface) {
       );
     }
   } catch (e) {
-    yield put(logError(e.message));
+    yield put(logError((e as Error).message));
   }
 }

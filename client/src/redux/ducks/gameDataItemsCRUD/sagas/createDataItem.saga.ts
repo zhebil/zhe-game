@@ -26,6 +26,6 @@ export function* createOneDataItem({ payload }: CreateNewItem) {
       })
     );
   } catch (e) {
-    yield put(logError(e.message));
+    yield put(logError((e as Error).message));
   }
 }

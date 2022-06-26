@@ -13,6 +13,6 @@ export function* deleteOneDataItem({ payload }: DeleteGameDataItemInterface) {
     const dataType = takeDataTypeFromPath(path);
     yield put(updateStoreByDeleteItem({ id, dataType }));
   } catch (e) {
-    yield put(logError(e.message));
+    yield put(logError((e as Error).message));
   }
 }

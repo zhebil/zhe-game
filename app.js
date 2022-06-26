@@ -69,6 +69,6 @@ runExpressApp();
 // }
 
 setInterval(() => {
-  http.get('http://zhe-game.herokuapp.com');
+  http.get('http://zhe-games.herokuapp.com');
   console.log('AUTO PING');
 }, 300000);
