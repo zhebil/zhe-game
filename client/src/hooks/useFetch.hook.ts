@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { cleanup } from '../layout/FetchContainer';
 import { reduxAction } from '../redux/types';
-import { useAppDispatch } from './redux.hook';
 
 export const useFetch = (
   cb: reduxAction | null,
   dataLength: number,
   cleanup: cleanup | null
 ): void => {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (cb) {

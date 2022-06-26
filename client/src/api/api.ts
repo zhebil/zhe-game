@@ -33,7 +33,8 @@ class Api {
   constructor(
     private dataPath: string,
     private presetsPath: string,
-    private pokerPath: string
+    private pokerPath: string,
+    private mafiaPath: string
   ) {}
   async getDataByType(type: string): Promise<IGetData> {
     const res = await fetch(`${this.dataPath}${type}`);
@@ -104,5 +105,23 @@ class Api {
   getPokerDeck() {
     return this.fetchWrapper(`${this.pokerPath}/getDeck/`);
   }
+  changeMafia(count: number) {
+    return this.fetchWrapper(
+      `${this.mafiaPath}startGame?playersCount=${count}`
+    );
+  }
+  getMafia() {
+    return this.fetchWrapper(`${this.mafiaPath}getPart`);
+  }
+  killPlayer(player: number) {
+    return this.fetchWrapper(
+      `${this.mafiaPath}killPlayer?killedPlayer=${player}`
+    );
+  }
 }
-export default new Api('/api/data/', '/api/presets/', '/api/poker/');
+export default new Api(
+  '/api/data/',
+  '/api/presets/',
+  '/api/poker/',
+  '/api/mafia/'
+);

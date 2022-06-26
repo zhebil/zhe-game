@@ -7,9 +7,10 @@ const mongoose = require('mongoose');
 const getDataRoute = require('./routes/get-data.routes');
 const presetsRoute = require('./routes/presets.routes');
 const pokerRoute = require('./routes/poker.routes');
+const mafiaRoute = require('./routes/mafia.routes');
 
 const HOSTNAME = process.env.HOST || 'localhost';
-const PORT = parseInt(process.env.PORT, 10) || 5000;
+const PORT = parseInt(process.env.PORT, 10) || 3001;
 const serverAddress = `http://${HOSTNAME}:${PORT}`;
 const url = process.env.MONGO_URL;
 
@@ -35,6 +36,7 @@ function runExpressApp() {
   app.use('/api/data', getDataRoute);
   app.use('/api/presets', presetsRoute);
   app.use('/api/poker', pokerRoute);
+  app.use('/api/mafia', mafiaRoute);
 
   if (process.env.NODE_ENV === 'production') {
     app.use('/', express.static(path.join(__dirname, 'client', 'build')));

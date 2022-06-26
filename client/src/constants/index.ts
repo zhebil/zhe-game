@@ -9,6 +9,7 @@ const constants = {
     CREATE_PRESET: '/presets/create',
     CHANGE_PRESET: '/presets/:name',
     POKER: '/poker',
+    MAFIA: '/mafia',
   },
   DEFAULT_PRESET: {
     currentName: 'default',
