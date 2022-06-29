@@ -50,6 +50,7 @@ const MafiaGame: React.FC = (): ReactElement => {
     setCheckedRole(null);
     setIsKiller(false);
   };
+  const [disableButton, setDisableButton] = useState(false);
   return (
     <div className="app">
       <div className="app__top">
@@ -98,7 +99,10 @@ const MafiaGame: React.FC = (): ReactElement => {
                     onClick={() => {
                       dispatch(changeMafiaAction(playersCount));
                       clear();
+                      setDisableButton(true);
+                      setTimeout(() => setDisableButton(false), 30000);
                     }}
+                    disabled={disableButton}
                     className="btn mr-2 mb-2 btn-success"
                   >
                     Перетасувати карти
@@ -117,10 +121,10 @@ const MafiaGame: React.FC = (): ReactElement => {
                 <div>
                   {currentPlayers.map((i, idx) => (
                     <div
-                      className="d-flex align-items-center mt-1 mb-1"
+                      className="row align-items-center mt-1 mb-1"
                       style={{ height: '40px' }}
                     >
-                      <p className="mb-0">
+                      <p className="mb-0 col">
                         {i}
                         {currentPlayer === idx + 1 || checkedRole === idx
                           ? ' - ' +
@@ -130,30 +134,31 @@ const MafiaGame: React.FC = (): ReactElement => {
                           : ''}
                         {part[idx] === ' ' ? ' - Жорстоко убитий мафією' : ''}
                       </p>
-
-                      {viewCheckButton(idx) && (
-                        <button
-                          className="ml-auto btn btn-primary"
-                          onClick={() => {
-                            setCheckedRole(idx);
-                          }}
-                        >
-                          Перевірити
-                        </button>
-                      )}
-                      {currentPlayerRole === 'don' &&
-                        currentPlayer !== idx + 1 &&
-                        !isKiller && (
+                      <div className="col">
+                        {viewCheckButton(idx) && (
                           <button
-                            className="ml-auto btn btn-danger"
+                            className="ml-auto btn btn-primary"
                             onClick={() => {
-                              dispatch(killPlayerAction(idx));
-                              setIsKiller(true);
+                              setCheckedRole(idx);
                             }}
                           >
-                            Убити
+                            Перевірити
                           </button>
                         )}
+                        {currentPlayerRole === 'don' &&
+                          currentPlayer !== idx + 1 &&
+                          !isKiller && (
+                            <button
+                              className="ml-auto btn btn-danger"
+                              onClick={() => {
+                                dispatch(killPlayerAction(idx));
+                                setIsKiller(true);
+                              }}
+                            >
+                              Убити
+                            </button>
+                          )}
+                      </div>
                     </div>
                   ))}
                 </div>

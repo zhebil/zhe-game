@@ -1,4 +1,3 @@
-import { Action } from 'redux';
 import { put, takeLatest } from 'redux-saga/effects';
 import api from '../../../api/api';
 import { logError } from '../../../utillity';

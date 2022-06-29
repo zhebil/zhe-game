@@ -1,6 +1,3 @@
-import { gameOneDataTypeState } from '../../types';
-import { updateData } from '../../functions';
-import { gameDataStatus } from '../../types';
 import { PokerAction, pokerActionType } from './actionCreators';
 import { IPlayer } from '../../../types';
 
