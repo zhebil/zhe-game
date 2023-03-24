@@ -105,7 +105,7 @@ const MafiaGame: React.FC = (): ReactElement => {
                     disabled={disableButton}
                     className="btn mr-2 mb-2 btn-success"
                   >
-                    Перетасувати карти
+                    {/* Перетасувати карти */}
                   </button>
                 )}
                 <button
