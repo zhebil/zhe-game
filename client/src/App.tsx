@@ -6,25 +6,15 @@ import './sass/style.scss';
 import { IRouterItem, router } from './constants/router';
 import { Messages } from './components/Messages/Messages';
 import { Footer } from './layout/Footer';
+import { MafiaGame } from './games/Mafia.game';
 
 const App: React.FC = (): ReactElement => {
   return (
     <Router>
       <Header />
-      <main>
-        <Switch>
-          {router.map(
-            ({ exact, path, component: Component }: IRouterItem, i: number) => {
-              return (
-                <Route key={path} exact={exact} path={path}>
-                  <Component />
-                </Route>
-              );
-            }
-          )}
-          <Route>{/* <NotFound /> */}</Route>
-        </Switch>
-      </main>
+
+      <MafiaGame />
+
       <Footer />
       <Messages />
     </Router>
