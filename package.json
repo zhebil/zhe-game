@@ -8,10 +8,8 @@
   },
   "scripts": {
     "start": "node app.js",
-    "build": "npm run build --prefix client",
     "server": "nodemon app.js",
-    "client": "npm run start --prefix client",
-    "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\" "
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run server\"  "
   },
   "repository": {
     "type": "git",
