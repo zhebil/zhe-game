@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const mafiaRoute = require('./routes/mafia.routes');
+const pokerRoute = require('./routes/poker.routes');
 const cors = require('cors');
 const PORT = parseInt(process.env.PORT, 10) || 3001;
 
@@ -21,6 +22,7 @@ function runExpressApp() {
   app.use(cors());
   app.use(express.json({ extended: true }));
   app.use('/api/mafia', mafiaRoute);
+  app.use('/api/poker', pokerRoute);
 
   run(app);
 }
